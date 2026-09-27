@@ -190,6 +190,7 @@
       const fileInput = document.getElementById('mediaFile');
       const assetTypeInput = document.getElementById('assetType');
       const statusOutput = document.getElementById('statusOutput');
+      const statusIndicator = document.querySelector('.status-indicator');
       const uploadButton = document.getElementById('uploadButton');
       const adminEmail = document.getElementById('adminEmail');
       const adminPassword = document.getElementById('adminPassword');
@@ -207,6 +208,7 @@
       function setStatus(message, state = 'ready') {
         statusOutput.textContent = message;
         statusOutput.dataset.state = state;
+        statusIndicator.dataset.state = state;
       }
 
       function applyAssets(assets) {
@@ -321,7 +323,7 @@
       async function initializeCms() {
         try {
           await loadPublicContent();
-          setStatus('Published overview, stories, and media loaded. Sign in to manage content.');
+          setStatus('Operational: public content and media are available. Sign in to manage the site.', 'success');
         } catch (error) {
           setStatus(`Could not load published content: ${error.message}. Check the Supabase setup.`, 'error');
         }
@@ -333,9 +335,16 @@
         }
 
         updateAuthState(data.session?.user);
+        if (data.session?.user) {
+          setStatus('Operational: Supabase connected and admin editing is enabled.', 'success');
+        }
         supabaseClient.auth.onAuthStateChange((_event, session) => {
           updateAuthState(session?.user);
-          if (session?.user) setStatus('Signed in. Content management is enabled.', 'success');
+          if (session?.user) {
+            setStatus('Operational: Supabase connected and admin editing is enabled.', 'success');
+          } else {
+            setStatus('Operational: public site is available. Sign in to manage content.', 'ready');
+          }
         });
       }
 
