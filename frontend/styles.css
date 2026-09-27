@@ -101,10 +101,12 @@ h2 em { color: var(--primary-color); font-weight: 600; }
 .admin-form input, .admin-form select { width: 100%; min-height: 45px; margin-bottom: 19px; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; color: var(--ink); background: #fff; font-size: 1rem; }
 .admin-form input[type='file'] { padding: 9px 10px; }
 .admin-form input:focus-visible, .admin-form select:focus-visible, .admin-form button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
+.auth-actions { display: flex; gap: 12px; margin-bottom: 18px; }
+.auth-actions button { flex: 1; }
 .field-note { margin: -11px 0 19px; color: var(--muted); font-size: 10px; line-height: 1.6; }
 .admin-form button { display: flex; min-height: 45px; align-items: center; justify-content: space-between; padding: 0.75rem; border: 0; border-radius: 4px; color: #fff; background: var(--primary-color); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 160ms ease; }
 .admin-form button:hover { background: var(--accent-color); }
-.admin-form button:disabled { cursor: wait; opacity: 0.65; }
+.admin-form button:disabled { cursor: not-allowed; opacity: 0.55; }
 .admin-form button span { font-size: 17px; }
 .status-panel { min-height: 150px; padding: 1rem; border: 0; border-left: 4px solid var(--primary-color); background: #f1f2f6; }
 .status-heading { display: flex; align-items: center; gap: 9px; padding-bottom: 16px; border-bottom: 1px solid #d8dce0; }

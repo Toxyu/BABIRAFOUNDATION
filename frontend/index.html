@@ -7,6 +7,7 @@
     <meta name="description" content="Babira Foundation empowers youth, advances education, and promotes community health in Vihiga County, Kenya.">
     <title>Babira Foundation | Vihiga County, Kenya</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
     <header class="site-header">
@@ -112,10 +113,18 @@
             <input type="file" id="mediaFile" name="mediaFile" accept=".png,.jpg,.jpeg,.webp" required>
             <p class="field-note">Images: PNG, JPG, WEBP. Video: MP4, WEBM. Maximum 25 MB.</p>
 
-            <label for="cmsKey">CMS access key</label>
-            <input type="password" id="cmsKey" name="cmsKey" autocomplete="current-password" required>
+            <label for="adminEmail">Admin email</label>
+            <input type="email" id="adminEmail" autocomplete="username" required>
 
-            <button type="submit" id="uploadButton">Upload asset <span aria-hidden="true">↗</span></button>
+            <label for="adminPassword">Admin password</label>
+            <input type="password" id="adminPassword" autocomplete="current-password" required>
+
+            <div class="auth-actions">
+              <button type="button" id="signInButton">Sign in <span aria-hidden="true">↗</span></button>
+              <button type="button" id="signOutButton" hidden>Sign out</button>
+            </div>
+
+            <button type="submit" id="uploadButton" disabled>Upload asset <span aria-hidden="true">↗</span></button>
           </form>
           <div class="status-panel">
             <div class="status-heading"><span class="status-indicator" aria-hidden="true"></span><h3>System status</h3></div>
@@ -132,11 +141,20 @@
     </footer>
 
     <script>
+      const SUPABASE_URL = 'https://nwhspxhnjutotzyztzfg.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK';
+      const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       const form = document.getElementById('uploadForm');
       const fileInput = document.getElementById('mediaFile');
       const assetTypeInput = document.getElementById('assetType');
       const statusOutput = document.getElementById('statusOutput');
       const uploadButton = document.getElementById('uploadButton');
+      const adminEmail = document.getElementById('adminEmail');
+      const adminPassword = document.getElementById('adminPassword');
+      const signInButton = document.getElementById('signInButton');
+      const signOutButton = document.getElementById('signOutButton');
+      let isAuthenticated = false;
+      let isUploading = false;
       const acceptedFiles = {
         logo: '.png,.jpg,.jpeg,.webp',
         background: '.png,.jpg,.jpeg,.webp',
@@ -154,45 +172,94 @@
         const background = document.getElementById('hero-background');
         const video = document.getElementById('hero-video');
         const illustration = document.getElementById('hero-illustration');
+        let logoApplied = false;
+        let heroApplied = false;
 
-        if (assets.logo?.filePath) {
-          logo.src = assets.logo.filePath;
-          logo.hidden = false;
-          monogram.hidden = true;
-        }
-        if (assets.background?.filePath) {
-          background.src = assets.background.filePath;
-          background.hidden = false;
-          illustration.hidden = true;
-          video.hidden = true;
-          video.pause();
-        }
-        if (assets.video?.filePath) {
-          video.src = assets.video.filePath;
-          video.hidden = false;
-          background.hidden = true;
-          illustration.hidden = true;
+        for (const asset of assets) {
+          if (asset.asset_type === 'logo' && !logoApplied) {
+            logo.src = asset.file_url;
+            logo.hidden = false;
+            monogram.hidden = true;
+            logoApplied = true;
+          }
+          if (!heroApplied && asset.asset_type === 'background') {
+            background.src = asset.file_url;
+            background.hidden = false;
+            video.hidden = true;
+            video.pause();
+            illustration.hidden = true;
+            heroApplied = true;
+          } else if (!heroApplied && asset.asset_type === 'video') {
+            video.src = asset.file_url;
+            video.hidden = false;
+            background.hidden = true;
+            illustration.hidden = true;
+            heroApplied = true;
+          }
         }
       }
 
       async function loadAssets() {
-        if (window.location.hostname.endsWith('github.io')) {
-          form.querySelectorAll('input, select, button').forEach((control) => {
-            control.disabled = true;
-          });
-          setStatus('The public site is live on GitHub Pages. CMS uploads require a separately hosted backend.', 'error');
+        const { data, error } = await supabaseClient
+          .from('website_assets')
+          .select('asset_type, file_url, file_name, created_at')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        applyAssets(data || []);
+      }
+
+      function updateAuthState(user) {
+        isAuthenticated = Boolean(user);
+        adminEmail.disabled = isAuthenticated;
+        adminPassword.disabled = isAuthenticated;
+        signInButton.hidden = isAuthenticated;
+        signOutButton.hidden = !isAuthenticated;
+        assetTypeInput.disabled = !isAuthenticated || isUploading;
+        fileInput.disabled = !isAuthenticated || isUploading;
+        uploadButton.disabled = !isAuthenticated || isUploading;
+      }
+
+      async function initializeCms() {
+        try {
+          await loadAssets();
+          setStatus('Public media loaded. Sign in to manage assets.');
+        } catch (error) {
+          setStatus(`Could not load published media: ${error.message}`, 'error');
+        }
+
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) {
+          setStatus(`Authentication service error: ${error.message}`, 'error');
           return;
         }
 
-        try {
-          const response = await fetch('/api/assets');
-          if (!response.ok) throw new Error('Media service is unavailable.');
-          applyAssets(await response.json());
-          setStatus('System operational.');
-        } catch (_error) {
-          setStatus('Media service unavailable. Start the foundation server to manage assets.', 'error');
-        }
+        updateAuthState(data.session?.user);
+        supabaseClient.auth.onAuthStateChange((_event, session) => updateAuthState(session?.user));
       }
+
+      signInButton.addEventListener('click', async () => {
+        signInButton.disabled = true;
+        setStatus('Signing in…', 'busy');
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email: adminEmail.value,
+          password: adminPassword.value,
+        });
+        signInButton.disabled = false;
+        if (error) {
+          setStatus(`Sign-in failed: ${error.message}`, 'error');
+          return;
+        }
+        setStatus('Signed in. Asset uploads are enabled.', 'success');
+      });
+
+      signOutButton.addEventListener('click', async () => {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) {
+          setStatus(`Sign-out failed: ${error.message}`, 'error');
+          return;
+        }
+        setStatus('Signed out.');
+      });
 
       assetTypeInput.addEventListener('change', () => {
         fileInput.accept = acceptedFiles[assetTypeInput.value];
@@ -201,34 +268,60 @@
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before uploading assets.', 'error');
+          return;
+        }
+
         const file = fileInput.files[0];
         if (!file) return;
+        if (file.size > 25 * 1024 * 1024) {
+          setStatus('Files must be 25 MB or smaller.', 'error');
+          return;
+        }
 
-        const formData = new FormData();
-        formData.append('assetType', assetTypeInput.value);
-        formData.append('mediaFile', file);
-        uploadButton.disabled = true;
-        setStatus('Uploading asset…', 'busy');
+        isUploading = true;
+        updateAuthState({});
+        setStatus('Uploading asset to Supabase Storage…', 'busy');
 
         try {
-          const response = await fetch('/api/upload', {
-            method: 'POST',
-            headers: { 'x-cms-key': document.getElementById('cmsKey').value },
-            body: formData,
+          const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_') || 'upload';
+          const fileName = `${crypto.randomUUID()}-${safeName}`;
+          const assetType = assetTypeInput.value;
+          const { error: uploadError } = await supabaseClient.storage
+            .from('cms-media')
+            .upload(fileName, file, { contentType: file.type, upsert: false });
+          if (uploadError) throw uploadError;
+
+          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(fileName);
+          const { error: dbError } = await supabaseClient.from('website_assets').insert({
+            asset_type: assetType,
+            file_url: publicUrlData.publicUrl,
+            file_name: safeName,
           });
-          const result = await response.json();
-          if (!response.ok || !result.success) throw new Error(result.error || 'Upload failed.');
+          if (dbError) {
+            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([fileName]);
+            if (cleanupError) console.error('Could not remove unregistered media:', cleanupError.message);
+            throw dbError;
+          }
+
           await loadAssets();
-          setStatus(`${result.message} ${result.originalName}`, 'success');
+          setStatus(`Asset uploaded and published: ${safeName}`, 'success');
           fileInput.value = '';
         } catch (error) {
           setStatus(error.message || 'The upload could not be completed.', 'error');
         } finally {
-          uploadButton.disabled = false;
+          isUploading = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
         }
       });
 
-      loadAssets();
+      assetTypeInput.addEventListener('change', () => {
+        fileInput.accept = acceptedFiles[assetTypeInput.value];
+        fileInput.value = '';
+      });
+
+      initializeCms();
     </script>
   </body>
 </html>

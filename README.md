@@ -24,4 +24,6 @@ Compile and run the audit logger with `javac core-audit-java/AuditLogger.java &&
 
 ## Public website
 
-The static website is published from `frontend/` at https://toxyu.github.io/BABIRAFOUNDATION/ by the GitHub Actions workflow. GitHub Pages does not run the Node.js, Python, or Java services, so CMS uploads require a separately hosted backend.
+The static website is published from `frontend/` at https://toxyu.github.io/BABIRAFOUNDATION/ by the GitHub Actions workflow. CMS uploads use Supabase Storage and Auth directly, so the static site does not require the Node server to upload assets. GitHub Pages does not run the Node.js, Python, or Java services; those pipelines remain available for a separately hosted backend.
+
+To configure the CMS, run `supabase/setup.sql` in the Supabase SQL Editor, create/invite an admin user in Supabase Auth, and disable public sign-ups. The `cms-media` bucket is public for website display, but upload and delete operations and asset metadata inserts require an authenticated user. Configure the Supabase Auth site URL and allowed redirect URLs for `https://toxyu.github.io/BABIRAFOUNDATION/`.
