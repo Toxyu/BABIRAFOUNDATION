@@ -20,6 +20,7 @@
         <a href="#about">About us</a>
         <a href="#objectives">Objectives</a>
         <a href="#programmes">Programmes</a>
+        <a href="#stories">Stories</a>
         <a class="nav-contact" href="#admin-panel">CMS portal <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -49,8 +50,8 @@
       <section class="about-section" id="about" aria-labelledby="about-title">
         <p class="eyebrow"><span></span> About us</p>
         <div class="section-copy">
-          <h2 id="about-title">Opportunity grows when a community grows <em>together.</em></h2>
-          <p>Babira Foundation is a community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
+          <h2 id="about-title">Opportunity grows when a community grows together.</h2>
+          <p id="about-copy">Babira Foundation is a community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
         </div>
       </section>
 
@@ -94,42 +95,80 @@
         </div>
       </section>
 
+      <section class="blog-section" id="stories" aria-labelledby="stories-title">
+        <div class="blog-heading">
+          <p class="eyebrow"><span></span> News & stories</p>
+          <h2 id="stories-title">From our community.</h2>
+        </div>
+        <div class="blog-list" id="blog-list" aria-live="polite">
+          <p class="blog-empty">Stories and updates will appear here.</p>
+        </div>
+      </section>
+
       <section class="admin-section" id="admin-panel" aria-labelledby="admin-title">
         <div class="admin-heading">
           <p class="eyebrow"><span></span> CMS portal</p>
-          <h2 id="admin-title">Media desk</h2>
-          <p>Update the foundation logo, hero image, or promotional video.</p>
+          <h2 id="admin-title">Content desk</h2>
+          <p>Manage the website overview, stories, logo, and hero media.</p>
         </div>
         <div class="admin-grid">
-          <form id="uploadForm" class="admin-form">
-            <label for="assetType">Asset type</label>
-            <select id="assetType" name="assetType">
-              <option value="logo">Organization logo</option>
-              <option value="background">Hero background image</option>
-              <option value="video">Promotional video</option>
-            </select>
+          <div class="admin-tools">
+            <form id="authForm" class="admin-form">
+              <h3>Admin access</h3>
+              <label for="adminEmail">Admin email</label>
+              <input type="email" id="adminEmail" autocomplete="username" required>
 
-            <label for="mediaFile">Choose file</label>
-            <input type="file" id="mediaFile" name="mediaFile" accept=".png,.jpg,.jpeg,.webp" required>
-            <p class="field-note">Images: PNG, JPG, WEBP. Video: MP4, WEBM. Maximum 25 MB.</p>
+              <label for="adminPassword">Admin password</label>
+              <input type="password" id="adminPassword" autocomplete="current-password" required>
 
-            <label for="adminEmail">Admin email</label>
-            <input type="email" id="adminEmail" autocomplete="username" required>
+              <div class="auth-actions">
+                <button type="submit" id="signInButton">Sign in</button>
+                <button type="button" id="signOutButton" hidden>Sign out</button>
+              </div>
+            </form>
 
-            <label for="adminPassword">Admin password</label>
-            <input type="password" id="adminPassword" autocomplete="current-password" required>
+            <form id="overviewForm" class="admin-form" aria-labelledby="overview-editor-title">
+              <h3 id="overview-editor-title">Website overview</h3>
+              <label for="overviewTitle">Heading</label>
+              <input id="overviewTitle" maxlength="180" required disabled>
+              <label for="overviewBody">Overview text</label>
+              <textarea id="overviewBody" rows="5" maxlength="4000" required disabled></textarea>
+              <button type="submit" disabled>Save overview</button>
+            </form>
 
-            <div class="auth-actions">
-              <button type="button" id="signInButton">Sign in <span aria-hidden="true">↗</span></button>
-              <button type="button" id="signOutButton" hidden>Sign out</button>
-            </div>
+            <form id="blogForm" class="admin-form" aria-labelledby="blog-editor-title">
+              <h3 id="blog-editor-title">Write a story</h3>
+              <label for="blogTitle">Title</label>
+              <input id="blogTitle" maxlength="180" required disabled>
+              <label for="blogExcerpt">Short introduction</label>
+              <textarea id="blogExcerpt" rows="2" maxlength="400" required disabled></textarea>
+              <label for="blogBody">Story</label>
+              <textarea id="blogBody" rows="7" maxlength="12000" required disabled></textarea>
+              <label class="checkbox-label" for="blogPublished"><input type="checkbox" id="blogPublished" checked disabled> Publish immediately</label>
+              <button type="submit" disabled>Save story</button>
+            </form>
 
-            <button type="submit" id="uploadButton" disabled>Upload asset <span aria-hidden="true">↗</span></button>
-          </form>
-          <div class="status-panel">
-            <div class="status-heading"><span class="status-indicator" aria-hidden="true"></span><h3>System status</h3></div>
-            <p id="statusOutput" role="status" aria-live="polite">Connecting to the media service…</p>
+            <form id="uploadForm" class="admin-form">
+              <h3>Update media</h3>
+              <label for="assetType">Asset type</label>
+              <select id="assetType" name="assetType" disabled>
+                <option value="logo">Organization logo</option>
+                <option value="background">Hero background photo</option>
+                <option value="video">Promotional video</option>
+              </select>
+
+              <label for="mediaFile">Choose file</label>
+              <input type="file" id="mediaFile" name="mediaFile" accept=".png,.jpg,.jpeg,.webp" required disabled>
+              <p class="field-note">Images: PNG, JPG, WEBP. Video: MP4, WEBM. Maximum 25 MB.</p>
+
+              <button type="submit" id="uploadButton" disabled>Upload asset <span aria-hidden="true">↗</span></button>
+            </form>
           </div>
+
+          <aside class="status-panel">
+            <div class="status-heading"><span class="status-indicator" aria-hidden="true"></span><h3>System status</h3></div>
+            <p id="statusOutput" role="status" aria-live="polite">Connecting to Supabase…</p>
+          </aside>
         </div>
       </section>
     </main>
@@ -144,7 +183,10 @@
       const SUPABASE_URL = 'https://nwhspxhnjutotzyztzfg.supabase.co';
       const SUPABASE_ANON_KEY = 'sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK';
       const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const form = document.getElementById('uploadForm');
+      const authForm = document.getElementById('authForm');
+      const uploadForm = document.getElementById('uploadForm');
+      const overviewForm = document.getElementById('overviewForm');
+      const blogForm = document.getElementById('blogForm');
       const fileInput = document.getElementById('mediaFile');
       const assetTypeInput = document.getElementById('assetType');
       const statusOutput = document.getElementById('statusOutput');
@@ -154,7 +196,8 @@
       const signInButton = document.getElementById('signInButton');
       const signOutButton = document.getElementById('signOutButton');
       let isAuthenticated = false;
-      let isUploading = false;
+      const managementForms = [overviewForm, blogForm, uploadForm];
+      let isSaving = false;
       const acceptedFiles = {
         logo: '.png,.jpg,.jpeg,.webp',
         background: '.png,.jpg,.jpeg,.webp',
@@ -199,7 +242,28 @@
         }
       }
 
-      async function loadAssets() {
+      async function loadPublicContent() {
+        const { data: overview, error: overviewError } = await supabaseClient
+          .from('site_overview')
+          .select('title, body')
+          .eq('id', 'main')
+          .maybeSingle();
+        if (overviewError) throw overviewError;
+        if (overview) {
+          document.getElementById('about-title').textContent = overview.title;
+          document.getElementById('about-copy').textContent = overview.body;
+          document.getElementById('overviewTitle').value = overview.title;
+          document.getElementById('overviewBody').value = overview.body;
+        }
+
+        const { data: posts, error: postsError } = await supabaseClient
+          .from('blog_posts')
+          .select('id, title, excerpt, body, created_at')
+          .eq('published', true)
+          .order('created_at', { ascending: false });
+        if (postsError) throw postsError;
+        renderBlogPosts(posts || []);
+
         const { data, error } = await supabaseClient
           .from('website_assets')
           .select('asset_type, file_url, file_name, created_at')
@@ -208,23 +272,58 @@
         applyAssets(data || []);
       }
 
+      function renderBlogPosts(posts) {
+        const list = document.getElementById('blog-list');
+        list.replaceChildren();
+        if (posts.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'blog-empty';
+          empty.textContent = 'Stories and updates will appear here.';
+          list.append(empty);
+          return;
+        }
+
+        for (const post of posts) {
+          const article = document.createElement('article');
+          article.className = 'blog-post';
+          const date = document.createElement('time');
+          date.dateTime = post.created_at;
+          date.textContent = new Date(post.created_at).toLocaleDateString(undefined, {
+            year: 'numeric', month: 'long', day: 'numeric',
+          });
+          const title = document.createElement('h3');
+          title.textContent = post.title;
+          const excerpt = document.createElement('p');
+          excerpt.className = 'blog-excerpt';
+          excerpt.textContent = post.excerpt;
+          const body = document.createElement('p');
+          body.className = 'blog-body';
+          body.textContent = post.body;
+          article.append(date, title, excerpt, body);
+          list.append(article);
+        }
+      }
+
       function updateAuthState(user) {
         isAuthenticated = Boolean(user);
         adminEmail.disabled = isAuthenticated;
         adminPassword.disabled = isAuthenticated;
         signInButton.hidden = isAuthenticated;
+        signInButton.disabled = isSaving;
         signOutButton.hidden = !isAuthenticated;
-        assetTypeInput.disabled = !isAuthenticated || isUploading;
-        fileInput.disabled = !isAuthenticated || isUploading;
-        uploadButton.disabled = !isAuthenticated || isUploading;
+        for (const managementForm of managementForms) {
+          managementForm.querySelectorAll('input, textarea, select, button').forEach((control) => {
+            control.disabled = !isAuthenticated || isSaving;
+          });
+        }
       }
 
       async function initializeCms() {
         try {
-          await loadAssets();
-          setStatus('Public media loaded. Sign in to manage assets.');
+          await loadPublicContent();
+          setStatus('Published overview, stories, and media loaded. Sign in to manage content.');
         } catch (error) {
-          setStatus(`Could not load published media: ${error.message}`, 'error');
+          setStatus(`Could not load published content: ${error.message}. Check the Supabase setup.`, 'error');
         }
 
         const { data, error } = await supabaseClient.auth.getSession();
@@ -234,22 +333,28 @@
         }
 
         updateAuthState(data.session?.user);
-        supabaseClient.auth.onAuthStateChange((_event, session) => updateAuthState(session?.user));
+        supabaseClient.auth.onAuthStateChange((_event, session) => {
+          updateAuthState(session?.user);
+          if (session?.user) setStatus('Signed in. Content management is enabled.', 'success');
+        });
       }
 
-      signInButton.addEventListener('click', async () => {
+      authForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        isSaving = true;
         signInButton.disabled = true;
         setStatus('Signing in…', 'busy');
         const { error } = await supabaseClient.auth.signInWithPassword({
           email: adminEmail.value,
           password: adminPassword.value,
         });
-        signInButton.disabled = false;
+        isSaving = false;
+        updateAuthState((await supabaseClient.auth.getUser()).data.user);
         if (error) {
           setStatus(`Sign-in failed: ${error.message}`, 'error');
           return;
         }
-        setStatus('Signed in. Asset uploads are enabled.', 'success');
+        setStatus('Signed in. Content management is enabled.', 'success');
       });
 
       signOutButton.addEventListener('click', async () => {
@@ -261,15 +366,75 @@
         setStatus('Signed out.');
       });
 
+      overviewForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before editing the overview.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Saving website overview…', 'busy');
+        try {
+          const title = document.getElementById('overviewTitle').value.trim();
+          const body = document.getElementById('overviewBody').value.trim();
+          const { error } = await supabaseClient.from('site_overview').upsert({
+            id: 'main',
+            title,
+            body,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+          if (error) throw error;
+          document.getElementById('about-title').textContent = title;
+          document.getElementById('about-copy').textContent = body;
+          setStatus('Website overview saved.', 'success');
+        } catch (error) {
+          setStatus(`Could not save overview: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState((await supabaseClient.auth.getUser()).data.user);
+        }
+      });
+
+      blogForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before writing a story.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Saving story…', 'busy');
+        try {
+          const { error } = await supabaseClient.from('blog_posts').insert({
+            title: document.getElementById('blogTitle').value.trim(),
+            excerpt: document.getElementById('blogExcerpt').value.trim(),
+            body: document.getElementById('blogBody').value.trim(),
+            published: document.getElementById('blogPublished').checked,
+          });
+          if (error) throw error;
+          blogForm.reset();
+          await loadPublicContent();
+          setStatus('Story saved.', 'success');
+        } catch (error) {
+          setStatus(`Could not save story: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
+      });
+
       assetTypeInput.addEventListener('change', () => {
         fileInput.accept = acceptedFiles[assetTypeInput.value];
         fileInput.value = '';
       });
 
-      form.addEventListener('submit', async (event) => {
+      uploadForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!isAuthenticated) {
-          setStatus('Sign in before uploading assets.', 'error');
+          setStatus('Sign in before uploading media.', 'error');
           return;
         }
 
@@ -280,45 +445,40 @@
           return;
         }
 
-        isUploading = true;
+        isSaving = true;
         updateAuthState({});
-        setStatus('Uploading asset to Supabase Storage…', 'busy');
-
+        setStatus('Uploading media…', 'busy');
+        let uploadedFileName;
         try {
           const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_') || 'upload';
-          const fileName = `${crypto.randomUUID()}-${safeName}`;
           const assetType = assetTypeInput.value;
+          uploadedFileName = `${assetType}/${crypto.randomUUID()}-${safeName}`;
           const { error: uploadError } = await supabaseClient.storage
             .from('cms-media')
-            .upload(fileName, file, { contentType: file.type, upsert: false });
+            .upload(uploadedFileName, file, { contentType: file.type, upsert: false });
           if (uploadError) throw uploadError;
 
-          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(fileName);
-          const { error: dbError } = await supabaseClient.from('website_assets').insert({
+          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(uploadedFileName);
+          const { error: metadataError } = await supabaseClient.from('website_assets').insert({
             asset_type: assetType,
             file_url: publicUrlData.publicUrl,
             file_name: safeName,
           });
-          if (dbError) {
-            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([fileName]);
-            if (cleanupError) console.error('Could not remove unregistered media:', cleanupError.message);
-            throw dbError;
-          }
+          if (metadataError) throw metadataError;
 
-          await loadAssets();
-          setStatus(`Asset uploaded and published: ${safeName}`, 'success');
+          await loadPublicContent();
           fileInput.value = '';
+          setStatus(`Media uploaded and published: ${safeName}`, 'success');
         } catch (error) {
-          setStatus(error.message || 'The upload could not be completed.', 'error');
+          if (uploadedFileName) {
+            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([uploadedFileName]);
+            if (cleanupError) console.error('Could not remove unregistered media:', cleanupError.message);
+          }
+          setStatus(`Could not upload media: ${error.message}`, 'error');
         } finally {
-          isUploading = false;
+          isSaving = false;
           updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
         }
-      });
-
-      assetTypeInput.addEventListener('change', () => {
-        fileInput.accept = acceptedFiles[assetTypeInput.value];
-        fileInput.value = '';
       });
 
       initializeCms();

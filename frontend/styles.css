@@ -89,20 +89,36 @@ h2 em { color: var(--primary-color); font-weight: 600; }
 .programme-item h3 { margin: 0 0 4px; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; }
 .programme-item p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 
+.blog-section { padding: 73px 7.2% 80px; }
+.blog-heading { margin-bottom: 34px; }
+.blog-heading h2 { max-width: 590px; }
+.blog-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 7%; }
+.blog-post { padding-top: 19px; border-top: 1px solid #aeb8a9; }
+.blog-post time { color: var(--muted); font-size: 10px; }
+.blog-post h3 { margin: 12px 0 8px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; }
+.blog-excerpt { margin-bottom: 12px; color: var(--green); font-size: 13px; font-weight: 600; line-height: 1.65; }
+.blog-body, .blog-empty { margin-bottom: 0; color: var(--muted); font-size: 13px; line-height: 1.8; white-space: pre-line; }
+
 .admin-section { max-width: 1100px; margin: 0 auto 4rem; padding: 4rem 2rem; border-radius: 8px; color: var(--dark-color); background: #fff; box-shadow: 0 4px 15px rgb(0 0 0 / 5%); }
 .admin-section .eyebrow { color: var(--primary-color); }
 .admin-section .eyebrow > span { background: var(--primary-color); }
 .admin-heading { margin-bottom: 31px; }
 .admin-heading h2 { margin-bottom: 11px; font-size: 2rem; }
 .admin-heading > p:last-child { margin-bottom: 0; color: var(--muted); font-size: 13px; }
-.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+.admin-grid { display: grid; grid-template-columns: 1fr 0.55fr; gap: 2rem; align-items: start; }
+.admin-tools { min-width: 0; }
 .admin-form { display: grid; grid-template-columns: 1fr; }
+.admin-form + .admin-form { margin-top: 27px; padding-top: 25px; border-top: 1px solid var(--line); }
+.admin-form h3 { margin: 0 0 18px; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; }
 .admin-form label { margin: 0 0 8px; color: var(--dark-color); font-size: 12px; font-weight: 600; }
-.admin-form input, .admin-form select { width: 100%; min-height: 45px; margin-bottom: 19px; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; color: var(--ink); background: #fff; font-size: 1rem; }
+.admin-form input, .admin-form select, .admin-form textarea { width: 100%; min-height: 45px; margin-bottom: 19px; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; color: var(--ink); background: #fff; font-size: 13px; }
+.admin-form textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
 .admin-form input[type='file'] { padding: 9px 10px; }
-.admin-form input:focus-visible, .admin-form select:focus-visible, .admin-form button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
+.admin-form input[type='checkbox'] { width: auto; min-height: 0; margin: 0; accent-color: var(--primary-color); }
+.admin-form input:focus-visible, .admin-form select:focus-visible, .admin-form textarea:focus-visible, .admin-form button:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
 .auth-actions { display: flex; gap: 12px; margin-bottom: 18px; }
 .auth-actions button { flex: 1; }
+.checkbox-label { display: flex; align-items: center; gap: 9px; margin-bottom: 18px !important; }
 .field-note { margin: -11px 0 19px; color: var(--muted); font-size: 10px; line-height: 1.6; }
 .admin-form button { display: flex; min-height: 45px; align-items: center; justify-content: space-between; padding: 0.75rem; border: 0; border-radius: 4px; color: #fff; background: var(--primary-color); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 160ms ease; }
 .admin-form button:hover { background: var(--accent-color); }
@@ -135,6 +151,8 @@ footer span:first-child { color: #fff; font-weight: 700; }
   .objective-item h3 { margin-top: 10px; }
   .item-mark { top: 25px; right: 3px; }
   .programmes-section { padding: 57px 6%; grid-template-columns: 1fr; gap: 31px; }
+  .blog-section { padding: 57px 6%; }
+  .blog-list { grid-template-columns: 1fr; gap: 25px; }
   .admin-section { margin: 0 1rem 2rem; padding: 2rem 1.25rem; }
   .admin-grid { grid-template-columns: 1fr; gap: 23px; }
   footer { padding: 18px 6%; flex-wrap: wrap; }
