@@ -248,7 +248,7 @@
         const { data: overview, error: overviewError } = await supabaseClient
           .from('site_overview')
           .select('title, body')
-          .eq('id', 'main')
+          .eq('id', 1)
           .maybeSingle();
         if (overviewError) throw overviewError;
         if (overview) {
@@ -389,7 +389,7 @@
           const title = document.getElementById('overviewTitle').value.trim();
           const body = document.getElementById('overviewBody').value.trim();
           const { error } = await supabaseClient.from('site_overview').upsert({
-            id: 'main',
+            id: 1,
             title,
             body,
             updated_at: new Date().toISOString(),
