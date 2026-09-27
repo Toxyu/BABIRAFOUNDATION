@@ -1,2 +1,27 @@
 # BABIRAFOUNDATION
-Empowering Youth. Advancing Education. Promoting Community Health
+
+Empowering Youth. Advancing Education. Promoting Community Health.
+
+## Project structure
+
+- `frontend/` contains the static foundation website.
+- `backend-node/` serves the site, authenticates CMS uploads, and orchestrates media processing and audit logging.
+- `media-processor-python/` optimizes uploaded images with Pillow and inventories media directories.
+- `core-audit-java/` appends media upload events to `system_audit.log`.
+- `.github/workflows/` contains the GitHub Pages deployment and media checks.
+
+## Run locally
+
+Install the image processor dependency with `python3 -m pip install -r media-processor-python/requirements.txt`.
+
+Start the site and API with `cd backend-node && CMS_API_KEY='replace-with-a-long-random-key' npm start`. Open `http://localhost:5000`; the health endpoint is at `/api/health`. Set the same key in the CMS portal to upload media. Uploaded assets are stored in the ignored `uploads/` directory by default. Python 3 and Java 11 or newer are required for the upload processing and audit hooks.
+
+For a separate frontend origin, set `CORS_ORIGINS` to a comma-separated list of allowed origins. The default same-origin setup does not require CORS configuration.
+
+Optimize an image with `python media-processor-python/processor.py <file> <logo|background>`, queue a video with `python media-processor-python/processor.py <file> video`, or inventory a directory with `python media-processor-python/processor.py <directory>`.
+
+Compile and run the audit logger with `javac core-audit-java/AuditLogger.java && java -cp core-audit-java AuditLogger`.
+
+## Public website
+
+The static website is published from `frontend/` at https://toxyu.github.io/BABIRAFOUNDATION/ by the GitHub Actions workflow. GitHub Pages does not run the Node.js, Python, or Java services, so CMS uploads require a separately hosted backend.
