@@ -108,6 +108,30 @@ app.use('/api', cors({
   methods: ['GET', 'POST', 'OPTIONS'],
 }));
 
+app.get('/api/foundation/status', (_request, response) => {
+  response.json({
+    organizationName: 'Babira Ndeda Foundation',
+    regNumber: 'SOCF-MOT7BE',
+    governingAct: 'Societies Act (Cap. 108), Section 10',
+    registrationDate: '2025-10-14',
+    status: 'Active & Verified',
+    jurisdiction: 'Vihiga County, Kenya',
+  });
+});
+
+app.get('/api/documents/certificate', (_request, response, next) => {
+  const certificatePath = path.join(__dirname, 'public', 'docs', 'certificate_SOCF-MOT7BE.pdf');
+  response.sendFile(certificatePath, (error) => {
+    if (!error) return;
+    if (response.headersSent) return next(error);
+    if (error.code === 'ENOENT') {
+      response.status(404).json({ error: 'Certificate document unavailable' });
+      return;
+    }
+    next(error);
+  });
+});
+
 app.get('/api/health', (_request, response) => {
   response.json({ status: 'ok', service: 'babira-foundation-api' });
 });
