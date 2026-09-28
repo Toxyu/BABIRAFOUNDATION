@@ -61,7 +61,7 @@
           <h2 id="compliance-title">Babira Ndeda Foundation</h2>
           <p class="compliance-description">Registered under Section 10 of the Societies Act (Cap. 108) | Reg No: <strong>SOCF-MOT7BE</strong></p>
         </div>
-        <a class="compliance-link" href="/api/documents/certificate" target="_blank" rel="noopener noreferrer">
+        <a class="compliance-link" id="certificate-link" href="/api/documents/certificate" target="_blank" rel="noopener noreferrer">
           View Official Registration Document
         </a>
       </section>
@@ -174,6 +174,14 @@
 
               <button type="submit" id="uploadButton" disabled>Upload asset <span aria-hidden="true">↗</span></button>
             </form>
+
+            <form id="certificateForm" class="admin-form" aria-labelledby="certificate-editor-title">
+              <h3 id="certificate-editor-title">Registration document</h3>
+              <label for="certificateFile">Choose PDF or image</label>
+              <input id="certificateFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" required disabled>
+              <p class="field-note">PDF, PNG, JPG, or WEBP. Maximum 25 MB.</p>
+              <button type="submit" disabled>Upload registration document</button>
+            </form>
           </div>
 
           <aside class="status-panel">
@@ -198,6 +206,7 @@
       const uploadForm = document.getElementById('uploadForm');
       const overviewForm = document.getElementById('overviewForm');
       const blogForm = document.getElementById('blogForm');
+      const certificateForm = document.getElementById('certificateForm');
       const fileInput = document.getElementById('mediaFile');
       const assetTypeInput = document.getElementById('assetType');
       const statusOutput = document.getElementById('statusOutput');
@@ -207,8 +216,10 @@
       const adminPassword = document.getElementById('adminPassword');
       const signInButton = document.getElementById('signInButton');
       const signOutButton = document.getElementById('signOutButton');
+      const certificateLink = document.getElementById('certificate-link');
+      const certificateFile = document.getElementById('certificateFile');
       let isAuthenticated = false;
-      const managementForms = [overviewForm, blogForm, uploadForm];
+      const managementForms = [overviewForm, blogForm, uploadForm, certificateForm];
       let isSaving = false;
       const acceptedFiles = {
         logo: '.png,.jpg,.jpeg,.webp',
@@ -283,6 +294,14 @@
           .order('created_at', { ascending: false });
         if (error) throw error;
         applyAssets(data || []);
+
+        const { data: foundationSettings, error: settingsError } = await supabaseClient
+          .from('foundation_settings')
+          .select('certificate_url')
+          .eq('id', 1)
+          .maybeSingle();
+        if (settingsError) throw settingsError;
+        if (foundationSettings) certificateLink.href = foundationSettings.certificate_url;
       }
 
       function renderBlogPosts(posts) {
@@ -440,6 +459,70 @@
           setStatus('Story saved.', 'success');
         } catch (error) {
           setStatus(`Could not save story: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
+      });
+
+      certificateForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before updating the registration document.', 'error');
+          return;
+        }
+
+        const file = certificateFile.files[0];
+        if (!file) {
+          setStatus('Choose a registration document to upload.', 'error');
+          return;
+        }
+        const allowedTypes = new Map([
+          ['.pdf', 'application/pdf'],
+          ['.png', 'image/png'],
+          ['.jpg', 'image/jpeg'],
+          ['.jpeg', 'image/jpeg'],
+          ['.webp', 'image/webp'],
+        ]);
+        const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+        if (!allowedTypes.has(extension) || file.type !== allowedTypes.get(extension)) {
+          setStatus('Choose a PDF, PNG, JPG, or WEBP registration document.', 'error');
+          return;
+        }
+        if (file.size > 25 * 1024 * 1024) {
+          setStatus('Registration documents must be 25 MB or smaller.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Uploading registration document…', 'busy');
+        let uploadedDocumentPath;
+        try {
+          const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120) || 'registration-document';
+          uploadedDocumentPath = `documents/${crypto.randomUUID()}-${safeName}`;
+          const { error: uploadError } = await supabaseClient.storage
+            .from('cms-media')
+            .upload(uploadedDocumentPath, file, { contentType: file.type, upsert: false });
+          if (uploadError) throw uploadError;
+
+          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(uploadedDocumentPath);
+          const documentUrl = publicUrlData.publicUrl;
+          const { error } = await supabaseClient.from('foundation_settings').upsert({
+            id: 1,
+            certificate_url: documentUrl,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+          if (error) throw error;
+          certificateLink.href = documentUrl;
+          certificateFile.value = '';
+          setStatus('Registration document uploaded and published.', 'success');
+        } catch (error) {
+          if (uploadedDocumentPath) {
+            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([uploadedDocumentPath]);
+            if (cleanupError) console.error('Could not remove unpublished registration document:', cleanupError.message);
+          }
+          setStatus(`Could not upload registration document: ${error.message}`, 'error');
         } finally {
           isSaving = false;
           updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
