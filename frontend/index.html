@@ -443,7 +443,7 @@
         signInButton.disabled = true;
         setStatus('Signing in…', 'busy');
         const { error } = await supabaseClient.auth.signInWithPassword({
-          email: adminEmail.value,
+          email: adminEmail.value.trim().toLowerCase(),
           password: adminPassword.value,
         });
         isSaving = false;
