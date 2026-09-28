@@ -3,16 +3,733 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0; url=frontend/">
-    <title>Babira Ndeda Foundation</title>
+    <meta name="theme-color" content="#f4f2ec">
+    <meta name="description" content="Babira Ndeda Foundation empowers youth, advances education, and promotes community health in Vihiga County, Kenya.">
+    <title>Babira Ndeda Foundation | Vihiga County, Kenya</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
-    <p><a href="frontend/">Continue to Babira Ndeda Foundation</a></p>
+    <header class="site-header">
+      <a class="wordmark" href="#hero" aria-label="Babira Ndeda Foundation home">
+        <span class="wordmark-mark" id="logo-monogram" aria-="true">B</span>
+        <img class="site-logo" id="site-logo" alt="Babira Ndeda Foundation logo" >
+        <span>Babira<br>Foundation</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About us</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#programmes">Programmes</a>
+        <a href="#stories">Stories</a>
+        <a class="nav-contact" href="#admin-panel">CMS portal <span aria-="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Vihiga County, Kenya</p>
+          <h1 id="hero-title">Babira<br>Foundation</h1>
+          <p class="hero-intro">Empowering youth. Advancing education. Promoting community health.</p>
+          <a class="text-link" href="#about">Meet the foundation <span aria-="true">↓</span></a>
+        </div>
+        <div class="hero-art" id="hero-art" role="img" aria-label="A sunrise over a growing community garden">
+          <div class="landscape" id="hero-illustration" aria-="true">
+            <div class="sun"></div>
+            <div class="hill hill-back"></div>
+            <div class="hill hill-front"></div>
+            <div class="plant plant-one"><i></i><i></i><b></b></div>
+            <div class="plant plant-two"><i></i><i></i><b></b></div>
+          </div>
+          <img class="hero-background" id="hero-background" alt="" >
+          <video autoplay loop muted playsinline autoplay loop muted  class="hero-video" id="hero-video"   ></video>
+          <div class="art-caption"><span>Community-led</span><span>Vihiga County</span></div>
+        </div>
+      </section>
+
+      <section class="about-section" id="about" aria-labelledby="about-title">
+        <p class="eyebrow"><span></span> About us</p>
+        <div class="section-copy">
+          <h2 id="about-title">Opportunity grows when a community grows together.</h2>
+          <p id="about-copy">Babira Ndeda Foundation is a community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
+        </div>
+      </section>
+
+      <section class="campaign-banner" id="campaign-banner" aria-label="Community campaign spotlight">
+        <div class="campaign-copy">
+          <span class="campaign-label">Spotlight</span>
+          <p>Empowering Vihiga County: Join the movement for better agriculture, education, and leadership.</p>
+        </div>
+        <button class="campaign-dismiss" id="campaign-dismiss" type="button" aria-label="Dismiss campaign spotlight">Dismiss</button>
+      </section>
+
+      <section class="compliance-section" aria-labelledby="compliance-title">
+        <div>
+          <p class="compliance-label">Verified Community Organization</p>
+          <h2 id="compliance-title">Babira Ndeda Foundation</h2>
+          <p class="compliance-description">Registered under Section 10 of the Societies Act (Cap. 108) | Reg No: <strong>SOCF-MOT7BE</strong></p>
+        </div>
+        <div class="compliance-actions">
+          <a class="compliance-link" id="certificate-link" href="/api/documents/certificate" target="_blank" rel="noopener noreferrer">
+            View Official Registration Document
+          </a>
+          <a class="whatsapp-link" href="https://api.whatsapp.com/send?text=Check%20out%20the%20Babira%20Foundation%20initiatives%20in%20Vihiga%20County%21" target="_blank" rel="noopener noreferrer">
+            Share on WhatsApp
+          </a>
+        </div>
+      </section>
+
+      <section class="objectives-section" id="objectives" aria-labelledby="objectives-title">
+        <div class="section-heading">
+          <p class="eyebrow"><span></span> Our objectives</p>
+          <h2 id="objectives-title">A stronger future, built close to home.</h2>
+        </div>
+        <div class="objective-grid">
+          <article class="objective-item">
+            <span class="item-number">01</span>
+            <h3>Youth empowerment</h3>
+            <p>Creating opportunities for young people to develop, contribute, and lead.</p>
+            <span class="item-mark" aria-="true">↗</span>
+          </article>
+          <article class="objective-item">
+            <span class="item-number">02</span>
+            <h3>Education</h3>
+            <p>Supporting access to learning and the foundations for lifelong growth.</p>
+            <span class="item-mark" aria-="true">✳</span>
+          </article>
+          <article class="objective-item">
+            <span class="item-number">03</span>
+            <h3>Community health</h3>
+            <p>Promoting healthier lives through awareness, care, and local action.</p>
+            <span class="item-mark" aria-="true">＋</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="programmes-section" id="programmes" aria-labelledby="programmes-title">
+        <div class="programmes-heading">
+          <p class="eyebrow"><span></span> Our programmes</p>
+          <h2 id="programmes-title">Investing in people and possibility.</h2>
+          <p>Our work is shaped around the priorities and strengths of the communities we serve.</p>
+        </div>
+        <div class="programme-list">
+          <article class="programme-item"><span>01</span><h3>Youth development</h3><p>Skills, mentorship, and pathways to opportunity.</p></article>
+          <article class="programme-item"><span>02</span><h3>Learning support</h3><p>Encouragement and support for learners and families.</p></article>
+          <article class="programme-item"><span>03</span><h3>Community wellbeing</h3><p>Local health awareness and community-led action.</p></article>
+        </div>
+      </section>
+
+      <section class="blog-section" id="stories" aria-labelledby="stories-title">
+        <div class="blog-heading">
+          <p class="eyebrow"><span></span> News & stories</p>
+          <h2 id="stories-title">From our community.</h2>
+        </div>
+        <div class="blog-list" id="blog-list" aria-live="polite">
+          <p class="blog-empty">Stories and updates will appear here.</p>
+        </div>
+      </section>
+
+      <section class="campaign-announcements" aria-labelledby="campaign-announcements-title">
+        <p class="eyebrow"><span></span> Community announcements</p>
+        <h2 id="campaign-announcements-title">Campaigns and community partners.</h2>
+        <p>Updates about local initiatives and community partnerships will be shared here.</p>
+      </section>
+
+      <section class="lead-section" aria-labelledby="lead-title">
+        <p class="eyebrow"><span></span> Stay connected</p>
+        <h2 id="lead-title">Connect with Babira Ndeda Foundation.</h2>
+        <p>Get updates about community programs, education, agriculture, and youth opportunities.</p>
+        <form id="leadForm" class="lead-form">
+          <div>
+            <label for="leadContact">Email address or WhatsApp number</label>
+            <input id="leadContact" name="contactInfo" type="text" maxlength="254" autocomplete="off" required>
+          </div>
+          <div>
+            <label for="leadRegion">Your region</label>
+            <input id="leadRegion" name="region" type="text" maxlength="100" value="Vihiga County" required>
+          </div>
+          <label class="lead-consent" for="leadConsent">
+            <input id="leadConsent" name="consent" type="checkbox" required>
+            I agree to be contacted with updates about Babira Ndeda Foundation programs.
+          </label>
+          <button type="submit" id="leadSubmit">Join the network</button>
+          <p class="lead-status" id="leadStatus" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-section" id="admin-panel" aria-labelledby="admin-title">
+        <div class="admin-heading">
+          <p class="eyebrow"><span></span> CMS portal</p>
+          <h2 id="admin-title">Content desk</h2>
+          <p>Manage the website overview, stories, logo, and hero media.</p>
+        </div>
+        <div class="admin-grid">
+          <div class="admin-tools">
+            <form id="authForm" class="admin-form">
+              <h3>Admin access</h3>
+              <label for="adminEmail">Admin email</label>
+              <input type="email" id="adminEmail" autocomplete="username" required>
+
+              <label for="adminPassword">Admin password</label>
+              <input type="password" id="adminPassword" autocomplete="current-password" required>
+
+              <div class="auth-actions">
+                <button type="submit" id="signInButton">Sign in</button>
+                <button type="button" id="signOutButton" >Sign out</button>
+              </div>
+            </form>
+
+            <form id="overviewForm" class="admin-form" aria-labelledby="overview-editor-title">
+              <h3 id="overview-editor-title">Website overview</h3>
+              <label for="overviewTitle">Heading</label>
+              <input id="overviewTitle" maxlength="180" required disabled>
+              <label for="overviewBody">Overview text</label>
+              <textarea id="overviewBody" rows="5" maxlength="4000" required disabled></textarea>
+              <button type="submit" disabled>Save overview</button>
+            </form>
+
+            <form id="blogForm" class="admin-form" aria-labelledby="blog-editor-title">
+              <h3 id="blog-editor-title">Write a story</h3>
+              <label for="blogTitle">Title</label>
+              <input id="blogTitle" maxlength="180" required disabled>
+              <label for="blogExcerpt">Short introduction</label>
+              <textarea id="blogExcerpt" rows="2" maxlength="400" required disabled></textarea>
+              <label for="blogBody">Story</label>
+              <textarea id="blogBody" rows="7" maxlength="12000" required disabled></textarea>
+              <label class="checkbox-label" for="blogPublished"><input type="checkbox" id="blogPublished" checked disabled> Publish immediately</label>
+              <button type="submit" disabled>Save story</button>
+            </form>
+
+            <form id="uploadForm" class="admin-form">
+              <h3>Update media</h3>
+              <label for="assetType">Asset type</label>
+              <select id="assetType" name="assetType" disabled>
+                <option value="logo">Organization logo</option>
+                <option value="background">Hero background photo</option>
+                <option value="video">Promotional video</option>
+              </select>
+
+              <label for="mediaFile">Choose file</label>
+              <input type="file" id="mediaFile" name="mediaFile" accept=".png,.jpg,.jpeg,.webp" required disabled>
+              <p class="field-note">Images: PNG, JPG, WEBP. Video: MP4, WEBM. Maximum 25 MB.</p>
+
+              <button type="submit" id="uploadButton" disabled>Upload asset <span aria-="true">↗</span></button>
+            </form>
+
+            <form id="certificateForm" class="admin-form" aria-labelledby="certificate-editor-title">
+              <h3 id="certificate-editor-title">Registration document</h3>
+              <label for="certificateFile">Choose PDF or image</label>
+              <input id="certificateFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" required disabled>
+              <p class="field-note">PDF, PNG, JPG, or WEBP. Maximum 25 MB.</p>
+              <button type="submit" disabled>Upload registration document</button>
+            </form>
+
+            <section class="admin-leads" aria-labelledby="admin-leads-title">
+              <h3 id="admin-leads-title">Community updates sign-ups</h3>
+              <p>Contact details are visible only to signed-in CMS admins.</p>
+              <button id="loadLeadsButton" type="button" disabled>Load sign-ups</button>
+              <div id="lead-list" class="lead-list" aria-live="polite"></div>
+            </section>
+          </div>
+
+          <aside class="status-panel">
+            <div class="status-heading"><span class="status-indicator" aria-="true"></span><h3>System status</h3></div>
+            <p id="statusOutput" role="status" aria-live="polite">Connecting to Supabase…</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Babira Ndeda Foundation</span>
+      <span>Vihiga County, Kenya</span>
+      <span>Empowering youth. Advancing education. Promoting community health.</span>
+    </footer>
+
     <script>
-      const destination = new URL('frontend/', window.location.href);
-      destination.search = window.location.search;
-      destination.hash = window.location.hash;
-      window.location.replace(destination);
+      const SUPABASE_URL = 'https://nwhspxhnjutotzyztzfg.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK';
+      const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const authForm = document.getElementById('authForm');
+      const uploadForm = document.getElementById('uploadForm');
+      const overviewForm = document.getElementById('overviewForm');
+      const blogForm = document.getElementById('blogForm');
+      const certificateForm = document.getElementById('certificateForm');
+      const fileInput = document.getElementById('mediaFile');
+      const assetTypeInput = document.getElementById('assetType');
+      const statusOutput = document.getElementById('statusOutput');
+      const statusIndicator = document.querySelector('.status-indicator');
+      const uploadButton = document.getElementById('uploadButton');
+      const adminEmail = document.getElementById('adminEmail');
+      const adminPassword = document.getElementById('adminPassword');
+      const signInButton = document.getElementById('signInButton');
+      const signOutButton = document.getElementById('signOutButton');
+      const certificateLink = document.getElementById('certificate-link');
+      const certificateFile = document.getElementById('certificateFile');
+      const leadForm = document.getElementById('leadForm');
+      const leadContact = document.getElementById('leadContact');
+      const leadRegion = document.getElementById('leadRegion');
+      const leadConsent = document.getElementById('leadConsent');
+      const leadSubmit = document.getElementById('leadSubmit');
+      const leadStatus = document.getElementById('leadStatus');
+      const loadLeadsButton = document.getElementById('loadLeadsButton');
+      const leadList = document.getElementById('lead-list');
+      const campaignBanner = document.getElementById('campaign-banner');
+      const campaignDismiss = document.getElementById('campaign-dismiss');
+      let isAuthenticated = false;
+      const managementForms = [overviewForm, blogForm, uploadForm, certificateForm];
+      let isSaving = false;
+      const acceptedFiles = {
+        logo: '.png,.jpg,.jpeg,.webp',
+        background: '.png,.jpg,.jpeg,.webp',
+        video: '.mp4,.webm',
+      };
+
+      function setStatus(message, state = 'ready') {
+        statusOutput.textContent = message;
+        statusOutput.dataset.state = state;
+        statusIndicator.dataset.state = state;
+      }
+
+      function applyAssets(assets) {
+        const logo = document.getElementById('site-logo');
+        const monogram = document.getElementById('logo-monogram');
+        const background = document.getElementById('hero-background');
+        const video = document.getElementById('hero-video');
+        const illustration = document.getElementById('hero-illustration');
+        let logoApplied = false;
+        let heroApplied = false;
+
+        for (const asset of assets) {
+          if (asset.asset_type === 'logo' && !logoApplied) {
+            logo.src = asset.file_url;
+            logo. = false;
+            monogram. = true;
+            logoApplied = true;
+          }
+          if (!heroApplied && asset.asset_type === 'background') {
+            background.src = asset.file_url;
+            background. = false;
+            video. = true;
+            video.pause();
+            illustration. = true;
+            heroApplied = true;
+          } else if (!heroApplied && asset.asset_type === 'video') {
+            video.src = asset.file_url;
+            video. = false;
+            background. = true;
+            illustration. = true;
+            heroApplied = true;
+          }
+        }
+      }
+
+      async function loadPublicContent() {
+        const { data: overview, error: overviewError } = await supabaseClient
+          .from('site_overview')
+          .select('title, body')
+          .eq('id', 1)
+          .maybeSingle();
+        if (overviewError) throw overviewError;
+        if (overview) {
+          document.getElementById('about-title').textContent = overview.title;
+          document.getElementById('about-copy').textContent = overview.body;
+          document.getElementById('overviewTitle').value = overview.title;
+          document.getElementById('overviewBody').value = overview.body;
+        }
+
+        const { data: posts, error: postsError } = await supabaseClient
+          .from('blog_posts')
+          .select('id, title, excerpt, body, created_at')
+          .eq('published', true)
+          .order('created_at', { ascending: false });
+        if (postsError) throw postsError;
+        renderBlogPosts(posts || []);
+
+        const { data, error } = await supabaseClient
+          .from('website_assets')
+          .select('asset_type, file_url, file_name, created_at')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        applyAssets(data || []);
+
+        const { data: foundationSettings, error: settingsError } = await supabaseClient
+          .from('foundation_settings')
+          .select('certificate_url')
+          .eq('id', 1)
+          .maybeSingle();
+        if (settingsError) throw settingsError;
+        if (foundationSettings) certificateLink.href = foundationSettings.certificate_url;
+      }
+
+      function renderBlogPosts(posts) {
+        const list = document.getElementById('blog-list');
+        list.replaceChildren();
+        if (posts.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'blog-empty';
+          empty.textContent = 'Stories and updates will appear here.';
+          list.append(empty);
+          return;
+        }
+
+        for (const post of posts) {
+          const article = document.createElement('article');
+          article.className = 'blog-post';
+          const date = document.createElement('time');
+          date.dateTime = post.created_at;
+          date.textContent = new Date(post.created_at).toLocaleDateString(undefined, {
+            year: 'numeric', month: 'long', day: 'numeric',
+          });
+          const title = document.createElement('h3');
+          title.textContent = post.title;
+          const excerpt = document.createElement('p');
+          excerpt.className = 'blog-excerpt';
+          excerpt.textContent = post.excerpt;
+          const body = document.createElement('p');
+          body.className = 'blog-body';
+          body.textContent = post.body;
+          article.append(date, title, excerpt, body);
+          list.append(article);
+        }
+      }
+
+      function updateAuthState(user) {
+        isAuthenticated = Boolean(user);
+        adminEmail.disabled = isAuthenticated;
+        adminPassword.disabled = isAuthenticated;
+        signInButton. = isAuthenticated;
+        signInButton.disabled = isSaving;
+        signOutButton. = !isAuthenticated;
+        loadLeadsButton.disabled = !isAuthenticated || isSaving;
+        for (const managementForm of managementForms) {
+          managementForm.querySelectorAll('input, textarea, select, button').forEach((control) => {
+            control.disabled = !isAuthenticated || isSaving;
+          });
+        }
+      }
+
+      async function initializeCms() {
+        try {
+          await loadPublicContent();
+          setStatus('Operational: public content and media are available. Sign in to manage the site.', 'success');
+        } catch (error) {
+          setStatus(`Could not load published content: ${error.message}. Check the Supabase setup.`, 'error');
+        }
+
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) {
+          setStatus(`Authentication service error: ${error.message}`, 'error');
+          return;
+        }
+
+        updateAuthState(data.session?.user);
+        if (data.session?.user) {
+          setStatus('Operational: Supabase connected and admin editing is enabled.', 'success');
+        }
+        supabaseClient.auth.onAuthStateChange((_event, session) => {
+          updateAuthState(session?.user);
+          if (session?.user) {
+            setStatus('Operational: Supabase connected and admin editing is enabled.', 'success');
+          } else {
+            setStatus('Operational: public site is available. Sign in to manage content.', 'ready');
+          }
+        });
+      }
+
+      authForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        isSaving = true;
+        signInButton.disabled = true;
+        setStatus('Signing in…', 'busy');
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email: adminEmail.value.trim().toLowerCase(),
+          password: adminPassword.value,
+        });
+        isSaving = false;
+        updateAuthState((await supabaseClient.auth.getUser()).data.user);
+        if (error) {
+          setStatus(`Sign-in failed: ${error.message}`, 'error');
+          return;
+        }
+        setStatus('Signed in. Content management is enabled.', 'success');
+      });
+
+      signOutButton.addEventListener('click', async () => {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) {
+          setStatus(`Sign-out failed: ${error.message}`, 'error');
+          return;
+        }
+        setStatus('Signed out.');
+      });
+
+      overviewForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before editing the overview.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Saving website overview…', 'busy');
+        try {
+          const title = document.getElementById('overviewTitle').value.trim();
+          const body = document.getElementById('overviewBody').value.trim();
+          const { error } = await supabaseClient.from('site_overview').upsert({
+            id: 1,
+            title,
+            body,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+          if (error) throw error;
+          document.getElementById('about-title').textContent = title;
+          document.getElementById('about-copy').textContent = body;
+          setStatus('Website overview saved.', 'success');
+        } catch (error) {
+          setStatus(`Could not save overview: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState((await supabaseClient.auth.getUser()).data.user);
+        }
+      });
+
+      blogForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before writing a story.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Saving story…', 'busy');
+        try {
+          const { error } = await supabaseClient.from('blog_posts').insert({
+            title: document.getElementById('blogTitle').value.trim(),
+            excerpt: document.getElementById('blogExcerpt').value.trim(),
+            body: document.getElementById('blogBody').value.trim(),
+            published: document.getElementById('blogPublished').checked,
+          });
+          if (error) throw error;
+          blogForm.reset();
+          await loadPublicContent();
+          setStatus('Story saved.', 'success');
+        } catch (error) {
+          setStatus(`Could not save story: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
+      });
+
+      certificateForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before updating the registration document.', 'error');
+          return;
+        }
+
+        const file = certificateFile.files[0];
+        if (!file) {
+          setStatus('Choose a registration document to upload.', 'error');
+          return;
+        }
+        const allowedTypes = new Map([
+          ['.pdf', 'application/pdf'],
+          ['.png', 'image/png'],
+          ['.jpg', 'image/jpeg'],
+          ['.jpeg', 'image/jpeg'],
+          ['.webp', 'image/webp'],
+        ]);
+        const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+        if (!allowedTypes.has(extension) || file.type !== allowedTypes.get(extension)) {
+          setStatus('Choose a PDF, PNG, JPG, or WEBP registration document.', 'error');
+          return;
+        }
+        if (file.size > 25 * 1024 * 1024) {
+          setStatus('Registration documents must be 25 MB or smaller.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Uploading registration document…', 'busy');
+        let uploadedDocumentPath;
+        try {
+          const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120) || 'registration-document';
+          uploadedDocumentPath = `documents/${crypto.randomUUID()}-${safeName}`;
+          const { error: uploadError } = await supabaseClient.storage
+            .from('cms-media')
+            .upload(uploadedDocumentPath, file, { contentType: file.type, upsert: false });
+          if (uploadError) throw uploadError;
+
+          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(uploadedDocumentPath);
+          const documentUrl = publicUrlData.publicUrl;
+          const { error } = await supabaseClient.from('foundation_settings').upsert({
+            id: 1,
+            certificate_url: documentUrl,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+          if (error) throw error;
+          certificateLink.href = documentUrl;
+          certificateFile.value = '';
+          setStatus('Registration document uploaded and published.', 'success');
+        } catch (error) {
+          if (uploadedDocumentPath) {
+            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([uploadedDocumentPath]);
+            if (cleanupError) console.error('Could not remove unpublished registration document:', cleanupError.message);
+          }
+          setStatus(`Could not upload registration document: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
+      });
+
+      assetTypeInput.addEventListener('change', () => {
+        fileInput.accept = acceptedFiles[assetTypeInput.value];
+        fileInput.value = '';
+      });
+
+      campaignDismiss.addEventListener('click', () => {
+        campaignBanner. = true;
+      });
+
+      leadForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const contactInfo = leadContact.value.trim();
+        const region = leadRegion.value.trim();
+        if (!leadConsent.checked || contactInfo.length < 3 || contactInfo.length > 254 || !region || region.length > 100) {
+          leadStatus.textContent = 'Enter valid contact details and region, then agree to receive program updates.';
+          leadStatus.dataset.state = 'error';
+          return;
+        }
+
+        leadSubmit.disabled = true;
+        leadStatus.textContent = 'Submitting your sign-up…';
+        leadStatus.dataset.state = 'busy';
+        try {
+          const { error } = await supabaseClient.from('community_leads').insert({
+            contact_info: contactInfo,
+            region,
+            consent_given: true,
+          });
+          if (error) throw error;
+          leadForm.reset();
+          leadRegion.value = 'Vihiga County';
+          leadStatus.textContent = 'Thank you. Your sign-up has been received.';
+          leadStatus.dataset.state = 'success';
+        } catch (error) {
+          leadStatus.textContent = `Could not submit your sign-up: ${error.message}`;
+          leadStatus.dataset.state = 'error';
+        } finally {
+          leadSubmit.disabled = false;
+        }
+      });
+
+      function renderLeads(leads) {
+        leadList.replaceChildren();
+        if (leads.length === 0) {
+          const emptyMessage = document.createElement('p');
+          emptyMessage.textContent = 'No sign-ups yet.';
+          leadList.append(emptyMessage);
+          return;
+        }
+
+        for (const lead of leads) {
+          const item = document.createElement('article');
+          item.className = 'lead-entry';
+          const contact = document.createElement('strong');
+          contact.textContent = lead.contact_info;
+          const details = document.createElement('span');
+          const date = new Date(lead.consent_at).toLocaleDateString(undefined, {
+            year: 'numeric', month: 'short', day: 'numeric',
+          });
+          details.textContent = `${lead.region} · ${date}`;
+          item.append(contact, details);
+          leadList.append(item);
+        }
+      }
+
+      loadLeadsButton.addEventListener('click', async () => {
+        if (!isAuthenticated) {
+          setStatus('Sign in before viewing community sign-ups.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Loading community sign-ups…', 'busy');
+        try {
+          const { data, error } = await supabaseClient
+            .from('community_leads')
+            .select('contact_info, region, consent_at')
+            .order('created_at', { ascending: false })
+            .limit(100);
+          if (error) throw error;
+          renderLeads(data || []);
+          setStatus('Community sign-ups loaded.', 'success');
+        } catch (error) {
+          setStatus(`Could not load community sign-ups: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
+      });
+
+      uploadForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!isAuthenticated) {
+          setStatus('Sign in before uploading media.', 'error');
+          return;
+        }
+
+        const file = fileInput.files[0];
+        if (!file) return;
+        if (file.size > 25 * 1024 * 1024) {
+          setStatus('Files must be 25 MB or smaller.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Uploading media…', 'busy');
+        let uploadedFileName;
+        try {
+          const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_') || 'upload';
+          const assetType = assetTypeInput.value;
+          uploadedFileName = `${assetType}/${crypto.randomUUID()}-${safeName}`;
+          const { error: uploadError } = await supabaseClient.storage
+            .from('cms-media')
+            .upload(uploadedFileName, file, { contentType: file.type, upsert: false });
+          if (uploadError) throw uploadError;
+
+          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(uploadedFileName);
+          const { error: metadataError } = await supabaseClient.from('website_assets').insert({
+            asset_type: assetType,
+            file_url: publicUrlData.publicUrl,
+            file_name: safeName,
+          });
+          if (metadataError) throw metadataError;
+
+          await loadPublicContent();
+          fileInput.value = '';
+          setStatus(`Media uploaded and published: ${safeName}`, 'success');
+        } catch (error) {
+          if (uploadedFileName) {
+            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([uploadedFileName]);
+            if (cleanupError) console.error('Could not remove unregistered media:', cleanupError.message);
+          }
+          setStatus(`Could not upload media: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
+      });
+
+      initializeCms();
     </script>
   </body>
 </html>
