@@ -55,15 +55,28 @@
         </div>
       </section>
 
+      <section class="campaign-banner" id="campaign-banner" aria-label="Community campaign spotlight">
+        <div class="campaign-copy">
+          <span class="campaign-label">Spotlight</span>
+          <p>Empowering Vihiga County: Join the movement for better agriculture, education, and leadership.</p>
+        </div>
+        <button class="campaign-dismiss" id="campaign-dismiss" type="button" aria-label="Dismiss campaign spotlight">Dismiss</button>
+      </section>
+
       <section class="compliance-section" aria-labelledby="compliance-title">
         <div>
           <p class="compliance-label">Verified Community Organization</p>
           <h2 id="compliance-title">Babira Ndeda Foundation</h2>
           <p class="compliance-description">Registered under Section 10 of the Societies Act (Cap. 108) | Reg No: <strong>SOCF-MOT7BE</strong></p>
         </div>
-        <a class="compliance-link" id="certificate-link" href="/api/documents/certificate" target="_blank" rel="noopener noreferrer">
-          View Official Registration Document
-        </a>
+        <div class="compliance-actions">
+          <a class="compliance-link" id="certificate-link" href="/api/documents/certificate" target="_blank" rel="noopener noreferrer">
+            View Official Registration Document
+          </a>
+          <a class="whatsapp-link" href="https://api.whatsapp.com/send?text=Check%20out%20the%20Babira%20Foundation%20initiatives%20in%20Vihiga%20County%21" target="_blank" rel="noopener noreferrer">
+            Share on WhatsApp
+          </a>
+        </div>
       </section>
 
       <section class="objectives-section" id="objectives" aria-labelledby="objectives-title">
@@ -114,6 +127,34 @@
         <div class="blog-list" id="blog-list" aria-live="polite">
           <p class="blog-empty">Stories and updates will appear here.</p>
         </div>
+      </section>
+
+      <section class="campaign-announcements" aria-labelledby="campaign-announcements-title">
+        <p class="eyebrow"><span></span> Community announcements</p>
+        <h2 id="campaign-announcements-title">Campaigns and community partners.</h2>
+        <p>Updates about local initiatives and community partnerships will be shared here.</p>
+      </section>
+
+      <section class="lead-section" aria-labelledby="lead-title">
+        <p class="eyebrow"><span></span> Stay connected</p>
+        <h2 id="lead-title">Connect with Babira Foundation.</h2>
+        <p>Get updates about community programs, education, agriculture, and youth opportunities.</p>
+        <form id="leadForm" class="lead-form">
+          <div>
+            <label for="leadContact">Email address or WhatsApp number</label>
+            <input id="leadContact" name="contactInfo" type="text" maxlength="254" autocomplete="off" required>
+          </div>
+          <div>
+            <label for="leadRegion">Your region</label>
+            <input id="leadRegion" name="region" type="text" maxlength="100" value="Vihiga County" required>
+          </div>
+          <label class="lead-consent" for="leadConsent">
+            <input id="leadConsent" name="consent" type="checkbox" required>
+            I agree to be contacted with updates about Babira Foundation programs.
+          </label>
+          <button type="submit" id="leadSubmit">Join the network</button>
+          <p class="lead-status" id="leadStatus" role="status" aria-live="polite"></p>
+        </form>
       </section>
 
       <section class="admin-section" id="admin-panel" aria-labelledby="admin-title">
@@ -182,6 +223,13 @@
               <p class="field-note">PDF, PNG, JPG, or WEBP. Maximum 25 MB.</p>
               <button type="submit" disabled>Upload registration document</button>
             </form>
+
+            <section class="admin-leads" aria-labelledby="admin-leads-title">
+              <h3 id="admin-leads-title">Community updates sign-ups</h3>
+              <p>Contact details are visible only to signed-in CMS admins.</p>
+              <button id="loadLeadsButton" type="button" disabled>Load sign-ups</button>
+              <div id="lead-list" class="lead-list" aria-live="polite"></div>
+            </section>
           </div>
 
           <aside class="status-panel">
@@ -218,6 +266,16 @@
       const signOutButton = document.getElementById('signOutButton');
       const certificateLink = document.getElementById('certificate-link');
       const certificateFile = document.getElementById('certificateFile');
+      const leadForm = document.getElementById('leadForm');
+      const leadContact = document.getElementById('leadContact');
+      const leadRegion = document.getElementById('leadRegion');
+      const leadConsent = document.getElementById('leadConsent');
+      const leadSubmit = document.getElementById('leadSubmit');
+      const leadStatus = document.getElementById('leadStatus');
+      const loadLeadsButton = document.getElementById('loadLeadsButton');
+      const leadList = document.getElementById('lead-list');
+      const campaignBanner = document.getElementById('campaign-banner');
+      const campaignDismiss = document.getElementById('campaign-dismiss');
       let isAuthenticated = false;
       const managementForms = [overviewForm, blogForm, uploadForm, certificateForm];
       let isSaving = false;
@@ -343,6 +401,7 @@
         signInButton.hidden = isAuthenticated;
         signInButton.disabled = isSaving;
         signOutButton.hidden = !isAuthenticated;
+        loadLeadsButton.disabled = !isAuthenticated || isSaving;
         for (const managementForm of managementForms) {
           managementForm.querySelectorAll('input, textarea, select, button').forEach((control) => {
             control.disabled = !isAuthenticated || isSaving;
@@ -532,6 +591,92 @@
       assetTypeInput.addEventListener('change', () => {
         fileInput.accept = acceptedFiles[assetTypeInput.value];
         fileInput.value = '';
+      });
+
+      campaignDismiss.addEventListener('click', () => {
+        campaignBanner.hidden = true;
+      });
+
+      leadForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const contactInfo = leadContact.value.trim();
+        const region = leadRegion.value.trim();
+        if (!leadConsent.checked || contactInfo.length < 3 || contactInfo.length > 254 || !region || region.length > 100) {
+          leadStatus.textContent = 'Enter valid contact details and region, then agree to receive program updates.';
+          leadStatus.dataset.state = 'error';
+          return;
+        }
+
+        leadSubmit.disabled = true;
+        leadStatus.textContent = 'Submitting your sign-up…';
+        leadStatus.dataset.state = 'busy';
+        try {
+          const { error } = await supabaseClient.from('community_leads').insert({
+            contact_info: contactInfo,
+            region,
+            consent_given: true,
+          });
+          if (error) throw error;
+          leadForm.reset();
+          leadRegion.value = 'Vihiga County';
+          leadStatus.textContent = 'Thank you. Your sign-up has been received.';
+          leadStatus.dataset.state = 'success';
+        } catch (error) {
+          leadStatus.textContent = `Could not submit your sign-up: ${error.message}`;
+          leadStatus.dataset.state = 'error';
+        } finally {
+          leadSubmit.disabled = false;
+        }
+      });
+
+      function renderLeads(leads) {
+        leadList.replaceChildren();
+        if (leads.length === 0) {
+          const emptyMessage = document.createElement('p');
+          emptyMessage.textContent = 'No sign-ups yet.';
+          leadList.append(emptyMessage);
+          return;
+        }
+
+        for (const lead of leads) {
+          const item = document.createElement('article');
+          item.className = 'lead-entry';
+          const contact = document.createElement('strong');
+          contact.textContent = lead.contact_info;
+          const details = document.createElement('span');
+          const date = new Date(lead.consent_at).toLocaleDateString(undefined, {
+            year: 'numeric', month: 'short', day: 'numeric',
+          });
+          details.textContent = `${lead.region} · ${date}`;
+          item.append(contact, details);
+          leadList.append(item);
+        }
+      }
+
+      loadLeadsButton.addEventListener('click', async () => {
+        if (!isAuthenticated) {
+          setStatus('Sign in before viewing community sign-ups.', 'error');
+          return;
+        }
+
+        isSaving = true;
+        updateAuthState({});
+        setStatus('Loading community sign-ups…', 'busy');
+        try {
+          const { data, error } = await supabaseClient
+            .from('community_leads')
+            .select('contact_info, region, consent_at')
+            .order('created_at', { ascending: false })
+            .limit(100);
+          if (error) throw error;
+          renderLeads(data || []);
+          setStatus('Community sign-ups loaded.', 'success');
+        } catch (error) {
+          setStatus(`Could not load community sign-ups: ${error.message}`, 'error');
+        } finally {
+          isSaving = false;
+          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
+        }
       });
 
       uploadForm.addEventListener('submit', async (event) => {

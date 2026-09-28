@@ -77,6 +77,37 @@ h2 em { color: var(--primary-color); font-weight: 600; }
 .compliance-link { flex: 0 0 auto; padding: 10px 20px; border-radius: 12px; color: #fff; background: #059669; font-size: 12px; font-weight: 600; text-align: center; transition: background 160ms ease; }
 .compliance-link:hover { background: #047857; }
 .compliance-link:focus-visible { outline: 2px solid #34d399; outline-offset: 3px; }
+.compliance-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: center; gap: 10px; }
+.whatsapp-link { padding: 10px 16px; border: 1px solid rgb(255 255 255 / 24%); border-radius: 12px; color: #fff; background: #218c52; font-size: 12px; font-weight: 600; text-align: center; transition: background 160ms ease; }
+.whatsapp-link:hover { background: #176f40; }
+.whatsapp-link:focus-visible, .campaign-dismiss:focus-visible { outline: 2px solid #34d399; outline-offset: 3px; }
+.campaign-banner { margin: 34px 7.2% 0; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-radius: 12px; color: #fff; background: linear-gradient(110deg, #b87516, #176b48); }
+.campaign-copy { display: flex; align-items: center; gap: 13px; }
+.campaign-label { flex: 0 0 auto; margin: 0; padding: 5px 8px; border-radius: 5px; color: #164d38; background: #fff; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.campaign-copy > p { margin: 0; font-size: 12px; font-weight: 600; line-height: 1.6; }
+.campaign-dismiss { flex: 0 0 auto; padding: 7px 11px; border: 0; border-radius: 8px; color: #fff; background: rgb(0 0 0 / 20%); font-size: 11px; cursor: pointer; transition: background 160ms ease; }
+.campaign-dismiss:hover { background: rgb(0 0 0 / 38%); }
+.campaign-announcements { margin: 0 7.2% 4rem; padding: 26px; border: 1px dashed rgb(13 92 58 / 36%); border-radius: 14px; background: #f1f3ec; }
+.campaign-announcements .eyebrow { margin-bottom: 12px; }
+.campaign-announcements h2 { margin-bottom: 9px; font-size: 1.35rem; }
+.campaign-announcements > p:last-child { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.lead-section { margin: 0 7.2% 4rem; padding: 30px; border: 1px solid rgb(13 92 58 / 20%); border-radius: 16px; background: #123b30; color: #fff; }
+.lead-section .eyebrow { margin-bottom: 12px; color: #8be0b1; }
+.lead-section h2 { margin-bottom: 8px; font-size: 1.6rem; }
+.lead-section > p:not(.eyebrow) { margin-bottom: 20px; color: #d1d5db; font-size: 12px; line-height: 1.7; }
+.lead-form { display: grid; grid-template-columns: 1fr 0.7fr; gap: 14px; align-items: end; }
+.lead-form > div { display: grid; gap: 7px; }
+.lead-form label { color: #e5e7eb; font-size: 11px; font-weight: 600; }
+.lead-form input[type='text'] { min-width: 0; min-height: 43px; padding: 10px 12px; border: 1px solid rgb(16 185 129 / 35%); border-radius: 8px; color: #fff; background: rgb(6 78 59 / 48%); font-size: 12px; }
+.lead-form input:focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }
+.lead-form .lead-consent { grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 9px; font-weight: 400; line-height: 1.6; }
+.lead-consent input { flex: 0 0 auto; margin: 2px 0 0; accent-color: #34d399; }
+.lead-form > button, .admin-leads > button { min-height: 42px; padding: 10px 16px; border: 0; border-radius: 8px; color: #153c2b; background: #f0b43c; font-size: 12px; font-weight: 700; cursor: pointer; }
+.lead-form > button:hover, .admin-leads > button:hover { background: #ffd06a; }
+.lead-form > button:disabled, .admin-leads > button:disabled { cursor: not-allowed; opacity: .55; }
+.lead-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #d1d5db; font-size: 12px; }
+.lead-status[data-state='success'] { color: #8be0b1; }
+.lead-status[data-state='error'] { color: #ffb4a8; }
 .objectives-section { padding: 74px 7.2% 78px; }
 .section-heading { max-width: 660px; margin-bottom: 34px; }
 .section-heading h2, .programmes-heading h2 { max-width: 590px; }
@@ -131,6 +162,16 @@ h2 em { color: var(--primary-color); font-weight: 600; }
 .admin-form button:hover { background: var(--accent-color); }
 .admin-form button:disabled { cursor: not-allowed; opacity: 0.55; }
 .admin-form button span { font-size: 17px; }
+.admin-leads { margin-top: 27px; padding-top: 25px; border-top: 1px solid var(--line); }
+.admin-leads h3 { margin: 0 0 8px; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; }
+.admin-leads > p { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.admin-leads > button { color: #fff; background: var(--primary-color); }
+.admin-leads > button:hover { background: var(--accent-color); }
+.lead-list { margin-top: 15px; }
+.lead-list > p { color: var(--muted); font-size: 12px; }
+.lead-entry { display: grid; gap: 5px; padding: 12px 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.lead-entry strong { color: var(--dark-color); font-size: 12px; }
+.lead-entry span { color: var(--muted); font-size: 10px; }
 .status-panel { min-height: 150px; padding: 1rem; border: 0; border-left: 4px solid var(--primary-color); background: #f1f2f6; }
 .status-heading { display: flex; align-items: center; gap: 9px; padding-bottom: 16px; border-bottom: 1px solid #d8dce0; }
 .status-indicator { width: 8px; aspect-ratio: 1; border-radius: 50%; background: var(--accent-color); }
@@ -156,8 +197,15 @@ footer span:first-child { color: #fff; font-weight: 700; }
   .hero-art { min-height: 330px; }
   .about-section, .objectives-section { padding: 57px 6%; }
   .section-copy { grid-template-columns: 1fr; gap: 22px; }
+  .campaign-banner { margin: 25px 6% 0; align-items: flex-start; }
+  .campaign-copy { align-items: flex-start; flex-direction: column; gap: 9px; }
+  .campaign-announcements { margin: 0 6% 2rem; padding: 22px; }
+  .lead-section { margin: 0 6% 2rem; padding: 24px 20px; }
+  .lead-form { grid-template-columns: 1fr; }
+  .lead-form .lead-consent, .lead-status { grid-column: auto; }
   .compliance-section { margin: 30px 6%; padding: 25px 22px; align-items: stretch; flex-direction: column; gap: 20px; }
-  .compliance-link { width: 100%; }
+  .compliance-actions { align-items: stretch; flex-direction: column; }
+  .compliance-actions a { width: 100%; }
   .objective-grid { grid-template-columns: 1fr; }
   .objective-item, .objective-item + .objective-item { min-height: 0; padding: 22px 36px 23px 0; border-right: 0; border-left: 0; }
   .objective-item h3 { margin-top: 10px; }
