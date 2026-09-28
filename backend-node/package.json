@@ -2,7 +2,7 @@
   "name": "babira-backend-engine",
   "version": "1.0.0",
   "private": true,
-  "description": "Backend API Orchestration for Babira Foundation Portal",
+  "description": "Backend API Orchestration for Babira Ndeda Foundation Portal",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

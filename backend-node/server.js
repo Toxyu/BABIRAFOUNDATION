@@ -198,7 +198,7 @@ app.use((error, _request, response, _next) => {
 
 fs.mkdir(uploadDirectory, { recursive: true }).then(() => {
   app.listen(port, () => {
-    console.log(`Babira Foundation site and API listening on port ${port}`);
+    console.log(`Babira Ndeda Foundation site and API listening on port ${port}`);
   });
 }).catch((error) => {
   console.error('Could not prepare media storage:', error);
