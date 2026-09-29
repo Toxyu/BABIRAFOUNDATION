@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 
-const SUPABASE_URL = 'https://nwhspxhnjutotzyztzfg.supabase.co';
+const ANNOUNCEMENTS = [
+  "📢 Applications open for Vihiga County Youth Digital Skills & Entrepreneurship Intake!",
+  "💡 Community Bursary Scheme allocations finalized for secondary and tertiary learners.",
+  "🏥 Free community health outreach and hygiene awareness camp scheduled next month.",
+  "🌱 Submissions open for local innovation & youth business grants."
+];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('about');
-  const [dbStatus, setDbStatus] = useState('Connected to Supabase');
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
   const [isCmsOpen, setIsCmsOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [tickerIndex, setTickerIndex] = useState(0);
 
   useEffect(() => {
-    fetch(`${SUPABASE_URL}/rest/v1/`, { method: 'HEAD' })
-      .then(() => setDbStatus('Connected to Supabase'))
-      .catch(() => setDbStatus('Connected to Supabase'));
+    const tickerInterval = setInterval(() => {
+      setTickerIndex((prev) => (prev + 1) % ANNOUNCEMENTS.length);
+    }, 4000);
+    return () => clearInterval(tickerInterval);
   }, []);
 
   const handleFileUpload = (e) => {
@@ -24,53 +30,54 @@ export default function App() {
       alert('Please select a document first.');
       return;
     }
-    setUploadStatus('Processing document...');
+    setUploadStatus('Processing application document...');
     setTimeout(() => {
-      setUploadStatus(`Document "${selectedFile.name}" submitted successfully.`);
+      setUploadStatus(`Document "${selectedFile.name}" submitted successfully to Babira Ndeda Foundation.`);
       setSelectedFile(null);
-    }, 1000);
+    }, 1200);
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (adminEmail && adminPassword) {
-      setIsLoggedIn(true);
-    }
+    if (adminEmail && adminPassword) setIsLoggedIn(true);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-slate-950 to-emerald-950 text-emerald-50 flex flex-col justify-between">
-      {/* Header Bar */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-emerald-950/80 border-b border-emerald-800/40 px-4 lg:px-8 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between font-sans">
+      <div className="bg-emerald-950/90 border-b border-emerald-800/60 py-2 px-4 text-xs font-semibold text-emerald-100 flex items-center justify-between z-50">
+        <div className="flex items-center space-x-3 w-full overflow-hidden h-5">
+          <span className="bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded text-[10px] uppercase shrink-0">UPDATES</span>
+          <p className="text-emerald-200 truncate">{ANNOUNCEMENTS[tickerIndex]}</p>
+        </div>
+        <span className="text-[10px] text-emerald-400 shrink-0 hidden sm:block">Vihiga Hub</span>
+      </div>
+
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-slate-950/90 border-b border-emerald-900/50 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-emerald-900/50">
-            BN
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg">
+            BNF
           </div>
           <div>
-            <h1 className="font-extrabold text-lg text-white tracking-wide">Babira Ndeda Foundation</h1>
+            <h1 className="font-extrabold text-base text-white tracking-wide">Babira Ndeda Foundation</h1>
             <p className="text-xs text-emerald-400 font-medium flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              Vihiga County, Kenya
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Vihiga County, Kenya
             </p>
           </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1 bg-emerald-900/40 p-1.5 rounded-2xl border border-emerald-800/50">
+        <nav className="hidden md:flex items-center space-x-1 bg-emerald-950/60 p-1.5 rounded-2xl border border-emerald-800/40">
           {[
             { id: 'about', label: 'About Us' },
+            { id: 'objectives', label: 'Objectives & Values' },
             { id: 'programmes', label: 'Programmes' },
-            { id: 'campaigns', label: 'Campaigns & Sign-ups' },
-            { id: 'gallery', label: 'Gallery' },
-            { id: 'stories', label: 'Stories' },
+            { id: 'campaigns', label: 'Applications' },
+            { id: 'contact', label: 'Partnerships & Contact' }
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                activeTab === tab.id
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md'
-                  : 'text-emerald-300 hover:text-white hover:bg-emerald-800/40'
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeTab === tab.id ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md' : 'text-emerald-300 hover:text-white hover:bg-emerald-900/40'
               }`}
             >
               {tab.label}
@@ -78,230 +85,120 @@ export default function App() {
           ))}
         </nav>
 
-        <button
-          onClick={() => setIsCmsOpen(true)}
-          className="px-4 py-2.5 rounded-2xl bg-emerald-800/60 hover:bg-emerald-700 text-emerald-100 text-xs font-bold transition border border-emerald-600/40 flex items-center space-x-2 shadow-sm"
-        >
-          <span>CMS Portal</span>
-          <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-[10px]">⚙ Admin</span>
+        <button onClick={() => setIsCmsOpen(true)} className="px-4 py-2 rounded-xl bg-emerald-900/40 hover:bg-emerald-800 text-emerald-200 text-xs font-bold border border-emerald-700/50">
+          Admin Portal
         </button>
       </header>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-900/50 border-b border-emerald-800/40">
-        {['about', 'programmes', 'campaigns', 'gallery', 'stories'].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
-              activeTab === tab ? 'bg-emerald-600 text-white' : 'text-emerald-300 bg-emerald-950/60'
-            }`}
-          >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+      <div className="md:hidden flex overflow-x-auto space-x-2 p-3 bg-slate-900 border-b border-emerald-900/50 text-xs">
+        {['about', 'objectives', 'programmes', 'campaigns', 'contact'].map((tab) => (
+          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-3 py-1.5 rounded-lg font-bold capitalize whitespace-nowrap ${activeTab === tab ? 'bg-emerald-600 text-white' : 'text-emerald-300 bg-slate-950'}`}>
+            {tab}
           </button>
         ))}
       </div>
 
-      {/* Hero Header */}
-      <section className="relative px-4 lg:px-12 py-12 text-center space-y-4">
-        <div className="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-emerald-900/60 border border-emerald-700/50 text-emerald-300 text-xs font-bold uppercase tracking-wider">
-          Community Empowerment
-        </div>
-        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
-          Empowering Youth. Advancing Education. Promoting Health.
-        </h2>
-        <p className="text-emerald-200 text-sm md:text-base max-w-2xl mx-auto font-normal">
-          Building community resilience across Vihiga County through education bursaries, skills training, and health initiatives.
-        </p>
-      </section>
-
-      {/* Dynamic Tab Views */}
-      <main className="max-w-6xl mx-auto px-4 lg:px-8 pb-16 w-full flex-grow">
+      <main className="max-w-5xl mx-auto px-6 py-10 flex-grow w-full">
         {activeTab === 'about' && (
-          <div className="grid md:grid-cols-3 gap-6 animate-float">
-            {[
-              { title: 'Youth Empowerment', desc: 'Providing youth leadership training, vocational support, and entrepreneurship opportunities across Kenya.' },
-              { title: 'Quality Education', desc: 'Supporting underprivileged students with bursaries, mentorship, and learning resources.' },
-              { title: 'Community Health', desc: 'Promoting healthcare access, health education, and outreach programs.' },
-            ].map((card, idx) => (
-              <div key={idx} className="glass-card p-6 rounded-3xl hover:border-emerald-400/60 transition-all duration-300">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold mb-4">
-                  0{idx + 1}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{card.title}</h3>
-                <p className="text-emerald-200 text-sm leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {activeTab === 'programmes' && (
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white">Strategic Programmes</h3>
+          <div className="space-y-10">
+            <div className="text-center space-y-4 max-w-3xl mx-auto">
+              <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950 px-3.5 py-1 rounded-full border border-emerald-800">
+                Empowering Youth • Advancing Education • Promoting Community Health
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-white">Babira Ndeda Foundation</h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                A community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.
+              </p>
+            </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="glass-card p-6 rounded-3xl">
-                <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-semibold">Active</span>
-                <h4 className="text-xl font-bold text-white mt-3">Vihiga Youth Digital Skills</h4>
-                <p className="text-sm text-emerald-200 mt-2">Equipping young innovators with practical digital, software, and agricultural skills.</p>
+              <div className="bg-slate-900/70 border border-emerald-900/60 p-6 rounded-3xl space-y-3">
+                <h3 className="text-xl font-bold text-white">Our Vision</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">A healthy, educated, and economically empowered community where young people have the opportunity to reach their full potential.</p>
               </div>
-              <div className="glass-card p-6 rounded-3xl">
-                <span className="text-xs bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full font-semibold">Active</span>
-                <h4 className="text-xl font-bold text-white mt-3">Community Bursary Scheme</h4>
-                <p className="text-sm text-emerald-200 mt-2">Supporting bright students with secondary and tertiary academic sponsorships.</p>
+              <div className="bg-slate-900/70 border border-emerald-900/60 p-6 rounded-3xl space-y-3">
+                <h3 className="text-xl font-bold text-white">Our Mission</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">To empower young people and vulnerable communities in Vihiga County through education, skills development, economic opportunities, mentorship, and health support.</p>
               </div>
             </div>
           </div>
         )}
 
-        {activeTab === 'campaigns' && (
+        {activeTab === 'objectives' && (
           <div className="space-y-8">
-            <div className="glass-card p-8 rounded-3xl space-y-6 max-w-2xl mx-auto">
-              <div>
-                <h3 className="text-2xl font-bold text-white">Registration & Document Submission</h3>
-                <p className="text-emerald-300 text-sm mt-1">Upload your registration document (PDF, PNG, JPG, WEBP. Max 25 MB).</p>
-              </div>
-
-              <form onSubmit={handleFileUpload} className="space-y-4">
-                <div className="border-2 border-dashed border-emerald-700/60 rounded-2xl p-6 text-center bg-emerald-950/40">
-                  <input
-                    type="file"
-                    id="doc-upload"
-                    accept=".pdf,.png,.jpg,.jpeg,.webp"
-                    onChange={(e) => setSelectedFile(e.target.files[0])}
-                    className="hidden"
-                  />
-                  <label htmlFor="doc-upload" className="cursor-pointer space-y-2 block">
-                    <div className="w-12 h-12 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center mx-auto text-xl">
-                      📄
-                    </div>
-                    <p className="text-sm font-semibold text-emerald-200">
-                      {selectedFile ? selectedFile.name : 'Choose File or Drag & Drop'}
-                    </p>
-                    <p className="text-xs text-emerald-400">PDF, PNG, JPG, or WEBP up to 25MB</p>
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-900/60"
-                >
-                  Upload registration document
-                </button>
-              </form>
-
-              {uploadStatus && (
-                <p className="text-xs text-center text-teal-300 font-semibold p-3 bg-emerald-900/40 rounded-xl border border-emerald-700/40">
-                  {uploadStatus}
-                </p>
-              )}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'gallery' && (
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white">Media Gallery</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="glass-card aspect-video rounded-2xl flex items-center justify-center text-emerald-300 font-medium text-sm">
-                  Community Media #{i}
+            <h2 className="text-2xl font-bold text-white">Main Objectives & Core Values</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                "Empower young people with practical, entrepreneurial, digital, and vocational skills.",
+                "Promote access to education and learning opportunities for vulnerable learners.",
+                "Support career guidance, mentorship, and leadership development.",
+                "Create awareness regarding preventive healthcare, hygiene, and healthy lifestyles."
+              ].map((obj, i) => (
+                <div key={i} className="bg-slate-900/60 border border-emerald-900/40 p-4 rounded-2xl text-xs text-slate-300">
+                  <strong className="text-emerald-400">{i + 1}.</strong> {obj}
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {activeTab === 'stories' && (
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white">Community Impact Stories</h3>
-            <div className="glass-card p-6 rounded-3xl">
-              <span className="text-xs text-emerald-400 font-bold uppercase tracking-wider">Featured Impact</span>
-              <h4 className="text-2xl font-bold text-white mt-1">Transforming Livelihoods in Vihiga County</h4>
-              <p className="text-emerald-200 text-sm mt-3 leading-relaxed">
-                How education bursaries and vocational skills development are enabling long-term self-reliance.
-              </p>
+        {activeTab === 'programmes' && (
+          <div className="space-y-8">
+            <h2 className="text-2xl font-bold text-white">Our Core Programme Areas</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {['Youth Empowerment', 'Education & Skills', 'Community Health'].map((prog, i) => (
+                <div key={i} className="bg-slate-900/70 border border-emerald-900/60 p-6 rounded-3xl space-y-3">
+                  <h3 className="text-lg font-bold text-white">{prog}</h3>
+                  <p className="text-xs text-slate-300">Targeted regional interventions designed for high community impact across Vihiga County.</p>
+                </div>
+              ))}
             </div>
           </div>
         )}
 
-        {/* Database Connection Status Widget */}
-        <div className="mt-12 glass-card p-5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-emerald-300">
-          <div className="flex items-center space-x-3">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-            </span>
-            <span className="font-semibold text-white">System Status: <strong className="text-emerald-400">{dbStatus}</strong></span>
+        {activeTab === 'campaigns' && (
+          <div className="max-w-xl mx-auto space-y-6">
+            <div className="bg-slate-900/80 border border-emerald-900/60 p-8 rounded-3xl space-y-6">
+              <h3 className="text-xl font-bold text-white">Document & Application Portal</h3>
+              <form onSubmit={handleFileUpload} className="space-y-4">
+                <input type="file" onChange={(e) => setSelectedFile(e.target.files[0])} className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500" />
+                <button type="submit" className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs">Submit Application</button>
+              </form>
+              {uploadStatus && <p className="text-xs text-center text-teal-300 font-semibold">{uploadStatus}</p>}
+            </div>
           </div>
-          <span className="bg-emerald-900/80 px-3 py-1 rounded-full text-[11px] font-mono border border-emerald-700/50">
-            https://nwhspxhnjutotzyztzfg.supabase.co
-          </span>
-        </div>
+        )}
+
+        {activeTab === 'contact' && (
+          <div className="space-y-6">
+            <div className="bg-slate-900/70 border border-emerald-900/60 p-6 rounded-3xl space-y-3 text-xs text-slate-300">
+              <h3 className="text-lg font-bold text-white">Contact Information</h3>
+              <p><strong>Organization:</strong> Babira Ndeda Foundation</p>
+              <p><strong>Location:</strong> Vihiga County, Kenya</p>
+              <p><strong>Email:</strong> info@babirandedafoundation.org</p>
+            </div>
+          </div>
+        )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-emerald-800/40 bg-emerald-950/90 py-6 px-4 text-center text-xs text-emerald-400">
-        <p className="font-semibold text-emerald-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
-        <p className="mt-1 text-emerald-500">Empowering youth. Advancing education. Promoting community health.</p>
+      <footer className="border-t border-emerald-900/40 bg-slate-950 py-6 text-center text-xs text-slate-400">
+        <p className="font-bold text-emerald-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
       </footer>
 
-      {/* Admin CMS Modal */}
       {isCmsOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-emerald-950 border border-emerald-700/60 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-6">
-            <div className="flex justify-between items-center border-b border-emerald-800/60 pb-4">
-              <div>
-                <h3 className="text-lg font-bold text-white">CMS Admin Portal</h3>
-                <p className="text-xs text-emerald-300">Manage portal content and database</p>
-              </div>
-              <button onClick={() => setIsCmsOpen(false)} className="text-emerald-400 hover:text-white text-xl">✕</button>
+          <div className="bg-slate-900 border border-emerald-800 rounded-2xl p-6 max-w-md w-full space-y-4">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+              <h3 className="text-base font-bold text-white">Admin Login</h3>
+              <button onClick={() => setIsCmsOpen(false)} className="text-slate-400 hover:text-white">✕</button>
             </div>
-
             {!isLoggedIn ? (
-              <form onSubmit={handleLogin} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-semibold text-emerald-200 mb-1">Admin Email</label>
-                  <input
-                    type="email"
-                    required
-                    value={adminEmail}
-                    onChange={(e) => setAdminEmail(e.target.value)}
-                    placeholder="admin@babirafoundation.org"
-                    className="w-full px-4 py-2.5 rounded-xl bg-emerald-900/60 border border-emerald-700 text-emerald-100 text-sm focus:outline-none focus:border-emerald-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-emerald-200 mb-1">Admin Password</label>
-                  <input
-                    type="password"
-                    required
-                    value={adminPassword}
-                    onChange={(e) => setAdminPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full px-4 py-2.5 rounded-xl bg-emerald-900/60 border border-emerald-700 text-emerald-100 text-sm focus:outline-none focus:border-emerald-400"
-                  />
-                </div>
-                <div className="flex space-x-3 pt-2">
-                  <button type="submit" className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition">
-                    Sign In
-                  </button>
-                  <button type="button" onClick={() => setIsCmsOpen(false)} className="px-4 py-2.5 rounded-xl bg-emerald-900/40 text-emerald-300 text-sm font-semibold">
-                    Cancel
-                  </button>
-                </div>
+              <form onSubmit={handleLogin} className="space-y-3 text-xs">
+                <input type="email" placeholder="Admin Email" value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} required className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-emerald-900 text-white" />
+                <input type="password" placeholder="Password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} required className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-emerald-900 text-white" />
+                <button type="submit" className="w-full py-2.5 rounded-lg bg-emerald-600 text-white font-bold">Sign In</button>
               </form>
             ) : (
-              <div className="space-y-4">
-                <div className="p-3 bg-emerald-900/40 rounded-xl text-xs text-emerald-300 border border-emerald-700/50">
-                  Logged in as: <strong>{adminEmail}</strong>
-                </div>
-                <button
-                  onClick={() => setIsLoggedIn(false)}
-                  className="w-full py-2.5 rounded-xl bg-rose-900/60 hover:bg-rose-800 text-rose-200 text-xs font-semibold border border-rose-700/50 transition"
-                >
-                  Sign Out
-                </button>
-              </div>
+              <p className="text-xs text-emerald-400">Logged in successfully as {adminEmail}.</p>
             )}
           </div>
         </div>
