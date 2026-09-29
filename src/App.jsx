@@ -12,7 +12,6 @@ export default function App() {
   const [adminPassword, setAdminPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Instant Supabase Verification Ping
   useEffect(() => {
     fetch(`${SUPABASE_URL}/rest/v1/`, { method: 'HEAD' })
       .then(() => setDbStatus('Connected to Supabase'))
@@ -41,7 +40,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-slate-950 to-emerald-950 text-emerald-50 flex flex-col justify-between">
-      {/* Header Bar */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-emerald-950/80 border-b border-emerald-800/40 px-4 lg:px-8 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-emerald-900/50">
@@ -56,7 +54,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1 bg-emerald-900/40 p-1.5 rounded-2xl border border-emerald-800/50">
           {[
             { id: 'about', label: 'About Us' },
@@ -88,7 +85,6 @@ export default function App() {
         </button>
       </header>
 
-      {/* Mobile Tab Bar */}
       <div className="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-900/50 border-b border-emerald-800/40">
         {['about', 'programmes', 'campaigns', 'gallery', 'stories'].map((tab) => (
           <button
@@ -103,7 +99,6 @@ export default function App() {
         ))}
       </div>
 
-      {/* Hero Header */}
       <section className="relative px-4 lg:px-12 py-16 text-center space-y-6">
         <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-900/60 border border-emerald-700/50 text-emerald-300 text-xs font-bold uppercase tracking-wider">
           <span>Google Quantum UI</span> • <span>Community Impact</span>
@@ -116,7 +111,6 @@ export default function App() {
         </p>
       </section>
 
-      {/* Dynamic Content */}
       <main className="max-w-6xl mx-auto px-4 lg:px-8 pb-16 w-full flex-grow">
         {activeTab === 'about' && (
           <div className="grid md:grid-cols-3 gap-6 animate-float">
@@ -225,7 +219,6 @@ export default function App() {
           </div>
         )}
 
-        {/* Live System Status Widget */}
         <div className="mt-12 glass-card p-5 rounded-2xl flex items-center justify-between text-xs text-emerald-300">
           <div className="flex items-center space-x-3">
             <span className="relative flex h-3 w-3">
@@ -240,13 +233,11 @@ export default function App() {
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-emerald-800/40 bg-emerald-950/90 py-6 px-4 text-center text-xs text-emerald-400">
         <p className="font-semibold text-emerald-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
         <p className="mt-1 text-emerald-500">Empowering youth. Advancing education. Promoting community health.</p>
       </footer>
 
-      {/* CMS Modal */}
       {isCmsOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-emerald-950 border border-emerald-700/60 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-6">
