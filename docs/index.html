@@ -22,163 +22,208 @@
     </script>
     <style>
       body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #022c22; color: #f1f5f9; }
-      .glass-card { background: rgba(6, 78, 59, 0.35); backdrop-filter: blur(16px); border: 1px solid rgba(52, 211, 153, 0.25); }
+      .glass-card { background: rgba(6, 78, 59, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(52, 211, 153, 0.25); }
       .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
   </head>
   <body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
-    <div id="app" class="flex flex-col min-h-screen justify-between"></div>
+    <!-- Ticker -->
+    <div class="bg-emerald-950 border-b border-emerald-800/60 py-2 px-4 text-xs font-semibold text-emerald-100 flex items-center justify-between">
+      <div class="flex items-center space-x-3 w-full overflow-hidden h-5">
+        <span class="bg-brand-500 text-slate-950 font-black px-2 py-0.5 rounded text-[10px] uppercase shrink-0">UPDATES</span>
+        <p id="ticker-text" class="text-emerald-200 truncate">📢 Applications open for Vihiga County Youth Digital Skills & Entrepreneurship Program!</p>
+      </div>
+      <span class="text-[10px] text-emerald-400 shrink-0 hidden sm:block">Vihiga Hub</span>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-emerald-950/90 border-b border-emerald-900/50 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-teal-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg">BN</div>
+        <div>
+          <h1 class="font-extrabold text-base text-white tracking-wide">Babira Ndeda Foundation</h1>
+          <p class="text-xs text-brand-400 font-medium flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span> Vihiga County, Kenya</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-1 bg-emerald-950/60 p-1.5 rounded-2xl border border-emerald-800/40">
+        <button onclick="switchTab('about')" id="btn-about" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white shadow-md transition-all">About Us</button>
+        <button onclick="switchTab('objectives')" id="btn-objectives" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-300 hover:text-white hover:bg-emerald-900/40 transition-all">Objectives & Values</button>
+        <button onclick="switchTab('programmes')" id="btn-programmes" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-300 hover:text-white hover:bg-emerald-900/40 transition-all">Programmes</button>
+        <button onclick="switchTab('campaigns')" id="btn-campaigns" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-300 hover:text-white hover:bg-emerald-900/40 transition-all">Applications</button>
+        <button onclick="switchTab('contact')" id="btn-contact" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-300 hover:text-white hover:bg-emerald-900/40 transition-all">Partnerships & Contact</button>
+      </nav>
+
+      <button onclick="toggleCms(true)" class="px-4 py-2 rounded-xl bg-emerald-900/40 hover:bg-emerald-800 text-emerald-200 text-xs font-bold border border-emerald-700/50">Admin Portal</button>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-950 border-b border-emerald-900/50 text-xs">
+      <button onclick="switchTab('about')" class="mob-btn px-3 py-1.5 rounded-lg font-bold bg-brand-600 text-white whitespace-nowrap" data-tab="about">About Us</button>
+      <button onclick="switchTab('objectives')" class="mob-btn px-3 py-1.5 rounded-lg font-bold text-emerald-300 bg-emerald-950 whitespace-nowrap" data-tab="objectives">Objectives</button>
+      <button onclick="switchTab('programmes')" class="mob-btn px-3 py-1.5 rounded-lg font-bold text-emerald-300 bg-emerald-950 whitespace-nowrap" data-tab="programmes">Programmes</button>
+      <button onclick="switchTab('campaigns')" class="mob-btn px-3 py-1.5 rounded-lg font-bold text-emerald-300 bg-emerald-950 whitespace-nowrap" data-tab="campaigns">Applications</button>
+      <button onclick="switchTab('contact')" class="mob-btn px-3 py-1.5 rounded-lg font-bold text-emerald-300 bg-emerald-950 whitespace-nowrap" data-tab="contact">Contact</button>
+    </div>
+
+    <!-- Main Content Sections -->
+    <main class="max-w-5xl mx-auto px-6 py-10 flex-grow w-full">
+      <!-- About Tab -->
+      <div id="tab-about" class="tab-content space-y-10 animate-fade-in">
+        <div class="text-center space-y-4 max-w-3xl mx-auto">
+          <span class="text-xs font-bold text-brand-400 uppercase tracking-widest bg-emerald-950 px-3.5 py-1 rounded-full border border-emerald-800">Empowering Youth • Advancing Education • Promoting Community Health</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Babira Ndeda Foundation</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">A community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="glass-card p-6 rounded-3xl space-y-3">
+            <h3 class="text-xl font-bold text-white">Our Vision</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">A healthy, educated, and economically empowered community where young people have the opportunity to reach their full potential.</p>
+          </div>
+          <div class="glass-card p-6 rounded-3xl space-y-3">
+            <h3 class="text-xl font-bold text-white">Our Mission</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">To empower young people and vulnerable communities in Vihiga County through education, skills development, economic opportunities, mentorship, and health support.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objectives Tab -->
+      <div id="tab-objectives" class="tab-content space-y-8 animate-fade-in hidden">
+        <h2 class="text-2xl font-bold text-white">Main Objectives & Core Values</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="glass-card p-4 rounded-2xl text-xs text-slate-300"><strong class="text-brand-400">1.</strong> Empower young people with practical, entrepreneurial, digital, and vocational skills.</div>
+          <div class="glass-card p-4 rounded-2xl text-xs text-slate-300"><strong class="text-brand-400">2.</strong> Promote access to education and learning opportunities for vulnerable learners.</div>
+          <div class="glass-card p-4 rounded-2xl text-xs text-slate-300"><strong class="text-brand-400">3.</strong> Support career guidance, mentorship, and leadership development.</div>
+          <div class="glass-card p-4 rounded-2xl text-xs text-slate-300"><strong class="text-brand-400">4.</strong> Create awareness regarding preventive healthcare, hygiene, and healthy lifestyles.</div>
+        </div>
+      </div>
+
+      <!-- Programmes Tab -->
+      <div id="tab-programmes" class="tab-content space-y-8 animate-fade-in hidden">
+        <h2 class="text-2xl font-bold text-white">Our Core Programme Areas</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="glass-card p-6 rounded-3xl space-y-3">
+            <h3 class="text-lg font-bold text-white">Youth Empowerment</h3>
+            <p class="text-xs text-slate-300">Targeted regional interventions designed for high community impact across Vihiga County.</p>
+          </div>
+          <div class="glass-card p-6 rounded-3xl space-y-3">
+            <h3 class="text-lg font-bold text-white">Education & Skills</h3>
+            <p class="text-xs text-slate-300">Targeted regional interventions designed for high community impact across Vihiga County.</p>
+          </div>
+          <div class="glass-card p-6 rounded-3xl space-y-3">
+            <h3 class="text-lg font-bold text-white">Community Health</h3>
+            <p class="text-xs text-slate-300">Targeted regional interventions designed for high community impact across Vihiga County.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campaigns/Applications Tab -->
+      <div id="tab-campaigns" class="tab-content space-y-6 animate-fade-in hidden">
+        <div class="max-w-xl mx-auto glass-card p-8 rounded-3xl space-y-6">
+          <h3 class="text-xl font-bold text-white">Document & Application Portal</h3>
+          <form onsubmit="submitApplication(event)" class="space-y-4">
+            <input type="file" id="file-in" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-600 file:text-white hover:file:bg-brand-500 cursor-pointer" required />
+            <button type="submit" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs transition">Submit Application</button>
+          </form>
+          <p id="upload-status" class="text-xs text-center text-teal-300 font-semibold hidden"></p>
+        </div>
+      </div>
+
+      <!-- Contact Tab -->
+      <div id="tab-contact" class="tab-content space-y-6 animate-fade-in hidden">
+        <div class="max-w-xl mx-auto glass-card p-6 rounded-3xl space-y-3 text-xs text-slate-300">
+          <h3 class="text-lg font-bold text-white">Contact Information</h3>
+          <p><strong>Organization:</strong> Babira Ndeda Foundation</p>
+          <p><strong>Location:</strong> Vihiga County, Kenya</p>
+          <p><strong>Email:</strong> info@babirandedafoundation.org</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-emerald-900/40 bg-emerald-950 py-6 text-center text-xs text-slate-400">
+      <p class="font-bold text-brand-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
+    </footer>
+
+    <!-- Admin Modal -->
+    <div id="cms-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+      <div class="glass-card rounded-2xl p-6 max-w-md w-full space-y-4 border border-emerald-800">
+        <div class="flex justify-between items-center border-b border-emerald-900 pb-3">
+          <h3 class="text-base font-bold text-white">Admin Portal</h3>
+          <button onclick="toggleCms(false)" class="text-slate-400 hover:text-white">✕</button>
+        </div>
+        <div id="cms-body">
+          <form onsubmit="handleAdminLogin(event)" class="space-y-3 text-xs">
+            <input type="email" id="admin-email" placeholder="Admin Email" required class="w-full px-3 py-2 rounded-lg bg-emerald-950 border border-emerald-800 text-white" />
+            <input type="password" placeholder="Password" required class="w-full px-3 py-2 rounded-lg bg-emerald-950 border border-emerald-800 text-white" />
+            <button type="submit" class="w-full py-2.5 rounded-lg bg-brand-600 text-white font-bold">Sign In</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <script>
-      const state = { activeTab: 'about', selectedFile: null, uploadStatus: '', isCmsOpen: false, adminEmail: '', isLoggedIn: false, tickerIndex: 0 };
       const announcements = [
         "📢 Applications open for Vihiga County Youth Digital Skills & Entrepreneurship Program!",
         "💡 Community Bursary Scheme allocations finalized for secondary & tertiary students.",
         "🏥 Free community health outreach and medical awareness camp scheduled next month.",
         "🌱 Local innovation & youth business grant submissions are now open."
       ];
-
+      let tickerIdx = 0;
       setInterval(() => {
-        state.tickerIndex = (state.tickerIndex + 1) % announcements.length;
+        tickerIdx = (tickerIdx + 1) % announcements.length;
         const el = document.getElementById('ticker-text');
-        if (el) el.innerText = announcements[state.tickerIndex];
+        if (el) el.innerText = announcements[tickerIdx];
       }, 4000);
 
-      function switchTab(id) { state.activeTab = id; render(); }
-      function handleFileSelect(e) { state.selectedFile = e.target.files[0]; const nameEl = document.getElementById('file-name-display'); if (nameEl && state.selectedFile) nameEl.innerText = state.selectedFile.name; }
-      function submitApplication(e) {
-        e.preventDefault();
-        if (!state.selectedFile) { alert('Please select a document file first.'); return; }
-        state.uploadStatus = 'Uploading document securely...'; render();
-        setTimeout(() => { state.uploadStatus = 'Document "' + state.selectedFile.name + '" submitted successfully!'; state.selectedFile = null; render(); }, 1200);
+      function switchTab(id) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        const target = document.getElementById('tab-' + id);
+        if (target) target.classList.remove('hidden');
+
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.className = "nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-emerald-300 hover:text-white hover:bg-emerald-900/40 transition-all";
+        });
+        const activeNav = document.getElementById('btn-' + id);
+        if (activeNav) activeNav.className = "nav-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white shadow-md transition-all";
+
+        document.querySelectorAll('.mob-btn').forEach(btn => {
+          btn.className = "mob-btn px-3 py-1.5 rounded-lg font-bold text-emerald-300 bg-emerald-950 whitespace-nowrap";
+          if(btn.getAttribute('data-tab') === id) {
+            btn.className = "mob-btn px-3 py-1.5 rounded-lg font-bold bg-brand-600 text-white whitespace-nowrap";
+          }
+        });
       }
-      function toggleCms(isOpen) { state.isCmsOpen = isOpen; render(); }
+
+      function toggleCms(isOpen) {
+        const modal = document.getElementById('cms-modal');
+        if (isOpen) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        } else {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }
+      }
+
       function handleAdminLogin(e) {
         e.preventDefault();
-        const emailInput = document.getElementById('admin-email');
-        if (emailInput && emailInput.value) { state.adminEmail = emailInput.value; state.isLoggedIn = true; render(); }
+        const email = document.getElementById('admin-email').value;
+        const body = document.getElementById('cms-body');
+        body.innerHTML = '<p class="text-xs text-brand-400">Logged in successfully as <strong>' + email + '</strong>. <button onclick="location.reload()" class="underline text-rose-400 ml-2">Sign Out</button></p>';
       }
 
-      function render() {
-        document.getElementById('app').innerHTML = `
-          <!-- Ticker -->
-          <div class="bg-emerald-950 border-b border-emerald-800/60 py-2 px-4 text-xs font-semibold text-emerald-100 flex items-center justify-between z-50">
-            <div class="flex items-center space-x-3 w-full overflow-hidden h-5">
-              <span class="bg-brand-500 text-slate-950 font-black px-2 py-0.5 rounded text-[10px] uppercase shrink-0">UPDATES</span>
-              <p id="ticker-text" class="text-emerald-200 truncate">${announcements[state.tickerIndex]}</p>
-            </div>
-            <span class="text-[10px] text-emerald-400 shrink-0 hidden sm:block">Vihiga Hub</span>
-          </div>
-
-          <!-- Header -->
-          <header class="sticky top-0 z-40 backdrop-blur-md bg-emerald-950/90 border-b border-emerald-900/50 px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-teal-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg">BN</div>
-              <div>
-                <h1 class="font-extrabold text-base text-white tracking-wide">Babira Ndeda Foundation</h1>
-                <p class="text-xs text-brand-400 font-medium flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span> Vihiga County, Kenya</p>
-              </div>
-            </div>
-
-            <nav class="hidden md:flex items-center space-x-1 bg-emerald-950/60 p-1.5 rounded-2xl border border-emerald-800/40">
-              ${[{id:'about',label:'About Us'},{id:'objectives',label:'Objectives & Values'},{id:'programmes',label:'Programmes'},{id:'campaigns',label:'Applications'},{id:'contact',label:'Partnerships & Contact'}].map(t=>`<button onclick="switchTab('${t.id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${state.activeTab===t.id?'bg-gradient-to-r from-brand-600 to-teal-600 text-white shadow-md':'text-emerald-300 hover:text-white hover:bg-emerald-900/40'}">${t.label}</button>`).join('')}
-            </nav>
-
-            <button onclick="toggleCms(true)" class="px-4 py-2 rounded-xl bg-emerald-900/40 hover:bg-emerald-800 text-emerald-200 text-xs font-bold border border-emerald-700/50 flex items-center gap-2">
-              <span>Admin Portal</span>
-            </button>
-          </header>
-
-          <!-- Mobile Nav -->
-          <div class="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-950 border-b border-emerald-900/50 text-xs">
-            ${['about','objectives','programmes','campaigns','contact'].map(t=>`<button onclick="switchTab('${t}')" class="px-3 py-1.5 rounded-lg font-bold capitalize whitespace-nowrap ${state.activeTab===t?'bg-brand-600 text-white':'text-emerald-300 bg-emerald-950'}">${t}</button>`).join('')}
-          </div>
-
-          <!-- Main Content -->
-          <main class="max-w-5xl mx-auto px-6 py-10 flex-grow w-full">
-            ${state.activeTab==='about'?`
-              <div class="space-y-10 animate-fade-in">
-                <div class="text-center space-y-4 max-w-3xl mx-auto">
-                  <span class="text-xs font-bold text-brand-400 uppercase tracking-widest bg-emerald-950 px-3.5 py-1 rounded-full border border-emerald-800">Empowering Youth • Advancing Education • Promoting Community Health</span>
-                  <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Babira Ndeda Foundation</h2>
-                  <p class="text-slate-300 text-sm sm:text-base leading-relaxed">A community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                  <div class="glass-card p-6 rounded-3xl space-y-3">
-                    <h3 class="text-xl font-bold text-white">Our Vision</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">A healthy, educated, and economically empowered community where young people have the opportunity to reach their full potential.</p>
-                  </div>
-                  <div class="glass-card p-6 rounded-3xl space-y-3">
-                    <h3 class="text-xl font-bold text-white">Our Mission</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">To empower young people and vulnerable communities in Vihiga County through education, skills development, economic opportunities, mentorship, and health support.</p>
-                  </div>
-                </div>
-              </div>`:''}
-
-            ${state.activeTab==='objectives'?`
-              <div class="space-y-8 animate-fade-in">
-                <h2 class="text-2xl font-bold text-white">Main Objectives & Core Values</h2>
-                <div class="grid sm:grid-cols-2 gap-4">
-                  ${["Empower young people with practical, entrepreneurial, digital, and vocational skills.","Promote access to education and learning opportunities for vulnerable learners.","Support career guidance, mentorship, and leadership development.","Create awareness regarding preventive healthcare, hygiene, and healthy lifestyles."].map((obj,i)=>`<div class="glass-card p-4 rounded-2xl text-xs text-slate-300"><strong class="text-brand-400">${i+1}.</strong> ${obj}</div>`).join('')}
-                </div>
-              </div>`:''}
-
-            ${state.activeTab==='programmes'?`
-              <div class="space-y-8 animate-fade-in">
-                <h2 class="text-2xl font-bold text-white">Our Core Programme Areas</h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                  ${['Youth Empowerment', 'Education & Skills', 'Community Health'].map((prog,i)=>`<div class="glass-card p-6 rounded-3xl space-y-3"><h3 class="text-lg font-bold text-white">${prog}</h3><p class="text-xs text-slate-300">Targeted regional interventions designed for high community impact across Vihiga County.</p></div>`).join('')}
-                </div>
-              </div>`:''}
-
-            ${state.activeTab==='campaigns'?`
-              <div class="max-w-xl mx-auto space-y-6 animate-fade-in">
-                <div class="glass-card p-8 rounded-3xl space-y-6">
-                  <h3 class="text-xl font-bold text-white">Document & Application Portal</h3>
-                  <form onsubmit="submitApplication(event)" class="space-y-4">
-                    <input type="file" id="file-in" onchange="handleFileSelect(event)" class="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-600 file:text-white hover:file:bg-brand-500 cursor-pointer" />
-                    <button type="submit" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs transition">Submit Application</button>
-                  </form>
-                  ${state.uploadStatus?`<p class="text-xs text-center text-teal-300 font-semibold">${state.uploadStatus}</p>`:''}
-                </div>
-              </div>`:''}
-
-            ${state.activeTab==='contact'?`
-              <div class="space-y-6 animate-fade-in">
-                <div class="glass-card p-6 rounded-3xl space-y-3 text-xs text-slate-300">
-                  <h3 class="text-lg font-bold text-white">Contact Information</h3>
-                  <p><strong>Organization:</strong> Babira Ndeda Foundation</p>
-                  <p><strong>Location:</strong> Vihiga County, Kenya</p>
-                  <p><strong>Email:</strong> info@babirandedafoundation.org</p>
-                </div>
-              </div>`:''}
-          </main>
-
-          <footer class="border-t border-emerald-900/40 bg-emerald-950 py-6 text-center text-xs text-slate-400">
-            <p class="font-bold text-brand-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
-          </footer>
-
-          <!-- Admin Modal -->
-          ${state.isCmsOpen?`
-            <div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-              <div class="glass-card rounded-2xl p-6 max-w-md w-full space-y-4 border border-emerald-800">
-                <div class="flex justify-between items-center border-b border-emerald-900 pb-3">
-                  <h3 class="text-base font-bold text-white">Admin Portal</h3>
-                  <button onclick="toggleCms(false)" class="text-slate-400 hover:text-white">✕</button>
-                </div>
-                {!state.isLoggedIn?`
-                  <form onsubmit="handleAdminLogin(event)" class="space-y-3 text-xs">
-                    <input type="email" id="admin-email" placeholder="Admin Email" required class="w-full px-3 py-2 rounded-lg bg-emerald-950 border border-emerald-800 text-white" />
-                    <input type="password" placeholder="Password" required class="w-full px-3 py-2 rounded-lg bg-emerald-950 border border-emerald-800 text-white" />
-                    <button type="submit" class="w-full py-2.5 rounded-lg bg-brand-600 text-white font-bold">Sign In</button>
-                  </form>`:`
-                  <p class="text-xs text-brand-400">Logged in as ${state.adminEmail}. <button onclick="state.isLoggedIn=false;render();" class="underline text-rose-400 ml-2">Sign Out</button></p>`}
-              </div>
-            </div>`:''}
-        `;
+      function submitApplication(e) {
+        e.preventDefault();
+        const fileInput = document.getElementById('file-in');
+        const status = document.getElementById('upload-status');
+        if (fileInput.files.length > 0) {
+          status.innerText = 'Document "' + fileInput.files[0].name + '" submitted securely!';
+          status.classList.remove('hidden');
+          fileInput.value = '';
+        }
       }
-      render();
     </script>
   </body>
 </html>
