@@ -3,20 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Google SEO & Site Verification -->
-    <title>Babira Ndeda Foundation | Vihiga County, Kenya</title>
-    <meta name="test-commit" content="publish-clean" />
+    <title>Babira Ndeda Foundation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unspkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unspkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unspkg.com/@babel/standalone@auto/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body class="bg-slate-950 text-white">
+  <body class="bg-slate-900 text-white min-h-screen">
     <div id="root"></div>
+
     <script type="text/babel">
-      const App = () => <h1 class="text-2xl p-4">Babira Ndeda Foundation 7 OK</h1>;
-      ReactDOM.render(<App />, document.getElementById('root'));
+      function App() {
+        return (
+          <div className="p-8 max-w-4xl mx-auto space-y-6">
+            <header className="border-b border-slate-700 pb-4">
+              <h1 className="text-3xl font-extrabold text-emerald-400">Babira Ndeda Foundation</h1>
+              <p className="text-slate-400 text-sm mt-1">Vihiga County, Kenya</p>
+            </header>
+
+            <main className="grid md:grid-cols-2 gap-6">
+              <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <h2 className="text-xl font-bold mb-2">Youth Empowerment</h2>
+                <p className="text-slate-300 text-sm">Advancing digital skills, mentorship, and education bursaries for youth across Vihiga County.</p>
+              </div>
+
+              <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <h2 className="text-xl font-bold mb-2">Community Outreach</h2>
+                <p className="text-slate-300 text-sm">Supporting local healthcare initiatives and educational development programs.</p>
+              </div>
+            </main>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
   </body>
 </html>
