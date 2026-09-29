@@ -1,3 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@tailwind base;@tailwind components;@tailwind utilities;
+:root{--base:#0f221a;--surface:#16382c;--border:rgba(74,222,128,.16);--green:#22c55e;--gold:#fbbf24}
+*{font-family:'Outfit',system-ui,sans-serif}body{background:#0f221a;color:#f0fdf4}
+.scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
+@keyframes tangle{0%{transform:translateY(0)}25%{transform:translateY(-3px) rotate(1deg)}50%{transform:translateY(2px) rotate(-1deg)}100%{transform:translateY(-2px) scale(1.03)}}
+.tangle{animation:tangle.5s cubic-bezier(.16,1,.3,1)}
