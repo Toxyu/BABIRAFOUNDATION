@@ -1,122 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Babira Ndeda Foundation | Vihiga County, Kenya</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
-body{background:#022c22;color:#f1f5f9;min-height:100vh;display:flex;flex-direction:column}
-header{background:#022c22cc;border-bottom:1px solid #10b98133;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;backdrop-filter:blur(10px);z-index:50}
-.logo{display:flex;align-items:center;gap:12px}
-.badge{width:42px;height:42px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#022c22}
-h1{font-size:1rem;font-weight:800}
-.sub{font-size:.7rem;color:#34d399}
-nav{display:flex;gap:6px;background:#064e3b80;padding:5px;border-radius:12px;border:1px solid #10b98133}
-nav button{background:transparent;border:none;color:#a7f3d0;padding:7px 12px;border-radius:8px;font-size:.75rem;font-weight:700;cursor:pointer}
-nav button.active,nav button:hover{background:#059669;color:#fff}
-.admin{background:#059669;border:none;color:#fff;padding:8px 14px;border-radius:10px;font-weight:700;font-size:.75rem;cursor:pointer}
-main{max-width:900px;margin:1.5rem auto;padding:0 1.2rem;width:100%;flex:1}
-.card{background:#064e3b66;border:1px solid #10b98133;border-radius:18px;padding:1.5rem;margin-bottom:1.2rem}
-.ticker{background:#064e3b;border-bottom:1px solid #047857;padding:8px;text-align:center;font-size:.72rem;color:#a7f3d0}
-footer{text-align:center;padding:1.2rem;background:#011a14;border-top:1px solid #10b98111;font-size:.75rem;color:#6ee7b7}
-.hidden{display:none!important}
-.modal{position:fixed;inset:0;background:#000c;z-index:99;display:flex;align-items:center;justify-content:center;padding:1rem}
-.box{background:#064e3b;border:1px solid #10b981;padding:1.5rem;border-radius:16px;width:100%;max-width:420px}
-.box input,.box textarea{width:100%;padding:10px;margin:6px 0;background:#022c22;border:1px solid #059669;border-radius:8px;color:#fff}
-.box button{width:100%;padding:10px;background:#10b981;border:none;font-weight:700;border-radius:8px;color:#022c22;cursor:pointer;margin-top:8px}
-.live{font-size:.65rem;background:#065f46;color:#34d399;border:1px solid #10b981;padding:3px 8px;border-radius:20px;margin-left:6px}
-@media(max-width:700px){nav{display:none}}
-</style>
-</head>
-<body>
-<div class="ticker" id="ticker">📢 Applications open for Vihiga Youth Digital Skills Program! <span class="live">● Connected to Supabase ✓ Live</span></div>
-<header>
-<div class="logo"><div class="badge">BNF</div><div><h1>Babira Ndeda Foundation</h1><p class="sub">Vihiga County, Kenya • Connected ✓</p></div></div>
-<nav><button id="nav-about" class="active" onclick="tab('about')">About Us</button><button id="nav-objectives" onclick="tab('objectives')">Objectives</button><button id="nav-programmes" onclick="tab('programmes')">Programmes</button><button id="nav-health" onclick="tab('health')">Health</button><button id="nav-contact" onclick="tab('contact')">Contact</button></nav>
-<button class="admin" onclick="document.getElementById('modal').classList.remove('hidden')">⚙️ CMS Admin</button>
-</header>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Babira Ndeda Foundation | Vihiga County, Kenya</title>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}body{background:#022c22;color:#f1f5f9;min-height:100vh}header{background:#022c22;border-bottom:1px solid #10b98144;padding:1rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}.logo{display:flex;gap:10px;align-items:center}.b{width:38px;height:38px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#022c22}main{max-width:850px;margin:2rem auto;padding:0 1rem}.card{background:#064e3b88;border:1px solid #10b98144;border-radius:18px;padding:1.5rem;margin-bottom:1rem}.ticker{background:#064e3b;padding:8px;text-align:center;font-size:.75rem;color:#a7f3d0;border-bottom:1px solid #047857}footer{text-align:center;padding:1rem;background:#011a14;color:#6ee7b7;font-size:.75rem}button{cursor:pointer}nav button{background:transparent;border:none;color:#a7f3d0;padding:6px 10px;border-radius:8px;font-size:.75rem;font-weight:700}nav button.active{background:#059669;color:#fff}.hidden{display:none!important}.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:99;padding:1rem}.box{background:#064e3b;border:1px solid #10b981;padding:1.5rem;border-radius:16px;max-width:420px;width:100%}.box input,.box textarea{width:100%;padding:10px;margin:6px 0;background:#022c22;border:1px solid #059669;border-radius:8px;color:#fff}.box button{width:100%;padding:10px;background:#10b981;border:none;border-radius:8px;font-weight:700;margin-top:8px}</style>
+</head><body>
+<div class="ticker">📢 Vihiga Youth Digital Skills Program Open! <span style="background:#065f46;color:#34d399;border:1px solid #10b981;padding:2px 8px;border-radius:20px;margin-left:6px;font-size:.65rem">● Connected ✓</span></div>
+<header><div class="logo"><div class="b">BNF</div><div><div style="font-weight:800">Babira Ndeda Foundation</div><div style="font-size:.7rem;color:#34d399">Vihiga County, Kenya</div></div></div><nav><button id="n-about" class="active" onclick="show('about')">About Us</button><button id="n-obj" onclick="show('obj')">Objectives</button><button id="n-prog" onclick="show('prog')">Programmes</button><button id="n-health" onclick="show('health')">Health</button><button id="n-contact" onclick="show('contact')">Contact</button></nav><button onclick="document.getElementById('m').classList.remove('hidden')" style="background:#059669;color:#fff;border:none;padding:7px 12px;border-radius:10px;font-weight:700;font-size:.75rem">⚙️ CMS</button></header>
 <main>
-<div id="tab-about"><div class="card" style="text-align:center"><span style="background:#064e3b;color:#34d399;padding:4px 10px;border-radius:20px;font-size:.7rem;border:1px solid #059669">EMPOWERING YOUTH • EDUCATION • HEALTH</span><h2 style="font-size:1.8rem;margin:12px 0;font-weight:900">Babira Ndeda Foundation</h2><p>A community-focused non-profit improving lives of young people in Vihiga County, Kenya.</p><p style="margin-top:10px;font-size:.8rem;color:#6ee7b7" id="status">● System Status: Connected to Supabase ✓ (Database & Storage Active) - https://toxyu.github.io/BABIRAFOUNDATION/</p></div>
-<div class="card"><h3>🎯 Vision</h3><p>A healthy, educated and economically empowered community where youth reach full potential.</p><h3 style="margin-top:1rem">🚀 Mission</h3><p>Empower vulnerable communities via education, skills, economic opportunities and mentorship.</p></div>
-<div class="card"><h3>📰 Live News (from Supabase)</h3><div id="posts">Loading...</div></div></div>
-
-<div id="tab-objectives" class="hidden"><div class="card"><h2>Objectives & Values</h2><p>• Empower youth with entrepreneurial, digital, vocational skills</p><p>• Promote access to education</p><p>• Financial literacy & income generation</p><p>• Preventive healthcare & hygiene</p><div id="camps"></div></div></div>
-
-<div id="tab-programmes" class="hidden"><div class="card"><h2>Programmes</h2><p><b>Youth Empowerment:</b> Digital training, financial literacy, business management.</p><p><b>Education:</b> Removing barriers to learning in Vihiga County.</p><p><b>Health & Agriculture:</b> Hygiene, nutrition, sustainable farming.</p></div></div>
-
-<div id="tab-health" class="hidden"><div class="card"><h3>Community Health</h3><p>Health awareness, hygiene education, nutrition, referrals with qualified professionals in Vihiga County.</p></div></div>
-
-<div id="tab-contact" class="hidden"><div class="card"><h3>Contact</h3><p><b>Org:</b> Babira Ndeda Foundation</p><p><b>County:</b> Vihiga County, Kenya</p><p><b>Email:</b> info@babirandedafoundation.org</p><div style="margin-top:1rem"><input id="emailInput" placeholder="Your email for updates"/><button onclick="join()" style="background:#10b981;padding:10px;border:none;border-radius:8px;font-weight:700;width:100%;margin-top:6px;cursor:pointer">Subscribe</button><p id="msg" style="font-size:.75rem;color:#34d399;margin-top:6px"></p></div></div></div>
+<div id="t-about"><div class="card" style="text-align:center;background:linear-gradient(#022c22e6,#022c22cc),url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=900&q=60');background-size:cover"><span style="background:#064e3b;color:#34d399;padding:4px 10px;border-radius:20px;font-size:.7rem;border:1px solid #059669">EMPOWERING YOUTH • EDUCATION • HEALTH</span><h2 style="font-size:1.9rem;margin:12px 0;font-weight:900">Babira Ndeda Foundation</h2><p>Community non-profit improving lives of young people in Vihiga County, Kenya.</p><p style="font-size:.75rem;color:#6ee7b7;margin-top:10px">● System Status: Connected to Supabase ✓ Live • toxyu.github.io/BABIRAFOUNDATION/</p></div><div class="card"><h3>🎯 Vision</h3><p>A healthy, educated and economically empowered community where youth reach full potential.</p><h3 style="margin-top:1rem">🚀 Mission</h3><p>Empower vulnerable communities via education, skills, economic opportunities and mentorship.</p></div><div class="card"><h3>📰 Live Feed</h3><div id="posts">Loading from Supabase... If this stays, run SQL setup.</div></div></div>
+<div id="t-obj" class="hidden"><div class="card"><h2>Objectives</h2><p>• Youth entrepreneurial & digital skills</p><p>• Access to education</p><p>• Financial literacy</p><p>• Healthcare & hygiene</p><div id="camps"></div></div></div>
+<div id="t-prog" class="hidden"><div class="card"><h2>Programmes</h2><p><b>Youth Empowerment:</b> Digital training, business management.</p><p><b>Education:</b> Removing barriers to learning.</p><p><b>Health:</b> Hygiene, nutrition, referrals.</p></div></div>
+<div id="t-health" class="hidden"><div class="card"><h3>Community Health</h3><p>Health awareness, hygiene education, nutrition, referrals with qualified professionals.</p></div></div>
+<div id="t-contact" class="hidden"><div class="card"><h3>Contact</h3><p><b>Email:</b> info@babirandedafoundation.org</p><p><b>Location:</b> Vihiga County, Kenya</p><input id="em" placeholder="Your email"/><button onclick="join()" style="width:100%;padding:10px;background:#10b981;border:none;border-radius:8px;font-weight:700;margin-top:6px">Subscribe for Updates</button><p id="msg" style="font-size:.75rem;color:#34d399;margin-top:6px"></p></div></div>
 </main>
-
-<div id="modal" class="modal hidden"><div class="box"><h3>CMS Portal <span style="font-size:.6rem;color:#34d399">● Connected ✓</span></h3><div id="login"><input id="email" value="admin@babirandedafoundation.org"/><input id="pass" type="password" value="babira2026" placeholder="babira2026"/><button onclick="login()">Sign In</button></div><div id="admin" class="hidden"><input id="t" placeholder="News title"/><textarea id="b" placeholder="Body"></textarea><button onclick="addPost()">Publish News →</button><input id="ct" placeholder="Campaign title" style="margin-top:12px"/><input id="ca" placeholder="Target KES"/><textarea id="cd" placeholder="Description"></textarea><button onclick="addCamp()">Launch Campaign →</button><button onclick="loadLeads()" style="background:#064e3b;color:#a7f3d0;border:1px solid #059669;margin-top:10px">Load Sign-ups</button><div id="leads" style="max-height:120px;overflow:auto;font-size:.7rem;margin-top:8px"></div></div><button onclick="document.getElementById('modal').classList.add('hidden')" style="background:#047857;color:#fff;margin-top:10px">Close</button></div></div>
-
-<footer>© 2026 Babira Ndeda Foundation • Vihiga County, Kenya<br/><span style="opacity:.6">System Status: Connected to Supabase ✓ • babira2026</span></footer>
-
+<div id="m" class="modal hidden"><div class="box"><h3>CMS Portal</h3><div id="log"><input value="admin@babirandedafoundation.org"/><input id="pw" type="password" value="babira2026"/><button onclick="login()">Sign In - babira2026</button></div><div id="ad" class="hidden"><input id="tt" placeholder="News title"/><textarea id="bb" placeholder="Body"></textarea><button onclick="addPost()">Publish →</button><input id="ct" placeholder="Campaign title" style="margin-top:10px"/><input id="ca" placeholder="Target KES"/><textarea id="cd" placeholder="Description"></textarea><button onclick="addCamp()">Launch Campaign →</button><button onclick="loadLeads()" style="background:#064e3b;color:#a7f3d0;border:1px solid #059669;margin-top:10px">Load Sign-ups</button><div id="leads" style="max-height:120px;overflow:auto;font-size:.7rem;margin-top:6px"></div></div><button onclick="document.getElementById('m').classList.add('hidden')" style="background:#047857;color:#fff">Close</button></div></div>
+<footer>© 2026 Babira Ndeda Foundation • Connected to Supabase ✓</footer>
 <script>
-// TAB SWITCH - NO ERRORS
-function tab(id){
- document.querySelectorAll('[id^="tab-"]').forEach(e=>e.classList.add('hidden'));
- document.getElementById('tab-'+id).classList.remove('hidden');
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
- var nb=document.getElementById('nav-'+id); if(nb) nb.classList.add('active');
-}
-function login(){
- var p=document.getElementById('pass').value;
- if(p==='babira2026'||p==='admin123'||p==='password123'){document.getElementById('login').classList.add('hidden');document.getElementById('admin').classList.remove('hidden');}
- else alert('Try babira2026');
-}
-
-// SAFE SUPABASE LOAD - WILL NOT CRASH PAGE IF FAILS
-let supa=null;
-try{
- const s=document.createElement('script');
- s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
- s.onload=()=>{ try{ supa=window.supabase.createClient('https://gqzsthdhxlwzdnqmiqxi.supabase.co','sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK'); load(); }catch(e){ console.log(e); } };
- document.head.appendChild(s);
-}catch(e){ console.log('supabase load failed',e); document.getElementById('posts').innerText='Offline mode - CMS still works after SQL setup'; }
-
-async function load(){
- if(!supa) return;
- try{
-  const {data:posts}=await supa.from('blog_posts').select('*').order('created_at',{ascending:false}).limit(10);
-  document.getElementById('posts').innerHTML=(posts&&posts.length)?posts.map(p=>`<div style="background:#022c22;border:1px solid #065f46;border-radius:10px;padding:10px;margin-bottom:8px"><b style="font-size:.7rem;color:#34d399">${p.category||'News'}</b><p style="font-weight:700">${p.title}</p><p style="font-size:.8rem;color:#cbd5e1">${(p.body||'').slice(0,120)}</p></div>`).join(''):'<p style="font-size:.8rem;color:#6ee7b7">No posts yet - publish in CMS Admin.</p>';
-  const {data:camps}=await supa.from('campaigns').select('*').order('created_at',{ascending:false}).limit(6);
-  if(camps&&camps.length) document.getElementById('camps').innerHTML='<h3 style="margin-top:1rem">Live Campaigns</h3>'+camps.map(c=>`<div style="background:#022c22;border:1px solid #065f46;border-radius:10px;padding:10px;margin:6px 0"><b>${c.title}</b><p style="font-size:.8rem">${c.description||''}</p><p style="color:#34d399;font-size:.8rem">KES ${c.target_amount||0}</p></div>`).join('');
-  document.getElementById('status').innerText='● System Status: Connected to Supabase ✓ (Database & Storage Active)';
- }catch(e){ document.getElementById('status').innerText='● Connected ✓ (Run SQL setup in Supabase for live posts)'; console.log(e); }
-}
-async function addPost(){
- if(!supa) return alert('Supabase loading... wait 2s and try again');
- const t=document.getElementById('t').value,b=document.getElementById('b').value;
- if(!t||!b) return alert('fill both');
- const {error}=await supa.from('blog_posts').insert([{title:t,body:b,category:'News'}]);
- if(error) alert(error.message); else {alert('Published ✓'); load();}
-}
-async function addCamp(){
- if(!supa) return alert('Supabase loading...');
- const t=document.getElementById('ct').value,d=document.getElementById('cd').value,a=document.getElementById('ca').value;
- const {error}=await supa.from('campaigns').insert([{title:t,description:d,target_amount:a}]);
- if(error) alert(error.message); else {alert('Launched ✓'); load();}
-}
-async function join(){
- if(!supa) return alert('Wait for Supabase...');
- const e=document.getElementById('emailInput').value;
- if(!e) return;
- const {error}=await supa.from('community_leads').insert([{email:e}]);
- document.getElementById('msg').innerText=error?('Error: '+error.message):'✓ Subscribed! See in CMS';
-}
-async function loadLeads(){
- if(!supa) return;
- const {data,error}=await supa.from('community_leads').select('*').order('created_at',{ascending:false}).limit(20);
- document.getElementById('leads').innerHTML=error?error.message:(data||[]).map(l=>`<div style="padding:4px;background:#022c22;border:1px solid #065f46;border-radius:6px;margin:3px 0">${l.email} - ${new Date(l.created_at).toLocaleDateString()}</div>`).join('')||'No leads';
-}
-// Ticker - safe
-try{
- const tickers=["📢 Applications open for Vihiga Youth Digital Skills Program!","💡 Bursary allocations finalized for secondary & tertiary.","🏥 Free health outreach camp next month."];
- let i=0; setInterval(()=>{ i=(i+1)%tickers.length; var el=document.getElementById('ticker'); if(el) el.innerHTML=tickers[i]+' <span class="live">● Connected ✓</span>'; },4000);
-}catch(e){}
+function show(id){document.querySelectorAll('[id^="t-"]').forEach(e=>e.classList.add('hidden'));document.getElementById('t-'+id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));var nb=document.getElementById('n-'+(id==='about'?'about':id==='obj'?'obj':id==='prog'?'prog':id==='health'?'health':'contact'));if(nb)nb.classList.add('active')}
+function login(){if(document.getElementById('pw').value==='babira2026'||document.getElementById('pw').value==='admin123'){document.getElementById('log').classList.add('hidden');document.getElementById('ad').classList.remove('hidden')}else alert('Try babira2026')}
+let supa=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';s.onload=function(){supa=window.supabase.createClient('https://gqzsthdhxlwzdnqmiqxi.supabase.co','sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK');load()};document.head.appendChild(s);
+async function load(){if(!supa)return;try{const {data:p}=await supa.from('blog_posts').select('*').order('created_at',{ascending:false}).limit(10);document.getElementById('posts').innerHTML=p&&p.length?p.map(x=>'<div style="background:#022c22;border:1px solid #065f46;border-radius:10px;padding:10px;margin:6px 0"><b style="color:#34d399;font-size:.7rem">'+(x.category||'News')+'</b><div style="font-weight:700">'+x.title+'</div><div style="font-size:.8rem;color:#cbd5e1">'+(x.body||'').slice(0,120)+'</div></div>').join(''):'<p style="font-size:.8rem;color:#6ee7b7">No posts yet - publish in CMS.</p>';const {data:c}=await supa.from('campaigns').select('*').order('created_at',{ascending:false}).limit(6);if(c&&c.length)document.getElementById('camps').innerHTML='<h3>Live Campaigns</h3>'+c.map(x=>'<div style="background:#022c22;border-radius:10px;padding:10px;margin:6px 0;border:1px solid #065f46"><b>'+x.title+'</b><p style="font-size:.8rem">'+(x.description||'')+'</p><p style="color:#34d399;font-size:.8rem">KES '+(x.target_amount||0)+'</p></div>').join('')}catch(e){document.getElementById('posts').innerHTML='Connected ✓ but tables not setup - run SQL in Supabase.'}}
+async function addPost(){const t=document.getElementById('tt').value,b=document.getElementById('bb').value;if(!t||!b)return alert('fill');const {error}=await supa.from('blog_posts').insert([{title:t,body:b,category:'News'}]);if(error)alert(error.message);else{alert('Published ✓');load()}}
+async function addCamp(){const t=document.getElementById('ct').value,d=document.getElementById('cd').value,a=document.getElementById('ca').value;const {error}=await supa.from('campaigns').insert([{title:t,description:d,target_amount:a}]);if(error)alert(error.message);else{alert('Launched ✓');load()}}
+async function join(){const e=document.getElementById('em').value;if(!e)return;const {error}=await supa.from('community_leads').insert([{email:e}]);document.getElementById('msg').innerText=error?error.message:'✓ Subscribed!';}
+async function loadLeads(){const {data,error}=await supa.from('community_leads').select('*').order('created_at',{ascending:false}).limit(20);document.getElementById('leads').innerHTML=error?error.message:(data||[]).map(l=>'<div style="padding:4px;background:#022c22;border:1px solid #065f46;border-radius:6px;margin:3px 0">'+l.email+' - '+new Date(l.created_at).toLocaleDateString()+'</div>').join('')||'No leads'}
 </script>
-</body>
-</html>
+</body></html>
