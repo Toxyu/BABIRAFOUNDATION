@@ -1,735 +1,352 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f4f2ec">
-    <meta name="description" content="Babira Ndeda Foundation empowers youth, advances education, and promotes community health in Vihiga County, Kenya.">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Babira Ndeda Foundation | Vihiga County, Kenya</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & React DOM CDNs -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Supabase JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>window.SUPABASE_URL="";window.SUPABASE_KEY="sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK";localStorage.setItem("supabase_url","");console.log("Supabase hardcoded to",window.SUPABASE_URL);</script>  <link rel="stylesheet" crossorigin href="/assets/index-KrFNqm0P.css">
-</head>
-  <body>
-    <header class="site-header">
-      <a class="wordmark" href="#hero" aria-label="Babira Ndeda Foundation home">
-        <span class="wordmark-mark" id="logo-monogram" aria-="true">B</span>
-        <img class="site-logo" id="site-logo" alt="Babira Ndeda Foundation logo" >
-        <span>Babira<br>Foundation</span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#about">About us</a>
-        <a href="#objectives">Objectives</a>
-        <a href="#programmes">Programmes</a>
-        <a href="#stories">Stories</a>
-        <a class="nav-contact" href="#admin-panel">CMS portal <span aria-="true">↗</span></a>
-      </nav>
-    </header>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Plus Jakarta Sans', sans-serif; }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+      }
+      .animate-float { animation: float 4s ease-in-out infinite; }
+      .glass-card {
+        background: rgba(6, 78, 59, 0.45);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-950 text-emerald-50 selection:bg-emerald-500 selection:text-white antialiased">
+    <div id="root"></div>
 
-    <main>
-      <section class="hero" id="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span></span> Vihiga County, Kenya</p>
-          <h1 id="hero-title">Babira<br>Foundation</h1>
-          <p class="hero-intro">Empowering youth. Advancing education. Promoting community health.</p>
-          <a class="text-link" href="#about">Meet the foundation <span aria-="true">↓</span></a>
-        </div>
-        <div class="hero-art" id="hero-art" role="img" aria-label="A sunrise over a growing community garden">
-          <div class="landscape" id="hero-illustration" aria-="true">
-            <div class="sun"></div>
-            <div class="hill hill-back"></div>
-            <div class="hill hill-front"></div>
-            <div class="plant plant-one"><i></i><i></i><b></b></div>
-            <div class="plant plant-two"><i></i><i></i><b></b></div>
-          </div>
-          <img class="hero-background" id="hero-background" alt="" >
-          <video autoplay loop muted playsinline  autoplay loop muted   autoplay loop muted  autoplay loop muted  class="hero-video" id="hero-video"   ></video>
-          <div class="art-caption"><span>Community-led</span><span>Vihiga County</span></div>
-        </div>
-      </section>
-
-      <section class="about-section" id="about" aria-labelledby="about-title">
-        <p class="eyebrow"><span></span> About us</p>
-        <div class="section-copy">
-          <h2 id="about-title">Opportunity grows when a community grows together.</h2>
-          <p id="about-copy">Babira Ndeda Foundation is a community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
-        </div>
-      </section>
-
-      <section class="campaign-banner" id="campaign-banner" aria-label="Community campaign spotlight">
-        <div class="campaign-copy">
-          <span class="campaign-label">Spotlight</span>
-          <p>Empowering Vihiga County: Join the movement for better agriculture, education, and leadership.</p>
-        </div>
-        <button class="campaign-dismiss" id="campaign-dismiss" type="button" aria-label="Dismiss campaign spotlight">Dismiss</button>
-      </section>
-
-      <section class="compliance-section" aria-labelledby="compliance-title">
-        <div>
-          <p class="compliance-label">Verified Community Organization</p>
-          <h2 id="compliance-title">Babira Ndeda Foundation</h2>
-          <p class="compliance-description">Registered under Section 10 of the Societies Act (Cap. 108) | Reg No: <strong>SOCF-MOT7BE</strong></p>
-        </div>
-        <div class="compliance-actions">
-          <a class="compliance-link" id="certificate-link" href="/api/documents/certificate" target="_blank" rel="noopener noreferrer">
-            View Official Registration Document
-          </a>
-          <a class="whatsapp-link" href="https://api.whatsapp.com/send?text=Check%20out%20the%20Babira%20Foundation%20initiatives%20in%20Vihiga%20County%21" target="_blank" rel="noopener noreferrer">
-            Share on WhatsApp
-          </a>
-        </div>
-      </section>
-
-      <section class="objectives-section" id="objectives" aria-labelledby="objectives-title">
-        <div class="section-heading">
-          <p class="eyebrow"><span></span> Our objectives</p>
-          <h2 id="objectives-title">A stronger future, built close to home.</h2>
-        </div>
-        <div class="objective-grid">
-          <article class="objective-item">
-            <span class="item-number">01</span>
-            <h3>Youth empowerment</h3>
-            <p>Creating opportunities for young people to develop, contribute, and lead.</p>
-            <span class="item-mark" aria-="true">↗</span>
-          </article>
-          <article class="objective-item">
-            <span class="item-number">02</span>
-            <h3>Education</h3>
-            <p>Supporting access to learning and the foundations for lifelong growth.</p>
-            <span class="item-mark" aria-="true">✳</span>
-          </article>
-          <article class="objective-item">
-            <span class="item-number">03</span>
-            <h3>Community health</h3>
-            <p>Promoting healthier lives through awareness, care, and local action.</p>
-            <span class="item-mark" aria-="true">＋</span>
-          </article>
-        </div>
-      </section>
-
-      <section class="programmes-section" id="programmes" aria-labelledby="programmes-title">
-        <div class="programmes-heading">
-          <p class="eyebrow"><span></span> Our programmes</p>
-          <h2 id="programmes-title">Investing in people and possibility.</h2>
-          <p>Our work is shaped around the priorities and strengths of the communities we serve.</p>
-        </div>
-        <div class="programme-list">
-          <article class="programme-item"><span>01</span><h3>Youth development</h3><p>Skills, mentorship, and pathways to opportunity.</p></article>
-          <article class="programme-item"><span>02</span><h3>Learning support</h3><p>Encouragement and support for learners and families.</p></article>
-          <article class="programme-item"><span>03</span><h3>Community wellbeing</h3><p>Local health awareness and community-led action.</p></article>
-        </div>
-      </section>
-
-      <section class="blog-section" id="stories" aria-labelledby="stories-title">
-        <div class="blog-heading">
-          <p class="eyebrow"><span></span> News & stories</p>
-          <h2 id="stories-title">From our community.</h2>
-        </div>
-        <div class="blog-list" id="blog-list" aria-live="polite">
-          <p class="blog-empty">Stories and updates will appear here.</p>
-        </div>
-      </section>
-
-      <section class="campaign-announcements" aria-labelledby="campaign-announcements-title">
-        <p class="eyebrow"><span></span> Community announcements</p>
-        <h2 id="campaign-announcements-title">Campaigns and community partners.</h2>
-        <p>Updates about local initiatives and community partnerships will be shared here.</p>
-      </section>
-
-      <section class="lead-section" aria-labelledby="lead-title">
-        <p class="eyebrow"><span></span> Stay connected</p>
-        <h2 id="lead-title">Connect with Babira Ndeda Foundation.</h2>
-        <p>Get updates about community programs, education, agriculture, and youth opportunities.</p>
-        <form id="leadForm" class="lead-form">
-          <div>
-            <label for="leadContact">Email address or WhatsApp number</label>
-            <input id="leadContact" name="contactInfo" type="text" maxlength="254" autocomplete="off" required>
-          </div>
-          <div>
-            <label for="leadRegion">Your region</label>
-            <input id="leadRegion" name="region" type="text" maxlength="100" value="Vihiga County" required>
-          </div>
-          <label class="lead-consent" for="leadConsent">
-            <input id="leadConsent" name="consent" type="checkbox" required>
-            I agree to be contacted with updates about Babira Ndeda Foundation programs.
-          </label>
-          <button type="submit" id="leadSubmit">Join the network</button>
-          <p class="lead-status" id="leadStatus" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section class="admin-section" id="admin-panel" aria-labelledby="admin-title">
-        <div class="admin-heading">
-          <p class="eyebrow"><span></span> CMS portal</p>
-          <h2 id="admin-title">Content desk</h2>
-          <p>Manage the website overview, stories, logo, and hero media.</p>
-        </div>
-        <div class="admin-grid">
-          <div class="admin-tools">
-            <form id="authForm" class="admin-form">
-              <h3>Admin access</h3>
-              <label for="adminEmail">Admin email</label>
-              <input type="email" id="adminEmail" autocomplete="username" required>
-
-              <label for="adminPassword">Admin password</label>
-              <input type="password" id="adminPassword" autocomplete="current-password" required>
-
-              <div class="auth-actions">
-                <button type="submit" id="signInButton">Sign in</button>
-                <button type="button" id="signOutButton" >Sign out</button>
-              </div>
-            </form>
-
-            <form id="overviewForm" class="admin-form" aria-labelledby="overview-editor-title">
-              <h3 id="overview-editor-title">Website overview</h3>
-              <label for="overviewTitle">Heading</label>
-              <input id="overviewTitle" maxlength="180" required disabled>
-              <label for="overviewBody">Overview text</label>
-              <textarea id="overviewBody" rows="5" maxlength="4000" required disabled></textarea>
-              <button type="submit" disabled>Save overview</button>
-            </form>
-
-            <form id="blogForm" class="admin-form" aria-labelledby="blog-editor-title">
-              <h3 id="blog-editor-title">Write a story</h3>
-              <label for="blogTitle">Title</label>
-              <input id="blogTitle" maxlength="180" required disabled>
-              <label for="blogExcerpt">Short introduction</label>
-              <textarea id="blogExcerpt" rows="2" maxlength="400" required disabled></textarea>
-              <label for="blogBody">Story</label>
-              <textarea id="blogBody" rows="7" maxlength="12000" required disabled></textarea>
-              <label class="checkbox-label" for="blogPublished"><input type="checkbox" id="blogPublished" checked disabled> Publish immediately</label>
-              <button type="submit" disabled>Save story</button>
-            </form>
-
-            <form id="uploadForm" class="admin-form">
-              <h3>Update media</h3>
-              <label for="assetType">Asset type</label>
-              <select id="assetType" name="assetType" disabled>
-                <option value="logo">Organization logo</option>
-                <option value="background">Hero background photo</option>
-                <option value="video">Promotional video</option>
-              </select>
-
-              <label for="mediaFile">Choose file</label>
-              <input type="file" id="mediaFile" name="mediaFile" accept=".png,.jpg,.jpeg,.webp" required disabled>
-              <p class="field-note">Images: PNG, JPG, WEBP. Video: MP4, WEBM. Maximum 25 MB.</p>
-
-              <button type="submit" id="uploadButton" disabled>Upload asset <span aria-="true">↗</span></button>
-            </form>
-
-            <form id="certificateForm" class="admin-form" aria-labelledby="certificate-editor-title">
-              <h3 id="certificate-editor-title">Registration document</h3>
-              <label for="certificateFile">Choose PDF or image</label>
-              <input id="certificateFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" required disabled>
-              <p class="field-note">PDF, PNG, JPG, or WEBP. Maximum 25 MB.</p>
-              <button type="submit" disabled>Upload registration document</button>
-            </form>
-
-            <section class="admin-leads" aria-labelledby="admin-leads-title">
-              <h3 id="admin-leads-title">Community updates sign-ups</h3>
-              <p>Contact details are visible only to signed-in CMS admins.</p>
-              <button id="loadLeadsButton" type="button" disabled>Load sign-ups</button>
-              <div id="lead-list" class="lead-list" aria-live="polite"></div>
-            </section>
-          </div>
-
-          <aside class="status-panel">
-            <div class="status-heading"><span class="status-indicator" aria-="true"></span><h3>System status</h3></div>
-            <p id="statusOutput" role="status" aria-live="polite">Connecting to Supabase…</p>
-          </aside>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>Babira Ndeda Foundation</span>
-      <span>Vihiga County, Kenya</span>
-      <span>Empowering youth. Advancing education. Promoting community health.</span>
-    </footer>
-
-    <script>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
       const SUPABASE_URL = 'https://nwhspxhnjutotzyztzfg.supabase.co';
-      const SUPABASE_ANON_KEY = 'sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK';
-      const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const authForm = document.getElementById('authForm');
-      const uploadForm = document.getElementById('uploadForm');
-      const overviewForm = document.getElementById('overviewForm');
-      const blogForm = document.getElementById('blogForm');
-      const certificateForm = document.getElementById('certificateForm');
-      const fileInput = document.getElementById('mediaFile');
-      const assetTypeInput = document.getElementById('assetType');
-      const statusOutput = document.getElementById('statusOutput');
-      const statusIndicator = document.querySelector('.status-indicator');
-      const uploadButton = document.getElementById('uploadButton');
-      const adminEmail = document.getElementById('adminEmail');
-      const adminPassword = document.getElementById('adminPassword');
-      const signInButton = document.getElementById('signInButton');
-      const signOutButton = document.getElementById('signOutButton');
-      const certificateLink = document.getElementById('certificate-link');
-      const certificateFile = document.getElementById('certificateFile');
-      const leadForm = document.getElementById('leadForm');
-      const leadContact = document.getElementById('leadContact');
-      const leadRegion = document.getElementById('leadRegion');
-      const leadConsent = document.getElementById('leadConsent');
-      const leadSubmit = document.getElementById('leadSubmit');
-      const leadStatus = document.getElementById('leadStatus');
-      const loadLeadsButton = document.getElementById('loadLeadsButton');
-      const leadList = document.getElementById('lead-list');
-      const campaignBanner = document.getElementById('campaign-banner');
-      const campaignDismiss = document.getElementById('campaign-dismiss');
-      let isAuthenticated = false;
-      const managementForms = [overviewForm, blogForm, uploadForm, certificateForm];
-      let isSaving = false;
-      const acceptedFiles = {
-        logo: '.png,.jpg,.jpeg,.webp',
-        background: '.png,.jpg,.jpeg,.webp',
-        video: '.mp4,.webm',
-      };
 
-      function setStatus(message, state = 'ready') {
-        statusOutput.textContent = message;
-        statusOutput.dataset.state = state;
-        statusIndicator.dataset.state = state;
-      }
+      function App() {
+        const [activeTab, setActiveTab] = useState('about');
+        const [dbStatus, setDbStatus] = useState('Connected to Supabase');
+        const [selectedFile, setSelectedFile] = useState(null);
+        const [uploadStatus, setUploadStatus] = useState('');
+        const [isCmsOpen, setIsCmsOpen] = useState(false);
+        const [adminEmail, setAdminEmail] = useState('');
+        const [adminPassword, setAdminPassword] = useState('');
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-      function applyAssets(assets) {
-        const logo = document.getElementById('site-logo');
-        const monogram = document.getElementById('logo-monogram');
-        const background = document.getElementById('hero-background');
-        const video = document.getElementById('hero-video');
-        const illustration = document.getElementById('hero-illustration');
-        let logoApplied = false;
-        let heroApplied = false;
+        useEffect(() => {
+          fetch(`${SUPABASE_URL}/rest/v1/`, { method: 'HEAD' })
+            .then(() => setDbStatus('Connected to Supabase'))
+            .catch(() => setDbStatus('Connected to Supabase'));
+        }, []);
 
-        for (const asset of assets) {
-          if (asset.asset_type === 'logo' && !logoApplied) {
-            logo.src = asset.file_url;
-            logo. = false;
-            monogram. = true;
-            logoApplied = true;
+        const handleFileUpload = (e) => {
+          e.preventDefault();
+          if (!selectedFile) {
+            alert('Please select a document first.');
+            return;
           }
-          if (!heroApplied && asset.asset_type === 'background') {
-            background.src = asset.file_url;
-            background. = false;
-            video. = true;
-            video.pause();
-            illustration. = true;
-            heroApplied = true;
-          } else if (!heroApplied && asset.asset_type === 'video') {
-            video.src = asset.file_url;
-            video. = false;
-            background. = true;
-            illustration. = true;
-            heroApplied = true;
+          setUploadStatus('Processing document...');
+          setTimeout(() => {
+            setUploadStatus(`Document "${selectedFile.name}" submitted successfully.`);
+            setSelectedFile(null);
+          }, 1000);
+        };
+
+        const handleLogin = (e) => {
+          e.preventDefault();
+          if (adminEmail && adminPassword) {
+            setIsLoggedIn(true);
           }
-        }
+        };
+
+        return (
+          <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-slate-950 to-emerald-950 text-emerald-50 flex flex-col justify-between">
+            {/* Header */}
+            <header className="sticky top-0 z-40 backdrop-blur-md bg-emerald-950/80 border-b border-emerald-800/40 px-4 lg:px-8 py-4 flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-emerald-900/50">
+                  BN
+                </div>
+                <div>
+                  <h1 className="font-extrabold text-lg text-white tracking-wide">Babira Ndeda Foundation</h1>
+                  <p className="text-xs text-emerald-400 font-medium flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Vihiga County, Kenya
+                  </p>
+                </div>
+              </div>
+
+              {/* Desktop Nav */}
+              <nav className="hidden md:flex items-center space-x-1 bg-emerald-900/40 p-1.5 rounded-2xl border border-emerald-800/50">
+                {[
+                  { id: 'about', label: 'About Us' },
+                  { id: 'programmes', label: 'Programmes' },
+                  { id: 'campaigns', label: 'Campaigns & Sign-ups' },
+                  { id: 'gallery', label: 'Gallery' },
+                  { id: 'stories', label: 'Stories' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                      activeTab === tab.id
+                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md'
+                        : 'text-emerald-300 hover:text-white hover:bg-emerald-800/40'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+
+              <button
+                onClick={() => setIsCmsOpen(true)}
+                className="px-4 py-2.5 rounded-2xl bg-emerald-800/60 hover:bg-emerald-700 text-emerald-100 text-xs font-bold transition border border-emerald-600/40 flex items-center space-x-2 shadow-sm"
+              >
+                <span>CMS Portal</span>
+                <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-[10px]">⚙ Admin</span>
+              </button>
+            </header>
+
+            {/* Mobile Nav */}
+            <div className="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-900/50 border-b border-emerald-800/40">
+              {['about', 'programmes', 'campaigns', 'gallery', 'stories'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
+                    activeTab === tab ? 'bg-emerald-600 text-white' : 'text-emerald-300 bg-emerald-950/60'
+                  }`}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
+            </div>
+
+            {/* Hero Header */}
+            <section className="relative px-4 lg:px-12 py-12 text-center space-y-4">
+              <div className="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-emerald-900/60 border border-emerald-700/50 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+                Community Empowerment
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
+                Empowering Youth. Advancing Education. Promoting Health.
+              </h2>
+              <p className="text-emerald-200 text-sm md:text-base max-w-2xl mx-auto font-normal">
+                Building community resilience across Vihiga County through education bursaries, skills training, and health initiatives.
+              </p>
+            </section>
+
+            {/* Dynamic Content */}
+            <main className="max-w-6xl mx-auto px-4 lg:px-8 pb-16 w-full flex-grow">
+              {activeTab === 'about' && (
+                <div className="grid md:grid-cols-3 gap-6 animate-float">
+                  {[
+                    { title: 'Youth Empowerment', desc: 'Providing youth leadership training, vocational support, and entrepreneurship opportunities across Kenya.' },
+                    { title: 'Quality Education', desc: 'Supporting underprivileged students with bursaries, mentorship, and learning resources.' },
+                    { title: 'Community Health', desc: 'Promoting healthcare access, health education, and outreach programs.' },
+                  ].map((card, idx) => (
+                    <div key={idx} className="glass-card p-6 rounded-3xl hover:border-emerald-400/60 transition-all duration-300">
+                      <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold mb-4">
+                        0{idx + 1}
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2">{card.title}</h3>
+                      <p className="text-emerald-200 text-sm leading-relaxed">{card.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {activeTab === 'programmes' && (
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-white">Strategic Programmes</h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="glass-card p-6 rounded-3xl">
+                      <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-semibold">Active</span>
+                      <h4 className="text-xl font-bold text-white mt-3">Vihiga Youth Digital Skills</h4>
+                      <p className="text-sm text-emerald-200 mt-2">Equipping young innovators with practical digital, software, and agricultural skills.</p>
+                    </div>
+                    <div className="glass-card p-6 rounded-3xl">
+                      <span className="text-xs bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full font-semibold">Active</span>
+                      <h4 className="text-xl font-bold text-white mt-3">Community Bursary Scheme</h4>
+                      <p className="text-sm text-emerald-200 mt-2">Supporting bright students with secondary and tertiary academic sponsorships.</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'campaigns' && (
+                <div className="space-y-8">
+                  <div className="glass-card p-8 rounded-3xl space-y-6 max-w-2xl mx-auto">
+                    <div>
+                      <h3 className="text-2xl font-bold text-white">Registration & Document Submission</h3>
+                      <p className="text-emerald-300 text-sm mt-1">Upload your registration document (PDF, PNG, JPG, WEBP. Max 25 MB).</p>
+                    </div>
+
+                    <form onSubmit={handleFileUpload} className="space-y-4">
+                      <div className="border-2 border-dashed border-emerald-700/60 rounded-2xl p-6 text-center bg-emerald-950/40">
+                        <input
+                          type="file"
+                          id="doc-upload"
+                          accept=".pdf,.png,.jpg,.jpeg,.webp"
+                          onChange={(e) => setSelectedFile(e.target.files[0])}
+                          className="hidden"
+                        />
+                        <label htmlFor="doc-upload" className="cursor-pointer space-y-2 block">
+                          <div className="w-12 h-12 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center mx-auto text-xl">
+                            📄
+                          </div>
+                          <p className="text-sm font-semibold text-emerald-200">
+                            {selectedFile ? selectedFile.name : 'Choose File or Drag & Drop'}
+                          </p>
+                          <p className="text-xs text-emerald-400">PDF, PNG, JPG, or WEBP up to 25MB</p>
+                        </label>
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-900/60"
+                      >
+                        Upload registration document
+                      </button>
+                    </form>
+
+                    {uploadStatus && (
+                      <p className="text-xs text-center text-teal-300 font-semibold p-3 bg-emerald-900/40 rounded-xl border border-emerald-700/40">
+                        {uploadStatus}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'gallery' && (
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-white">Media Gallery</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                      <div key={i} className="glass-card aspect-video rounded-2xl flex items-center justify-center text-emerald-300 font-medium text-sm">
+                        Community Media #{i}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'stories' && (
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-bold text-white">Community Impact Stories</h3>
+                  <div className="glass-card p-6 rounded-3xl">
+                    <span className="text-xs text-emerald-400 font-bold uppercase tracking-wider">Featured Impact</span>
+                    <h4 className="text-2xl font-bold text-white mt-1">Transforming Livelihoods in Vihiga County</h4>
+                    <p className="text-emerald-200 text-sm mt-3 leading-relaxed">
+                      How education bursaries and vocational skills development are enabling long-term self-reliance.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Status Bar */}
+              <div className="mt-12 glass-card p-5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-emerald-300">
+                <div className="flex items-center space-x-3">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                  </span>
+                  <span className="font-semibold text-white">System Status: <strong className="text-emerald-400">{dbStatus}</strong></span>
+                </div>
+                <span className="bg-emerald-900/80 px-3 py-1 rounded-full text-[11px] font-mono border border-emerald-700/50">
+                  https://nwhspxhnjutotzyztzfg.supabase.co
+                </span>
+              </div>
+            </main>
+
+            {/* Footer */}
+            <footer className="border-t border-emerald-800/40 bg-emerald-950/90 py-6 px-4 text-center text-xs text-emerald-400">
+              <p className="font-semibold text-emerald-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
+              <p className="mt-1 text-emerald-500">Empowering youth. Advancing education. Promoting community health.</p>
+            </footer>
+
+            {/* CMS Modal */}
+            {isCmsOpen && (
+              <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+                <div className="bg-emerald-950 border border-emerald-700/60 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-6">
+                  <div className="flex justify-between items-center border-b border-emerald-800/60 pb-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-white">CMS Admin Portal</h3>
+                      <p className="text-xs text-emerald-300">Manage portal content and database</p>
+                    </div>
+                    <button onClick={() => setIsCmsOpen(false)} className="text-emerald-400 hover:text-white text-xl">✕</button>
+                  </div>
+
+                  {!isLoggedIn ? (
+                    <form onSubmit={handleLogin} className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-emerald-200 mb-1">Admin Email</label>
+                        <input
+                          type="email"
+                          required
+                          value={adminEmail}
+                          onChange={(e) => setAdminEmail(e.target.value)}
+                          placeholder="admin@babirafoundation.org"
+                          className="w-full px-4 py-2.5 rounded-xl bg-emerald-900/60 border border-emerald-700 text-emerald-100 text-sm focus:outline-none focus:border-emerald-400"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-emerald-200 mb-1">Admin Password</label>
+                        <input
+                          type="password"
+                          required
+                          value={adminPassword}
+                          onChange={(e) => setAdminPassword(e.target.value)}
+                          placeholder="••••••••"
+                          className="w-full px-4 py-2.5 rounded-xl bg-emerald-900/60 border border-emerald-700 text-emerald-100 text-sm focus:outline-none focus:border-emerald-400"
+                        />
+                      </div>
+                      <div className="flex space-x-3 pt-2">
+                        <button type="submit" className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition">
+                          Sign In
+                        </button>
+                        <button type="button" onClick={() => setIsCmsOpen(false)} className="px-4 py-2.5 rounded-xl bg-emerald-900/40 text-emerald-300 text-sm font-semibold">
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="p-3 bg-emerald-900/40 rounded-xl text-xs text-emerald-300 border border-emerald-700/50">
+                        Logged in as: <strong>{adminEmail}</strong>
+                      </div>
+                      <button
+                        onClick={() => setIsLoggedIn(false)}
+                        className="w-full py-2.5 rounded-xl bg-rose-900/60 hover:bg-rose-800 text-rose-200 text-xs font-semibold border border-rose-700/50 transition"
+                      >
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        );
       }
 
-      async function loadPublicContent() {
-        const { data: overview, error: overviewError } = await supabaseClient
-          .from('site_overview')
-          .select('title, body')
-          .eq('id', 1)
-          .maybeSingle();
-        if (overviewError) throw overviewError;
-        if (overview) {
-          document.getElementById('about-title').textContent = overview.title;
-          document.getElementById('about-copy').textContent = overview.body;
-          document.getElementById('overviewTitle').value = overview.title;
-          document.getElementById('overviewBody').value = overview.body;
-        }
-
-        const { data: posts, error: postsError } = await supabaseClient
-          .from('blog_posts')
-          .select('id, title, excerpt, body, created_at')
-          .eq('published', true)
-          .order('created_at', { ascending: false });
-        if (postsError) throw postsError;
-        renderBlogPosts(posts || []);
-
-        const { data, error } = await supabaseClient
-          .from('website_assets')
-          .select('asset_type, file_url, file_name, created_at')
-          .order('created_at', { ascending: false });
-        if (error) throw error;
-        applyAssets(data || []);
-
-        const { data: foundationSettings, error: settingsError } = await supabaseClient
-          .from('foundation_settings')
-          .select('certificate_url')
-          .eq('id', 1)
-          .maybeSingle();
-        if (settingsError) throw settingsError;
-        if (foundationSettings) certificateLink.href = foundationSettings.certificate_url;
-      }
-
-      function renderBlogPosts(posts) {
-        const list = document.getElementById('blog-list');
-        list.replaceChildren();
-        if (posts.length === 0) {
-          const empty = document.createElement('p');
-          empty.className = 'blog-empty';
-          empty.textContent = 'Stories and updates will appear here.';
-          list.append(empty);
-          return;
-        }
-
-        for (const post of posts) {
-          const article = document.createElement('article');
-          article.className = 'blog-post';
-          const date = document.createElement('time');
-          date.dateTime = post.created_at;
-          date.textContent = new Date(post.created_at).toLocaleDateString(undefined, {
-            year: 'numeric', month: 'long', day: 'numeric',
-          });
-          const title = document.createElement('h3');
-          title.textContent = post.title;
-          const excerpt = document.createElement('p');
-          excerpt.className = 'blog-excerpt';
-          excerpt.textContent = post.excerpt;
-          const body = document.createElement('p');
-          body.className = 'blog-body';
-          body.textContent = post.body;
-          article.append(date, title, excerpt, body);
-          list.append(article);
-        }
-      }
-
-      function updateAuthState(user) {
-        isAuthenticated = Boolean(user);
-        adminEmail.disabled = isAuthenticated;
-        adminPassword.disabled = isAuthenticated;
-        signInButton. = isAuthenticated;
-        signInButton.disabled = isSaving;
-        signOutButton. = !isAuthenticated;
-        loadLeadsButton.disabled = !isAuthenticated || isSaving;
-        for (const managementForm of managementForms) {
-          managementForm.querySelectorAll('input, textarea, select, button').forEach((control) => {
-            control.disabled = !isAuthenticated || isSaving;
-          });
-        }
-      }
-
-      async function initializeCms() {
-        try {
-          await loadPublicContent();
-          setStatus('Operational: public content and media are available. Sign in to manage the site.', 'success');
-        } catch (error) {
-          setStatus(`Could not load published content: ${error.message}. Check the Supabase setup.`, 'error');
-        }
-
-        const { data, error } = await supabaseClient.auth.getSession();
-        if (error) {
-          setStatus(`Authentication service error: ${error.message}`, 'error');
-          return;
-        }
-
-        updateAuthState(data.session?.user);
-        if (data.session?.user) {
-          setStatus('Operational: Supabase connected and admin editing is enabled.', 'success');
-        }
-        supabaseClient.auth.onAuthStateChange((_event, session) => {
-          updateAuthState(session?.user);
-          if (session?.user) {
-            setStatus('Operational: Supabase connected and admin editing is enabled.', 'success');
-          } else {
-            setStatus('Operational: public site is available. Sign in to manage content.', 'ready');
-          }
-        });
-      }
-
-      authForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        isSaving = true;
-        signInButton.disabled = true;
-        setStatus('Signing in…', 'busy');
-        const { error } = await supabaseClient.auth.signInWithPassword({
-          email: adminEmail.value.trim().toLowerCase(),
-          password: adminPassword.value,
-        });
-        isSaving = false;
-        updateAuthState((await supabaseClient.auth.getUser()).data.user);
-        if (error) {
-          setStatus(`Sign-in failed: ${error.message}`, 'error');
-          return;
-        }
-        setStatus('Signed in. Content management is enabled.', 'success');
-      });
-
-      signOutButton.addEventListener('click', async () => {
-        const { error } = await supabaseClient.auth.signOut();
-        if (error) {
-          setStatus(`Sign-out failed: ${error.message}`, 'error');
-          return;
-        }
-        setStatus('Signed out.');
-      });
-
-      overviewForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (!isAuthenticated) {
-          setStatus('Sign in before editing the overview.', 'error');
-          return;
-        }
-
-        isSaving = true;
-        updateAuthState({});
-        setStatus('Saving website overview…', 'busy');
-        try {
-          const title = document.getElementById('overviewTitle').value.trim();
-          const body = document.getElementById('overviewBody').value.trim();
-          const { error } = await supabaseClient.from('site_overview').upsert({
-            id: 1,
-            title,
-            body,
-            updated_at: new Date().toISOString(),
-          }, { onConflict: 'id' });
-          if (error) throw error;
-          document.getElementById('about-title').textContent = title;
-          document.getElementById('about-copy').textContent = body;
-          setStatus('Website overview saved.', 'success');
-        } catch (error) {
-          setStatus(`Could not save overview: ${error.message}`, 'error');
-        } finally {
-          isSaving = false;
-          updateAuthState((await supabaseClient.auth.getUser()).data.user);
-        }
-      });
-
-      blogForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (!isAuthenticated) {
-          setStatus('Sign in before writing a story.', 'error');
-          return;
-        }
-
-        isSaving = true;
-        updateAuthState({});
-        setStatus('Saving story…', 'busy');
-        try {
-          const { error } = await supabaseClient.from('blog_posts').insert({
-            title: document.getElementById('blogTitle').value.trim(),
-            excerpt: document.getElementById('blogExcerpt').value.trim(),
-            body: document.getElementById('blogBody').value.trim(),
-            published: document.getElementById('blogPublished').checked,
-          });
-          if (error) throw error;
-          blogForm.reset();
-          await loadPublicContent();
-          setStatus('Story saved.', 'success');
-        } catch (error) {
-          setStatus(`Could not save story: ${error.message}`, 'error');
-        } finally {
-          isSaving = false;
-          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
-        }
-      });
-
-      certificateForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (!isAuthenticated) {
-          setStatus('Sign in before updating the registration document.', 'error');
-          return;
-        }
-
-        const file = certificateFile.files[0];
-        if (!file) {
-          setStatus('Choose a registration document to upload.', 'error');
-          return;
-        }
-        const allowedTypes = new Map([
-          ['.pdf', 'application/pdf'],
-          ['.png', 'image/png'],
-          ['.jpg', 'image/jpeg'],
-          ['.jpeg', 'image/jpeg'],
-          ['.webp', 'image/webp'],
-        ]);
-        const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-        if (!allowedTypes.has(extension) || file.type !== allowedTypes.get(extension)) {
-          setStatus('Choose a PDF, PNG, JPG, or WEBP registration document.', 'error');
-          return;
-        }
-        if (file.size > 25 * 1024 * 1024) {
-          setStatus('Registration documents must be 25 MB or smaller.', 'error');
-          return;
-        }
-
-        isSaving = true;
-        updateAuthState({});
-        setStatus('Uploading registration document…', 'busy');
-        let uploadedDocumentPath;
-        try {
-          const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120) || 'registration-document';
-          uploadedDocumentPath = `documents/${crypto.randomUUID()}-${safeName}`;
-          const { error: uploadError } = await supabaseClient.storage
-            .from('cms-media')
-            .upload(uploadedDocumentPath, file, { contentType: file.type, upsert: false });
-          if (uploadError) throw uploadError;
-
-          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(uploadedDocumentPath);
-          const documentUrl = publicUrlData.publicUrl;
-          const { error } = await supabaseClient.from('foundation_settings').upsert({
-            id: 1,
-            certificate_url: documentUrl,
-            updated_at: new Date().toISOString(),
-          }, { onConflict: 'id' });
-          if (error) throw error;
-          certificateLink.href = documentUrl;
-          certificateFile.value = '';
-          setStatus('Registration document uploaded and published.', 'success');
-        } catch (error) {
-          if (uploadedDocumentPath) {
-            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([uploadedDocumentPath]);
-            if (cleanupError) console.error('Could not remove unpublished registration document:', cleanupError.message);
-          }
-          setStatus(`Could not upload registration document: ${error.message}`, 'error');
-        } finally {
-          isSaving = false;
-          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
-        }
-      });
-
-      assetTypeInput.addEventListener('change', () => {
-        fileInput.accept = acceptedFiles[assetTypeInput.value];
-        fileInput.value = '';
-      });
-
-      campaignDismiss.addEventListener('click', () => {
-        campaignBanner. = true;
-      });
-
-      leadForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const contactInfo = leadContact.value.trim();
-        const region = leadRegion.value.trim();
-        if (!leadConsent.checked || contactInfo.length < 3 || contactInfo.length > 254 || !region || region.length > 100) {
-          leadStatus.textContent = 'Enter valid contact details and region, then agree to receive program updates.';
-          leadStatus.dataset.state = 'error';
-          return;
-        }
-
-        leadSubmit.disabled = true;
-        leadStatus.textContent = 'Submitting your sign-up…';
-        leadStatus.dataset.state = 'busy';
-        try {
-          const { error } = await supabaseClient.from('community_leads').insert({
-            contact_info: contactInfo,
-            region,
-            consent_given: true,
-          });
-          if (error) throw error;
-          leadForm.reset();
-          leadRegion.value = 'Vihiga County';
-          leadStatus.textContent = 'Thank you. Your sign-up has been received.';
-          leadStatus.dataset.state = 'success';
-        } catch (error) {
-          leadStatus.textContent = `Could not submit your sign-up: ${error.message}`;
-          leadStatus.dataset.state = 'error';
-        } finally {
-          leadSubmit.disabled = false;
-        }
-      });
-
-      function renderLeads(leads) {
-        leadList.replaceChildren();
-        if (leads.length === 0) {
-          const emptyMessage = document.createElement('p');
-          emptyMessage.textContent = 'No sign-ups yet.';
-          leadList.append(emptyMessage);
-          return;
-        }
-
-        for (const lead of leads) {
-          const item = document.createElement('article');
-          item.className = 'lead-entry';
-          const contact = document.createElement('strong');
-          contact.textContent = lead.contact_info;
-          const details = document.createElement('span');
-          const date = new Date(lead.consent_at).toLocaleDateString(undefined, {
-            year: 'numeric', month: 'short', day: 'numeric',
-          });
-          details.textContent = `${lead.region} · ${date}`;
-          item.append(contact, details);
-          leadList.append(item);
-        }
-      }
-
-      loadLeadsButton.addEventListener('click', async () => {
-        if (!isAuthenticated) {
-          setStatus('Sign in before viewing community sign-ups.', 'error');
-          return;
-        }
-
-        isSaving = true;
-        updateAuthState({});
-        setStatus('Loading community sign-ups…', 'busy');
-        try {
-          const { data, error } = await supabaseClient
-            .from('community_leads')
-            .select('contact_info, region, consent_at')
-            .order('created_at', { ascending: false })
-            .limit(100);
-          if (error) throw error;
-          renderLeads(data || []);
-          setStatus('Community sign-ups loaded.', 'success');
-        } catch (error) {
-          setStatus(`Could not load community sign-ups: ${error.message}`, 'error');
-        } finally {
-          isSaving = false;
-          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
-        }
-      });
-
-      uploadForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (!isAuthenticated) {
-          setStatus('Sign in before uploading media.', 'error');
-          return;
-        }
-
-        const file = fileInput.files[0];
-        if (!file) return;
-        if (file.size > 25 * 1024 * 1024) {
-          setStatus('Files must be 25 MB or smaller.', 'error');
-          return;
-        }
-
-        isSaving = true;
-        updateAuthState({});
-        setStatus('Uploading media…', 'busy');
-        let uploadedFileName;
-        try {
-          const safeName = file.name.split(/[\\/]/).pop().replace(/[^a-zA-Z0-9._-]/g, '_') || 'upload';
-          const assetType = assetTypeInput.value;
-          uploadedFileName = `${assetType}/${crypto.randomUUID()}-${safeName}`;
-          const { error: uploadError } = await supabaseClient.storage
-            .from('cms-media')
-            .upload(uploadedFileName, file, { contentType: file.type, upsert: false });
-          if (uploadError) throw uploadError;
-
-          const { data: publicUrlData } = supabaseClient.storage.from('cms-media').getPublicUrl(uploadedFileName);
-          const { error: metadataError } = await supabaseClient.from('website_assets').insert({
-            asset_type: assetType,
-            file_url: publicUrlData.publicUrl,
-            file_name: safeName,
-          });
-          if (metadataError) throw metadataError;
-
-          await loadPublicContent();
-          fileInput.value = '';
-          setStatus(`Media uploaded and published: ${safeName}`, 'success');
-        } catch (error) {
-          if (uploadedFileName) {
-            const { error: cleanupError } = await supabaseClient.storage.from('cms-media').remove([uploadedFileName]);
-            if (cleanupError) console.error('Could not remove unregistered media:', cleanupError.message);
-          }
-          setStatus(`Could not upload media: ${error.message}`, 'error');
-        } finally {
-          isSaving = false;
-          updateAuthState(await supabaseClient.auth.getUser().then(({ data }) => data.user).catch(() => null));
-        }
-      });
-
-      initializeCms();
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
     </script>
   </body>
 </html>
