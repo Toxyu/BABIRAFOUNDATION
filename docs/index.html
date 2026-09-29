@@ -2,210 +2,508 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Babira Ndeda Foundation | Vihiga County, Kenya</title>
-<meta name="description" content="Babira Ndeda Foundation - Empowering youth and communities in Vihiga County, Kenya through education, health, and skills."/>
+<title>Babira Ndeda Foundation | Vihiga County, Kenya - Organizational Profile</title>
+<meta name="description" content="Babira Ndeda Foundation - Empowering Youth, Advancing Education, Promoting Community Health - Vihiga County, Kenya"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--base:#0f221a;--surface:#16382c;--surface2:#1c4a38;--card:rgba(22,56,44,.72);--border:rgba(74,222,128,.16);--border2:rgba(74,222,128,.28);--green:#22c55e;--green2:#16a34a;--mint:#86efac;--gold:#fbbf24;--text:#f0fdf4;--muted:#a3d9b1;--muted2:#86efacbb}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',system-ui,sans-serif}
-html{scroll-behavior:smooth}
-body{background:var(--base);color:var(--text);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;position:relative}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px at 12% 18%,rgba(34,197,94,.11),transparent 55%),radial-gradient(700px at 88% 82%,rgba(251,191,36,.06),transparent 60%)}
+:root{--base:#0f221a;--surface:#16382c;--surface2:#1c4a38;--card:rgba(22,56,44,.74);--border:rgba(74,222,128,.16);--border2:rgba(74,222,128,.28);--green:#22c55e;--green2:#16a34a;--mint:#86efac;--gold:#fbbf24;--text:#f0fdf4;--muted:#a3d9b1;--muted2:#86efacbb}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',system-ui,sans-serif} html{scroll-behavior:smooth}
+body{background:var(--base);color:var(--text);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px at 12% 15%,rgba(34,197,94,.1),transparent 55%),radial-gradient(700px at 88% 80%,rgba(251,191,36,.05),transparent 60%)}
 .orb{position:fixed;border-radius:50%;filter:blur(50px);pointer-events:none;z-index:0;opacity:.5;animation:float 14s ease-in-out infinite}
-.orb1{width:380px;height:380px;background:radial-gradient(circle,rgba(34,197,94,.18),rgba(22,56,44,.1));top:-80px;left:-100px}
-.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(251,191,36,.08),rgba(34,197,94,.06));bottom:-120px;right:-120px;animation-delay:-7s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
-.ticker{position:relative;z-index:2;background:#091712;border-bottom:1px solid var(--border);height:38px;display:flex;align-items:center;overflow:hidden}
-.marquee{display:flex;gap:3rem;animation:marquee 40s linear infinite;white-space:nowrap}
+.orb1{width:360px;height:360px;background:radial-gradient(circle,rgba(34,197,94,.16),transparent);top:-60px;left:-80px}
+.orb2{width:480px;height:480px;background:radial-gradient(circle,rgba(34,197,94,.07),transparent);bottom:-100px;right:-100px;animation-delay:-7s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+.ticker{position:relative;z-index:3;background:#091712;border-bottom:1px solid var(--border);height:36px;display:flex;align-items:center;overflow:hidden}
+.marquee{display:flex;gap:3rem;animation:marquee 45s linear infinite;white-space:nowrap}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ticker-item{font-size:.74rem;font-weight:600;color:var(--muted);display:flex;gap:6px;align-items:center}
-.live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green);animation:pulse 1.5s infinite;display:inline-block}
+.ticker-item{font-size:.72rem;font-weight:600;color:var(--muted);display:flex;gap:6px;align-items:center}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green);animation:pulse 1.5s infinite;display:inline-block}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
-header{position:sticky;top:0;z-index:20;background:rgba(15,34,26,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:.85rem 1.4rem;display:flex;justify-content:space-between;align-items:center}
+/* HEADER with logo space */
+header{position:sticky;top:0;z-index:30;background:rgba(15,34,26,.88);backdrop-filter:blur(20px) saturate(1.2);border-bottom:1px solid var(--border);padding:.75rem 1.2rem;display:flex;justify-content:space-between;align-items:center;transition:all.35s ease}
+header.shrink{padding:.5rem 1.2rem;background:rgba(15,34,26,.96);box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .logo-area{display:flex;gap:12px;align-items:center}
-.logo-img{width:46px;height:46px;border-radius:12px;background:#fff;object-fit:contain;padding:4px;border:1px solid var(--border2);box-shadow:0 4px 14px rgba(0,0,0,.2)}
-.logo-fallback{width:46px;height:46px;background:linear-gradient(135deg,var(--green),#15803d);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff}
-h1{font-size:1.05rem;font-weight:800;line-height:1.1}.sub{font-size:.68rem;color:var(--gold);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-top:2px}
-nav{display:flex;gap:5px;background:rgba(22,56,44,.8);padding:5px;border-radius:12px;border:1px solid var(--border)}
-nav button{background:transparent;border:none;color:var(--muted2);padding:7px 13px;border-radius:9px;font-size:.76rem;font-weight:600;cursor:pointer;transition:.2s}
-nav button.active,nav button:hover{background:var(--green);color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(34,197,94,.3)}
-.admin{border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.12);color:var(--gold);padding:8px 14px;border-radius:10px;font-weight:700;font-size:.76rem;cursor:pointer}
-.admin:hover{background:var(--gold);color:#0f221a}
-main{max-width:1160px;margin:0 auto;padding:0 1.2rem;width:100%;flex:1;position:relative;z-index:1}
-.hero-video-wrap{position:relative;height:68vh;min-height:440px;border-radius:24px;overflow:hidden;margin:1.2rem 0;border:1px solid var(--border)}
+.logo-img{width:48px;height:48px;border-radius:12px;background:#fff;object-fit:contain;padding:4px;border:1px solid var(--border2)}
+.logo-fallback{width:48px;height:48px;background:linear-gradient(135deg,var(--green),#15803d);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff}
+h1{font-size:1.02rem;font-weight:800;line-height:1.1}.sub{font-size:.66rem;color:var(--gold);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-top:2px}
+.admin{border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.12);color:var(--gold);padding:8px 14px;border-radius:10px;font-weight:700;font-size:.74rem;cursor:pointer}
+/* TANGLE TABS - genius scroll animation */
+.tabs-wrap{position:sticky;top:64px;z-index:25;padding:.7rem 0.5rem;background:linear-gradient(180deg,var(--base) 60%,transparent);backdrop-filter:blur(8px);transition:all.35s ease}
+.tabs-wrap.scrolled{top:52px;background:rgba(15,34,26,.92);padding:.5rem 1.2rem;margin:0 -1.2rem;box-shadow:0 6px 20px rgba(0,0,0,.2);border-bottom:1px solid var(--border)}
+.tabs{display:flex;gap:6px;overflow:auto;scrollbar-width:none;padding:4px 1.2rem;scroll-behavior:smooth}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;background:rgba(22,56,44,.75);border:1px solid var(--border);color:var(--muted2);padding:9px 16px;border-radius:12px;font-size:.76rem;font-weight:600;cursor:pointer;transition:all.32s cubic-bezier(.16,1,.3,1);white-space:nowrap;position:relative;overflow:hidden}
+.tab-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--green),var(--green2));opacity:0;transition:.32s;z-index:-1}
+.tab-btn.active{color:#fff;border-color:var(--green);transform:translateY(-2px) scale(1.03);box-shadow:0 6px 16px rgba(34,197,94,.28)}
+.tab-btn.active::before{opacity:1}
+.tab-btn:hover{transform:translateY(-1px);border-color:var(--border2)}
+.tab-btn.tangle{animation:tangle.5s cubic-bezier(.16,1,.3,1)}
+@keyframes tangle{0%{transform:translateY(0) rotate(0)}25%{transform:translateY(-3px) rotate(1deg)}50%{transform:translateY(2px) rotate(-1deg)}100%{transform:translateY(-2px) rotate(0) scale(1.03)}}
+main{max-width:1180px;margin:0 auto;padding:0 1.2rem;width:100%;flex:1;position:relative;z-index:1}
+.hero-video-wrap{position:relative;height:62vh;min-height:420px;border-radius:22px;overflow:hidden;margin:1rem 0;border:1px solid var(--border)}
 .hero-video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,34,26,.92) 0%,rgba(15,34,26,.65) 55%,rgba(15,34,26,.25) 100%),linear-gradient(180deg,transparent 60%,rgba(15,34,26,.85) 100%)}
-.hero-content{position:relative;z-index:2;padding:2.2rem;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:640px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.8rem;margin-bottom:1.2rem;backdrop-filter:blur(18px);position:relative;overflow:hidden;animation:rise.6s both;transition:.28s}
-.card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,34,26,.92) 0%,rgba(15,34,26,.6) 55%,rgba(15,34,26,.2) 100%),linear-gradient(180deg,transparent 60%,rgba(15,34,26,.9) 100%)}
+.hero-content{position:relative;z-index:2;padding:2rem;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:680px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.7rem;margin-bottom:1.1rem;backdrop-filter:blur(18px);position:relative;overflow:hidden;transition:.28s}
 .card::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:var(--green)}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:1.2rem}
+.card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.page{display:none;animation:pageIn.5s cubic-bezier(.16,1,.3,1) both}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.page-inner{animation:contentSlide.55s cubic-bezier(.16,1,.3,1) both}
+@keyframes contentSlide{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:1.1rem}
 .stat{background:linear-gradient(145deg,rgba(22,56,44,.9),rgba(15,34,26,.7));border:1px solid var(--border);border-radius:16px;padding:1.1rem}
-.stat-title{font-size:.66rem;color:var(--muted2);text-transform:uppercase;font-weight:700;letter-spacing:.7px;margin-bottom:4px}
-.stat-value{font-size:1.35rem;font-weight:800}
+.stat-title{font-size:.65rem;color:var(--muted2);text-transform:uppercase;font-weight:700;letter-spacing:.7px;margin-bottom:4px}
+.stat-value{font-size:1.3rem;font-weight:800}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-h2{font-size:1.8rem;font-weight:800;line-height:1.15;margin-bottom:.6rem} h3{font-size:1.15rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
-p{font-size:.9rem;line-height:1.6;color:#dcfce7;opacity:.9;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.7rem}
-.gallery-filters{display:flex;gap:6px;flex-wrap:wrap;margin:1rem 0}
-.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(22,56,44,.6);color:var(--muted);font-size:.75rem;font-weight:600;cursor:pointer;transition:.2s}
-.filter-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+h2{font-size:1.7rem;font-weight:800;line-height:1.15;margin-bottom:.6rem} h3{font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
+h4{font-size:.95rem;font-weight:700;color:var(--mint);margin:1rem 0.4rem}
+p{font-size:.88rem;line-height:1.65;color:#dcfce7;opacity:.9;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:.7rem}
+ul{margin:.6rem 0.9rem 1.1rem} li{font-size:.86rem;line-height:1.6;color:#dcfce7;margin-bottom:.4rem;font-family:'Plus Jakarta Sans',sans-serif}
+.badge{font-size:.62rem;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.28);color:var(--mint);padding:3px 9px;border-radius:20px;font-weight:700}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
-.gallery-item{background:rgba(9,23,18,.75);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:.25s;animation:rise.5s both}
-.gallery-item:hover{transform:translateY(-4px);border-color:var(--border2)}
+.gallery-item{background:rgba(9,23,18,.75);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:.25s}
+.gallery-item:hover{transform:translateY(-3px);border-color:var(--border2)}
 .gallery-item img,.gallery-item video{width:100%;height:180px;object-fit:cover;display:block}
 .gallery-info{padding:.9rem}
-.badge{font-size:.62rem;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.28);color:var(--mint);padding:3px 8px;border-radius:20px;font-weight:700}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin:1rem 0}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(22,56,44,.6);color:var(--muted);font-size:.73rem;font-weight:600;cursor:pointer}
+.filter-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
 .ad-slot{background:rgba(9,23,18,.6);border:1px dashed rgba(251,191,36,.25);border-radius:12px;padding:10px;margin:1rem 0;text-align:center;font-size:.7rem;color:var(--muted)}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-.tool{background:linear-gradient(145deg,rgba(22,56,44,.85),rgba(15,34,26,.7));border:1px solid var(--border);border-radius:16px;padding:1.2rem;transition:.25s}
-.tool:hover{border-color:var(--border2);transform:translateY(-2px)}
+.tool{background:linear-gradient(145deg,rgba(22,56,44,.85),rgba(15,34,26,.7));border:1px solid var(--border);border-radius:16px;padding:1.1rem}
 .tool input,.tool select{width:100%;padding:9px;margin:6px 0;background:#091712;border:1px solid var(--border);border-radius:8px;color:#fff}
-footer{text-align:center;padding:1.3rem;background:linear-gradient(180deg,#091712,#050e0a);border-top:1px solid var(--border);font-size:.72rem;color:var(--muted)}
+footer{text-align:center;padding:1.2rem;background:linear-gradient(180deg,#091712,#050e0a);border-top:1px solid var(--border);font-size:.72rem;color:var(--muted)}
 .hidden{display:none!important}
 .modal{position:fixed;inset:0;background:rgba(5,18,12,.85);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem;overflow:auto}
-.box{background:linear-gradient(145deg,var(--surface),var(--base));border:1px solid var(--border2);border-radius:20px;padding:1.6rem;width:100%;max-width:520px;box-shadow:0 24px 60px rgba(0,0,0,.55);max-height:90vh;overflow:auto}
+.box{background:linear-gradient(145deg,var(--surface),var(--base));border:1px solid var(--border2);border-radius:20px;padding:1.5rem;width:100%;max-width:540px;max-height:90vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.55)}
 .box input,.box textarea,.box select{width:100%;padding:11px;margin:6px 0;background:rgba(9,23,18,.9);border:1px solid var(--border);border-radius:10px;color:#fff;outline:none;font-size:.85rem}
-.box input:focus,.box textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.15)}
 .box button{width:100%;padding:11px;background:linear-gradient(135deg,var(--green),var(--green2));border:none;border-radius:10px;font-weight:800;color:#fff;cursor:pointer;margin-top:8px}
-.tab{animation:fade.35s ease}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:800px){.grid,.stats,.tools-grid{grid-template-columns:1fr} nav{display:none}.hero-video-wrap{height:56vh} h2{font-size:1.45rem}}
+@media(max-width:850px){.grid,.stats,.tools-grid{grid-template-columns:1fr}.tabs{padding:4px.8rem} h2{font-size:1.4rem}.hero-video-wrap{height:52vh}}
 </style>
 </head>
 <body>
 <div class="orb orb1"></div><div class="orb orb2"></div>
 
 <div class="ticker"><div class="marquee">
-<div class="ticker-item"><span class="live-dot"></span> <b>VIHIGA COUNTY</b> Kenya - Community Active</div>
+<div class="ticker-item"><span class="live-dot"></span> <b>VIHIGA COUNTY KENYA</b> - Community Programs Active</div>
 <div class="ticker-item">Reach: <b>1,420+ Youth and Households Empowered</b></div>
-<div class="ticker-item">Support: <b>Education Bursaries and Youth Skills Open</b></div>
+<div class="ticker-item">Focus: <b>Youth Empowerment Education Community Health</b></div>
 <div class="ticker-item">M-PESA Paybill 522522 Account BABIRA</div>
 <div class="ticker-item" id="sys">Connected to Supabase Live</div>
-<div class="ticker-item"><span class="live-dot"></span> <b>VIHIGA COUNTY</b> Kenya - Community Active</div>
-<div class="ticker-item">Reach: <b>1,420+ Youth and Households Empowered</b></div>
-<div class="ticker-item">Support: <b>Education Bursaries and Youth Skills Open</b></div>
-<div class="ticker-item">M-PESA Paybill 522522 Account BABIRA</div>
-<div class="ticker-item">Connected to Supabase Live</div>
+<div class="ticker-item"><span class="live-dot"></span> <b>VIHIGA COUNTY KENYA</b></div>
+<div class="ticker-item">Reach: <b>1,420+ Youth and Households</b></div>
+<div class="ticker-item">Focus: <b>Youth Education Health</b></div>
+<div class="ticker-item">M-PESA 522522 BABIRA</div>
+<div class="ticker-item">Connected Live</div>
 </div></div>
 
-<header>
+<header id="mainHeader">
 <div class="logo-area">
-<img id="siteLogo" class="logo-img" src="logo.jpg" alt="BNF Logo" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex'"/>
+<img id="siteLogo" class="logo-img" src="logo.jpg" alt="Babira Ndeda Foundation Logo" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex'"/>
 <div id="logoFallback" class="logo-fallback" style="display:none">BNF</div>
 <div><h1>Babira Ndeda Foundation</h1><p class="sub">Vihiga County Kenya - Growing Together</p></div>
 </div>
-<nav>
-<button onclick="switchTab('about')" id="nav-about" class="active">About</button>
-<button onclick="switchTab('gallery')" id="nav-gallery">Gallery</button>
-<button onclick="switchTab('programmes')" id="nav-programmes">Programmes</button>
-<button onclick="switchTab('news')" id="nav-news">News</button>
-<button onclick="switchTab('tools')" id="nav-tools">Smart Tools</button>
-<button onclick="switchTab('contact')" id="nav-contact">Contact</button>
-</nav>
-<button class="admin" onclick="openCMS()">CMS Portal</button>
+<button class="admin" onclick="document.getElementById('cmsModal').classList.remove('hidden')">CMS Portal</button>
 </header>
 
+<div class="tabs-wrap" id="tabsWrap">
+<div class="tabs" id="tabsBar">
+<button class="tab-btn active" onclick="openPage('about', this)" data-page="about">About Us</button>
+<button class="tab-btn" onclick="openPage('objectives', this)" data-page="objectives">Objectives and Values</button>
+<button class="tab-btn" onclick="openPage('youth', this)" data-page="youth">Youth Empowerment</button>
+<button class="tab-btn" onclick="openPage('education', this)" data-page="education">Education Programme</button>
+<button class="tab-btn" onclick="openPage('health', this)" data-page="health">Community Health</button>
+<button class="tab-btn" onclick="openPage('geo', this)" data-page="geo">Geographical Focus</button>
+<button class="tab-btn" onclick="openPage('monitoring', this)" data-page="monitoring">Monitoring and Funding</button>
+<button class="tab-btn" onclick="openPage('partnership', this)" data-page="partnership">Partnership</button>
+<button class="tab-btn" onclick="openPage('gallery', this)" data-page="gallery">Gallery</button>
+<button class="tab-btn" onclick="openPage('tools', this)" data-page="tools">Smart Tools</button>
+<button class="tab-btn" onclick="openPage('contact', this)" data-page="contact">Contact</button>
+</div>
+</div>
+
 <main>
-<!-- HERO WITH BACKGROUND VIDEO LOOP -->
-<div class="hero-video-wrap" id="heroWrap">
+<!-- HERO with background video loop 24/7 -->
+<div class="hero-video-wrap">
 <video id="bgVideo" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=70">
 <source id="bgVideoSrc" src="https://videos.pexels.com/video-files/18069234/18069234-uhd_1440_1440_24fps.mp4" type="video/mp4">
 </video>
 <div class="hero-overlay"></div>
 <div class="hero-content">
-<span style="background:rgba(34,197,94,.15);color:var(--green);padding:6px 14px;border-radius:20px;font-size:.68rem;font-weight:800;border:1px solid rgba(34,197,94,.3)">REGISTERED COMMUNITY ORGANIZATION VIHIGA COUNTY</span>
-<h2 style="margin-top:.8rem">Empowering Youth and <span style="color:var(--mint)">Vulnerable Communities</span></h2>
-<p style="color:#d1fae5;max-width:560px">Babira Ndeda Foundation uplifts lives across Vihiga County through grassroots educational support, youth digital skills, health advocacy, and economic empowerment.</p>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem"><span class="badge">5 Wards Active</span><span class="badge" style="color:var(--gold);border-color:rgba(251,191,36,.3)">1,420+ Trained</span><span class="badge">Supabase Live</span></div>
-<button onclick="switchTab('gallery')" style="margin-top:1rem;padding:10px 18px;background:var(--green);border:none;border-radius:10px;font-weight:800;color:#fff;cursor:pointer">Explore Gallery</button>
+<span style="background:rgba(34,197,94,.15);color:var(--green);padding:6px 12px;border-radius:20px;font-size:.66rem;font-weight:800;border:1px solid rgba(34,197,94,.3)">BABIRA NDEDA FOUNDATION - ORGANIZATIONAL PROFILE</span>
+<h2 style="margin-top:.8rem">Empowering Youth<br/><span style="color:var(--mint)">Advancing Education<br/>Promoting Community Health</span></h2>
+<p style="color:#d1fae5;max-width:620px">Location: Vihiga County, Kenya. Target Area: Vihiga County and surrounding communities. Community-focused non-profit organization.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem"><span class="badge">5 Wards Active</span><span class="badge" style="color:var(--gold);border-color:rgba(251,191,36,.3)">1,420+ Youth</span><span class="badge">Supabase Live</span></div>
 </div>
 </div>
 
-<!-- AD SLOT TOP -->
-<div class="ad-slot" id="adTop">Advertisement Space - Managed from CMS Portal - Google AdSense / Meta</div>
+<div class="ad-slot" id="adTop">Advertisement Space - Managed from CMS Portal - Google AdSense and Meta Pixel</div>
 
-<div id="tab-about" class="tab">
+<!-- PAGE 1 ABOUT -->
+<div id="page-about" class="page active"><div class="page-inner">
 <div class="stats">
-<div class="stat"><div class="stat-title">Active Wards</div><div class="stat-value"><span id="cWards">5</span> Sub-Counties</div><div style="font-size:.72rem;color:var(--muted)">Luanda, Emuhaya, Hamisi, Vihiga, Sabatia</div></div>
-<div class="stat"><div class="stat-title">Beneficiaries</div><div class="stat-value" style="color:var(--green)"><span id="cYouth">1,420+</span> Youth</div><div style="font-size:.72rem;color:var(--muted)">Digital, vocational, bursaries</div></div>
-<div class="stat"><div class="stat-title">Status</div><div class="stat-value"><span class="live-dot"></span> Fully Active</div><div style="font-size:.72rem;color:var(--muted)">100% Community Owned Since 2024</div></div>
+<div class="stat"><div class="stat-title">Target Area</div><div class="stat-value">Vihiga County</div><div style="font-size:.72rem;color:var(--muted)">Western Kenya and surrounding communities</div></div>
+<div class="stat"><div class="stat-title">Beneficiaries</div><div class="stat-value" style="color:var(--green)">1,420+ Youth</div><div style="font-size:.72rem;color:var(--muted)">Young people and vulnerable households</div></div>
+<div class="stat"><div class="stat-title">Status</div><div class="stat-value"><span class="live-dot"></span> Non-profit Active</div><div style="font-size:.72rem;color:var(--muted)">Community-focused organization</div></div>
 </div>
-<div class="grid">
-<div class="card"><h3>Vision</h3><p>A healthy, well-educated, and economically resilient community where young people in Vihiga County are equipped to realize their highest potential.</p></div>
-<div class="card"><h3>Mission</h3><p>To foster grassroots transformation through structured mentorship, digital literacy training, educational bursaries, and collaborative community health outreach.</p></div>
+<div class="card"><h2>Page 1 - About Babira Foundation</h2>
+<h4>1.1 Introduction</h4>
+<p>Babira Foundation is a community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya.</p>
+<p>The Foundation focuses on three interconnected areas:</p>
+<ul>
+<li>Youth empowerment and economic opportunities</li>
+<li>Education and skills development</li>
+<li>Community health and health awareness</li>
+</ul>
+<p>Babira Foundation recognizes that young people are an important part of the future of Vihiga County. However, many young people face challenges including limited access to employment opportunities, inadequate skills, financial constraints, and limited access to mentorship and career guidance.</p>
+<p>At the same time, barriers to education and health information can affect the ability of individuals and families to improve their livelihoods and quality of life.</p>
+<p>The Foundation therefore seeks to work with communities, schools, government institutions, development partners, private organizations, donors and other stakeholders to develop practical and sustainable programmes that respond to local needs.</p>
+<p>As a developing organization, Babira Foundation aims to build its programmes through strong community participation, transparency, accountability and partnerships.</p>
+<h4>1.3 Our Vision</h4>
+<p><b style="color:#fff">A healthy, educated and economically empowered community where young people have the opportunity to reach their full potential.</b></p>
+<h4>1.4 Our Mission</h4>
+<p><b style="color:#fff">To empower young people and vulnerable communities in Vihiga County through education, skills development, economic opportunities, mentorship and improved access to health information and community-based support.</b></p>
+<h4>1.5 Our Core Purpose</h4>
+<p>Babira Foundation exists to help communities identify challenges, develop practical solutions and create opportunities that enable individuals particularly young people to become more self-reliant and contribute positively to society.</p>
 </div>
-</div>
+<div class="card"><h3>Live Community Feed</h3><div id="postsAbout"><p style="font-size:.85rem">Loading stories...</p></div></div>
+</div></div>
 
-<div id="tab-gallery" class="tab hidden">
-<div class="card"><h2>Gallery - Photos, Videos, Stories</h2><p>Blogs with heading, photo, and story. Videos with title and description. Managed from CMS Portal.</p>
-<div class="gallery-filters">
+<!-- PAGE 2 OBJECTIVES -->
+<div id="page-objectives" class="page"><div class="page-inner">
+<div class="card"><h2>Page 2 - Our Objectives and Core Values</h2>
+<h4>2.1 Main Objectives</h4>
+<p>Babira Foundation seeks to:</p>
+<ul>
+<li>Empower young people with practical, entrepreneurial, digital and vocational skills.</li>
+<li>Promote access to education and learning opportunities.</li>
+<li>Support vulnerable learners and communities facing barriers to education.</li>
+<li>Promote career guidance, mentorship and personal development among young people.</li>
+<li>Encourage entrepreneurship and income-generating activities.</li>
+<li>Promote financial literacy among youth and community members.</li>
+<li>Create awareness about preventive healthcare and healthy lifestyles.</li>
+<li>Support community health education and appropriate referrals.</li>
+<li>Build partnerships that create opportunities for young people and vulnerable communities.</li>
+<li>Encourage community participation in identifying and addressing local challenges.</li>
+<li>Promote sustainable development and self-reliance.</li>
+<li>Advocate for inclusive opportunities for young people, women and other vulnerable members of society.</li>
+</ul>
+<h4>2.2 Our Core Values</h4>
+<p><b style="color:#fff">Integrity</b> - We conduct our work honestly, responsibly and transparently.</p>
+<p><b style="color:#fff">Accountability</b> - We take responsibility for the resources entrusted to us and the results of our programmes.</p>
+<p><b style="color:#fff">Empowerment</b> - We believe communities should be equipped with knowledge, skills and opportunities that enable them to improve their own lives.</p>
+<p><b style="color:#fff">Inclusion</b> - We seek to ensure that programmes are accessible to people regardless of their social or economic circumstances.</p>
+<p><b style="color:#fff">Respect</b> - We respect the dignity, rights, opinions and experiences of the communities we serve.</p>
+<p><b style="color:#fff">Partnership</b> - We believe sustainable community development requires collaboration between communities, government, donors, private organizations and other stakeholders.</p>
+<p><b style="color:#fff">Sustainability</b> - We seek solutions that can continue creating benefits beyond the initial project funding period.</p>
+<div id="campsObj"></div>
+</div>
+</div></div>
+
+<!-- PAGE 3 YOUTH -->
+<div id="page-youth" class="page"><div class="page-inner">
+<div class="card"><h2>Page 3 - Youth Empowerment Programme</h2>
+<p>Youth empowerment is one of Babira Foundation major areas of focus.</p>
+<p>The programme will seek to equip young people with practical skills and opportunities that can improve their ability to pursue employment, entrepreneurship and other productive activities.</p>
+<h4>Proposed Activities</h4>
+<ul>
+<li>Entrepreneurship and business management training</li>
+<li>Digital skills training</li>
+<li>Financial literacy</li>
+<li>Career guidance</li>
+<li>Mentorship programmes</li>
+<li>Leadership development</li>
+<li>Life-skills training</li>
+<li>Vocational and technical skills linkages</li>
+<li>Employment-readiness training</li>
+<li>Business idea development</li>
+<li>Networking and partnership opportunities</li>
+<li>Linking young people to available opportunities and services</li>
+</ul>
+<h4>Expected Outcomes</h4>
+<ul>
+<li>Increased employability among participating youth</li>
+<li>Improved entrepreneurship knowledge</li>
+<li>Better financial management skills</li>
+<li>Increased access to mentorship</li>
+<li>Greater awareness of employment and business opportunities</li>
+<li>Increased confidence and leadership capacity among young people</li>
+</ul>
+</div>
+</div></div>
+
+<!-- PAGE 3B EDUCATION -->
+<div id="page-education" class="page"><div class="page-inner">
+<div class="card"><h2>Education Programme</h2>
+<p>Education is a key pathway to personal and community development.</p>
+<p>Babira Foundation seeks to support education by addressing some of the barriers that prevent children and young people from accessing or benefiting fully from learning opportunities.</p>
+<h4>Proposed Activities</h4>
+<ul>
+<li>Education support initiatives</li>
+<li>Provision of learning materials where resources permit</li>
+<li>Mentorship for students</li>
+<li>Career guidance</li>
+<li>Academic motivation programmes</li>
+<li>School and community outreach</li>
+<li>Digital literacy initiatives</li>
+<li>Support for vulnerable learners</li>
+<li>Educational awareness campaigns</li>
+<li>Partnerships with schools and education stakeholders</li>
+</ul>
+<h4>Expected Outcomes</h4>
+<ul>
+<li>Improved access to educational support</li>
+<li>Increased motivation among learners</li>
+<li>Greater awareness of career opportunities</li>
+<li>Improved digital and life skills</li>
+<li>Increased community participation in education</li>
+</ul>
+</div>
+</div></div>
+
+<!-- PAGE 4 HEALTH -->
+<div id="page-health" class="page"><div class="page-inner">
+<div class="card"><h2>Page 4 - Community Health and Development</h2>
+<h4>4.1 Community Health Programme</h4>
+<p>Babira Foundation recognizes that healthy communities are essential for education, productivity and sustainable development.</p>
+<p>The Foundation will promote health awareness and community-level initiatives while working with qualified health professionals and relevant institutions where specialized medical services are required.</p>
+<ul>
+<li>Community health awareness campaigns</li>
+<li>Health education sessions</li>
+<li>Preventive health awareness</li>
+<li>Hygiene and sanitation education</li>
+<li>Nutrition awareness</li>
+<li>Youth health education</li>
+<li>Community outreach activities</li>
+<li>Health screening partnerships where appropriate</li>
+<li>Referral and linkage to appropriate health facilities</li>
+<li>Awareness on available health services</li>
+</ul>
+<p>The Foundation will work with qualified professionals and relevant health institutions when implementing activities requiring medical expertise.</p>
+<h4>4.2 Integrated Community Development</h4>
+<p>Babira Foundation recognizes that youth empowerment, education and health are interconnected. For example, a young person who has access to education and skills may have better opportunities to earn a livelihood. Economic empowerment can in turn improve a household ability to support education and access appropriate healthcare.</p>
+<p>The Foundation therefore seeks to implement integrated community programmes rather than treating development challenges in isolation.</p>
+<h4>4.3 Target Beneficiaries</h4>
+<ul>
+<li>Young people</li>
+<li>Students and learners</li>
+<li>Unemployed and underemployed youth</li>
+<li>Young entrepreneurs</li>
+<li>Vulnerable households</li>
+<li>Women and girls</li>
+<li>Children facing barriers to education</li>
+<li>Community members requiring health information</li>
+<li>Other vulnerable groups identified through community needs assessments</li>
+</ul>
+<p>Specific beneficiary groups will be determined according to the objectives and requirements of each project.</p>
+</div>
+</div></div>
+
+<!-- PAGE 5 GEO -->
+<div id="page-geo" class="page"><div class="page-inner">
+<div class="card"><h2>Page 5 - Geographical Focus and Implementation Approach</h2>
+<h4>5.1 Geographical Focus</h4>
+<p>Babira Foundation is focused on Vihiga County, Western Kenya.</p>
+<p>The Foundation intends to work with communities across the county according to identified needs, available resources and programme priorities.</p>
+<p>As the organization grows, programmes may be expanded through partnerships to other areas where appropriate.</p>
+<h4>5.2 Community-Based Approach</h4>
+<p>Babira Foundation believes that successful development programmes should involve the people they are intended to serve. The Foundation will therefore seek to:</p>
+<ul>
+<li>Identify community needs.</li>
+<li>Consult relevant community stakeholders.</li>
+<li>Develop practical interventions.</li>
+<li>Implement activities with community participation.</li>
+<li>Monitor progress.</li>
+<li>Collect feedback from beneficiaries.</li>
+<li>Document lessons and results.</li>
+<li>Improve future programmes based on evidence.</li>
+</ul>
+<h4>5.3 Partnerships</h4>
+<p>Babira Foundation seeks to establish partnerships with:</p>
+<ul>
+<li>County and national government institutions</li>
+<li>Schools and educational institutions</li>
+<li>Health facilities and qualified health professionals</li>
+<li>Community-based organizations</li>
+<li>Faith-based organizations</li>
+<li>Youth groups</li>
+<li>Women groups</li>
+<li>Private-sector organizations</li>
+<li>Local businesses</li>
+<li>Development organizations</li>
+<li>National and international NGOs</li>
+<li>Foundations and charitable organizations</li>
+<li>Individual donors</li>
+<li>Training institutions</li>
+</ul>
+<p>Partnerships will enable the Foundation to combine resources, expertise, networks and opportunities for greater community impact.</p>
+<h4>5.4 Sustainability</h4>
+<p>Babira Foundation will seek to develop programmes that can continue generating benefits after external funding ends. Sustainability approaches may include:</p>
+<ul>
+<li>Skills transfer</li>
+<li>Community ownership</li>
+<li>Youth entrepreneurship</li>
+<li>Local partnerships</li>
+<li>Volunteer engagement</li>
+<li>Capacity building</li>
+<li>Resource mobilization</li>
+<li>Linking beneficiaries with existing opportunities</li>
+<li>Development of community-led initiatives</li>
+</ul>
+</div>
+</div></div>
+
+<!-- PAGE 6 MONITORING -->
+<div id="page-monitoring" class="page"><div class="page-inner">
+<div class="card"><h2>Page 6 - Monitoring, Accountability and Funding</h2>
+<h4>6.1 Monitoring and Evaluation</h4>
+<p>Babira Foundation will establish appropriate monitoring and evaluation systems for its programmes. Depending on the project, indicators may include:</p>
+<ul>
+<li>Number of youth trained</li>
+<li>Number of learners supported</li>
+<li>Number of mentorship sessions conducted</li>
+<li>Number of community members reached</li>
+<li>Number of entrepreneurship activities supported</li>
+<li>Number of health-awareness sessions conducted</li>
+<li>Number of beneficiaries referred to appropriate services</li>
+<li>Percentage of participants completing training</li>
+<li>Participant feedback and satisfaction</li>
+<li>Changes in knowledge and skills following programme activities</li>
+</ul>
+<p>Project-specific indicators will be established before implementation.</p>
+<h4>6.2 Accountability and Transparency</h4>
+<ul>
+<li>Proper financial records</li>
+<li>Appropriate authorization procedures</li>
+<li>Project budgets</li>
+<li>Supporting documentation for expenditure</li>
+<li>Procurement procedures</li>
+<li>Regular programme reports</li>
+<li>Financial reporting</li>
+<li>Donor reporting</li>
+<li>Appropriate organizational policies</li>
+<li>Monitoring and evaluation records</li>
+</ul>
+<p>The Foundation will comply with applicable Kenyan laws and regulatory requirements.</p>
+<h4>6.3 Funding Priorities</h4>
+<p><b style="color:#fff">Youth Empowerment</b> - Funding for skills training, entrepreneurship, mentorship, digital literacy and employment-readiness programmes.</p>
+<p><b style="color:#fff">Education</b> - Funding for educational support, learning materials, mentorship, career guidance and vulnerable learners.</p>
+<p><b style="color:#fff">Community Health</b> - Funding for health awareness, community outreach, preventive health education and partnerships with qualified health service providers.</p>
+<p><b style="color:#fff">Institutional Capacity</b> - Support for strengthening organizational systems, staff and volunteer capacity, monitoring and evaluation, technology and programme development.</p>
+<h4>6.4 Types of Support</h4>
+<ul>
+<li>Grants</li>
+<li>Project funding</li>
+<li>Corporate social responsibility partnerships</li>
+<li>Donations</li>
+<li>In-kind support</li>
+<li>Equipment and learning materials</li>
+<li>Technical assistance</li>
+<li>Training partnerships</li>
+<li>Volunteer support</li>
+<li>Strategic partnerships</li>
+</ul>
+</div>
+</div></div>
+
+<!-- PAGE 7 PARTNERSHIP -->
+<div id="page-partnership" class="page"><div class="page-inner">
+<div class="card"><h2>Page 7 - Partnership Opportunity and Contact</h2>
+<h4>7.1 Why Partner With Babira Foundation</h4>
+<p>Babira Foundation seeks to become a trusted community partner in Vihiga County by connecting resources and expertise with locally identified needs.</p>
+<p>Partnership with the Foundation can provide an opportunity to support programmes focused on:</p>
+<p><b style="color:#fff">Youth - Skills - Opportunities - Economic empowerment</b></p>
+<p><b style="color:#fff">Education - Knowledge - Confidence - Future opportunities</b></p>
+<p><b style="color:#fff">Health awareness - Prevention - Healthy communities - Productivity</b></p>
+<p>The Foundation welcomes partnerships based on shared objectives, transparency, measurable outcomes and community benefit.</p>
+<h4>7.2 Our Commitment to Donors and Partners</h4>
+<ul>
+<li>Using resources responsibly.</li>
+<li>Maintaining appropriate financial records.</li>
+<li>Providing programme updates and reports.</li>
+<li>Monitoring project activities and outcomes.</li>
+<li>Maintaining open communication with partners.</li>
+<li>Protecting the dignity of beneficiaries.</li>
+<li>Promoting responsible safeguarding practices.</li>
+<li>Learning from programme implementation.</li>
+<li>Using evidence to improve future interventions.</li>
+</ul>
+<h4>7.3 Our Long-Term Goal</h4>
+<p>Our long-term goal is to contribute to a Vihiga County where young people have access to skills and opportunities, learners are supported to pursue education, and communities have better access to health information and appropriate services.</p>
+<p>Babira Foundation aims to grow gradually through strong partnerships, community participation and accountable programme implementation.</p>
+</div>
+<div class="card"><h3>Organizational Information</h3>
+<p><b style="color:#fff">Organization Name:</b> Babira Foundation / Babira Ndeda Foundation</p>
+<p><b style="color:#fff">County of Focus:</b> Vihiga County, Kenya</p>
+<p><b style="color:#fff">Primary Programme Areas:</b> Youth Empowerment, Education, Community Health</p>
+<p><b style="color:#fff">Target Beneficiaries:</b> Youth, Students and learners, Vulnerable households, Women and girls, Other vulnerable community members</p>
+<p><b style="color:#fff">Registration Status:</b> Community-focused non-profit</p>
+<p><b style="color:#fff">Physical Address:</b> Vihiga County, Western Kenya</p>
+<p><b style="color:#fff">Email:</b> info@babirandedafoundation.org</p>
+<p><b style="color:#fff">Website:</b> babirandedafoundation.org - toxyu.github.io/BABIRAFOUNDATION</p>
+</div>
+</div></div>
+
+<!-- GALLERY -->
+<div id="page-gallery" class="page"><div class="page-inner">
+<div class="card"><h2>Gallery - Photos, Videos, Stories, Campaigns</h2><p>Blogs with photo, heading and story. Videos with title and story. Animated filtering. Managed from CMS Portal.</p>
+<div class="filter-bar">
 <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
 <button class="filter-btn" onclick="filterGallery('photo', this)">Photos</button>
 <button class="filter-btn" onclick="filterGallery('video', this)">Videos</button>
 <button class="filter-btn" onclick="filterGallery('story', this)">Stories and Blogs</button>
 <button class="filter-btn" onclick="filterGallery('campaign', this)">Campaigns</button>
 </div>
-<div class="gallery-grid" id="galleryGrid"><p>Loading gallery from Supabase...</p></div>
+<div class="gallery-grid" id="galleryGrid"><p>Loading gallery...</p></div>
 </div>
-</div>
+</div></div>
 
-<div id="tab-programmes" class="tab hidden">
-<div class="grid">
-<div class="card"><h3>Youth Empowerment Programme</h3><p>Workshops and mentorship focused on digital literacy, leadership training, and career guidance for young adults in Vihiga County.</p></div>
-<div class="card"><h3>Community Education Initiative</h3><p>Targeted resource mobilization and school support frameworks to improve retention and academic excellence.</p></div>
-<div class="card"><h3>Agriculture and Livelihood</h3><p>Sustainable farming, market linkages, food security from shamba to market.</p></div>
-<div class="card"><h3>Health and Social Impact</h3><p>Working with community health volunteers to promote preventive healthcare, hygiene, and nutritional awareness.</p></div>
-</div>
-<div class="ad-slot" id="adMid">Mid Content Advertisement - CMS Managed</div>
-</div>
-
-<div id="tab-news" class="tab hidden">
-<div class="card"><h2>News, Stories, Campaigns</h2><p>Animated feed with photos and videos support. Publish from CMS Portal.</p><div id="posts"><p>Loading live feed...</p></div></div>
-<div class="card"><h3>Active Campaigns</h3><div id="camps"><p>No campaigns yet.</p></div></div>
-</div>
-
-<div id="tab-tools" class="tab hidden">
+<!-- SMART TOOLS -->
+<div id="page-tools" class="page"><div class="page-inner">
 <h2 style="margin-bottom:1rem">Smart Essentials Tools</h2>
 <div class="tools-grid">
-<div class="tool"><h3>Bursary Eligibility Checker</h3><p>Check if you qualify for Vihiga education support.</p><select id="wardSelect"><option>Vihiga</option><option>Luanda</option><option>Emuhaya</option><option>Hamisi</option><option>Sabatia</option></select><input id="gradeInput" placeholder="Form / Class e.g. Form 3"/><button onclick="checkBursary()" style="width:100%;padding:9px;background:var(--green);border:none;border-radius:8px;font-weight:700;color:#fff;margin-top:6px;cursor:pointer">Check Eligibility</button><p id="bursaryResult" style="font-size:.8rem;margin-top:6px;color:var(--mint)"></p></div>
+<div class="tool"><h3>Bursary Eligibility Checker</h3><p>Check if you qualify for Vihiga education support.</p><select id="wardSelect"><option>Vihiga</option><option>Luanda</option><option>Emuhaya</option><option>Hamisi</option><option>Sabatia</option></select><input id="gradeInput" placeholder="Form or Class e.g. Form 3"/><button onclick="checkBursary()" style="width:100%;padding:9px;background:var(--green);border:none;border-radius:8px;font-weight:700;color:#fff;margin-top:6px;cursor:pointer">Check Eligibility</button><p id="bursaryResult" style="font-size:.8rem;margin-top:6px;color:var(--mint)"></p></div>
 <div class="tool"><h3>Impact Calculator</h3><p>See how your contribution creates impact.</p><input id="donateInput" type="number" placeholder="Amount KES e.g. 1000"/><button onclick="calcImpact()" style="width:100%;padding:9px;background:var(--gold);border:none;border-radius:8px;font-weight:700;color:#0f221a;margin-top:6px;cursor:pointer">Calculate Impact</button><p id="impactResult" style="font-size:.8rem;margin-top:6px;color:var(--gold)"></p></div>
-<div class="tool"><h3>Volunteer Signup</h3><p>Join community health and education outreach.</p><input id="volName" placeholder="Full Name"/><input id="volPhone" placeholder="Phone / WhatsApp"/><button onclick="volunteer()" style="width:100%;padding:9px;background:var(--green);border:none;border-radius:8px;font-weight:700;color:#fff;margin-top:6px;cursor:pointer">Register as Volunteer</button><p id="volMsg" style="font-size:.8rem;margin-top:6px;color:var(--mint)"></p></div>
-<div class="tool"><h3>M-Pesa Donation Tracker</h3><p>Paybill 522522 Account BABIRA</p><input placeholder="Transaction Code e.g. QGH..."/><button onclick="alert('Thank you - M-Pesa verified manually by admin')" style="width:100%;padding:9px;background:rgba(22,56,44,.9);border:1px solid var(--border);border-radius:8px;font-weight:700;color:var(--mint);margin-top:6px;cursor:pointer">Verify Donation</button></div>
+<div class="tool"><h3>Volunteer Signup</h3><p>Join community health and education outreach.</p><input id="volName" placeholder="Full Name"/><input id="volPhone" placeholder="Phone WhatsApp"/><button onclick="volunteer()" style="width:100%;padding:9px;background:var(--green);border:none;border-radius:8px;font-weight:700;color:#fff;margin-top:6px;cursor:pointer">Register as Volunteer</button><p id="volMsg" style="font-size:.8rem;margin-top:6px;color:var(--mint)"></p></div>
+<div class="tool"><h3>M-Pesa Donation Tracker</h3><p>Paybill 522522 Account BABIRA - Foundation Growth</p><input placeholder="Transaction Code e.g. QGH..."/><button onclick="alert('Thank you - M-Pesa verified manually by admin')" style="width:100%;padding:9px;background:rgba(22,56,44,.9);border:1px solid var(--border);border-radius:8px;font-weight:700;color:var(--mint);margin-top:6px;cursor:pointer">Verify Donation</button></div>
 </div>
-</div>
+</div></div>
 
-<div id="tab-contact" class="tab hidden">
-<div class="card"><h3>Contact Babira Ndeda Foundation</h3>
-<p><b style="color:#fff">Organization:</b> Babira Ndeda Foundation</p>
-<p><b style="color:#fff">Location:</b> Vihiga County, Western Kenya</p>
-<p><b style="color:#fff">Official Email:</b> info@babirandedafoundation.org</p>
-<div style="margin-top:1rem;background:rgba(9,23,18,.75);border:1px solid var(--border);border-radius:14px;padding:1.1rem">
+<!-- CONTACT -->
+<div id="page-contact" class="page"><div class="page-inner">
+<div class="card"><h2>Contact Us - Babira Foundation</h2>
+<p><b style="color:#fff">BABIRA FOUNDATION</b><br/>Empowering Youth. Advancing Education. Promoting Health.<br/>Vihiga County, Kenya</p>
+<p><b style="color:#fff">Email:</b> info@babirandedafoundation.org - admin.babirafoundation.org@gmail.com</p>
+<p><b style="color:#fff">Phone:</b> Insert Phone Number - Vihiga County</p>
+<p><b style="color:#fff">Address:</b> Insert Physical Postal Address - Vihiga County, Western Kenya</p>
+<p><b style="color:#fff">Website:</b> toxyu.github.io/BABIRAFOUNDATION</p>
+<div style="margin-top:1.2rem;background:rgba(9,23,18,.75);border:1px solid var(--border);border-radius:14px;padding:1.1rem">
 <div style="font-size:.72rem;font-weight:800;color:var(--mint);text-transform:uppercase;letter-spacing:.6px">Stay Connected - Join Network</div>
-<input id="emailInput" placeholder="Email address" style="width:100%;padding:11px;background:#0a1f15;border:1px solid var(--border);border-radius:10px;color:#fff;margin:8px 0"/>
-<input id="regionInput" placeholder="Your region e.g. Vihiga County" style="width:100%;padding:11px;background:#0a1f15;border:1px solid var(--border);border-radius:10px;color:#fff;margin:6px 0" value="Vihiga County"/>
+<input id="emailInput" placeholder="Email address or WhatsApp number" style="width:100%;padding:11px;background:#0a1f15;border:1px solid var(--border);border-radius:10px;color:#fff;margin:8px 0"/>
+<input id="regionInput" placeholder="Your region - Vihiga County" style="width:100%;padding:11px;background:#0a1f15;border:1px solid var(--border);border-radius:10px;color:#fff;margin:6px 0" value="Vihiga County"/>
 <label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--muted);margin:8px 0"><input type="checkbox" id="agreeCheck" checked style="margin-top:3px"/> I agree to be contacted with updates about Babira Foundation programs.</label>
 <button onclick="joinNetwork()" style="width:100%;padding:12px;background:var(--gold);border:none;border-radius:10px;font-weight:800;color:#0f221a;cursor:pointer">Join the network</button>
 <p id="joinMsg" style="font-size:.78rem;margin-top:8px"></p>
 </div>
 </div>
-</div>
+</div></div>
 
 <div class="ad-slot" id="adBottom">Bottom Advertisement - CMS Managed - Meta Pixel and Google Ads</div>
 </main>
 
-<!-- CMS MODAL - SECURE EMPTY FIELDS -->
-<div id="modal" class="modal hidden"><div class="box">
-<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0;color:var(--mint)">CMS Portal</h3><span class="badge">Connected</span></div>
-<p style="font-size:.7rem;color:var(--muted);margin:6px 0 12px">Content Desk - Secure Access</p>
-
+<!-- CMS MODAL - SECURE EMPTY -->
+<div id="cmsModal" class="modal hidden"><div class="box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0;color:var(--mint)">CMS Portal</h3><span class="badge">Connected Live</span></div>
+<p style="font-size:.7rem;color:var(--muted);margin:6px 0 12px">Content Desk - Secure Access - Empty fields for security</p>
 <div id="loginBox">
-<input id="loginEmail" type="email" placeholder="Admin email" autocomplete="off"/>
-<input id="loginPass" type="password" placeholder="Password" autocomplete="new-password"/>
+<input id="loginEmail" type="email" placeholder="Admin email - type manually" autocomplete="off"/>
+<input id="loginPass" type="password" placeholder="Password - type manually" autocomplete="new-password"/>
 <button onclick="cmsLogin()">Sign In to Dashboard</button>
-<p style="font-size:.65rem;color:var(--muted);margin-top:8px;text-align:center">Enter credentials manually - fields are empty for security</p>
+<p style="font-size:.65rem;color:var(--muted);margin-top:8px;text-align:center">Fields are empty - you must fill manually and site verifies</p>
 </div>
-
 <div id="adminBox" class="hidden">
 <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
 <button onclick="cmsTab('content')" id="cmsBtn-content" style="flex:1;padding:7px;background:var(--green);border-radius:8px;font-size:.72rem">Content</button>
@@ -213,65 +511,78 @@ footer{text-align:center;padding:1.3rem;background:linear-gradient(180deg,#09171
 <button onclick="cmsTab('ads')" id="cmsBtn-ads" style="flex:1;padding:7px;background:rgba(22,56,44,.8);border-radius:8px;font-size:.72rem">Ads</button>
 <button onclick="cmsTab('leads')" id="cmsBtn-leads" style="flex:1;padding:7px;background:rgba(22,56,44,.8);border-radius:8px;font-size:.72rem">Leads</button>
 </div>
-
 <div id="cms-content">
-<h3 style="color:#fff;font-size:.9rem">Create Blog / Photo / Video Post</h3>
-<input id="postTitle" placeholder="Heading / Title"/>
-<select id="postType"><option value="story">Story / Blog</option><option value="photo">Photo</option><option value="video">Video</option><option value="campaign">Campaign</option></select>
-<input id="postImage" placeholder="Image URL - https://... (for photo and blog)"/>
-<input id="postVideo" placeholder="Video URL - https://... mp4 or YouTube"/>
-<textarea id="postBody" placeholder="Story / Description" rows="3"></textarea>
-<input id="postCategory" placeholder="Category e.g. News, Education, Health"/>
+<h3 style="color:#fff;font-size:.9rem">Create Blog Photo Video</h3>
+<input id="postTitle" placeholder="Heading Title"/>
+<select id="postType"><option value="story">Story Blog</option><option value="photo">Photo</option><option value="video">Video</option><option value="campaign">Campaign</option></select>
+<input id="postImage" placeholder="Image URL https://..."/>
+<input id="postVideo" placeholder="Video URL https://... mp4 or YouTube"/>
+<textarea id="postBody" placeholder="Story Description" rows="3"></textarea>
+<input id="postCategory" placeholder="Category e.g. News Education Health"/>
 <button onclick="createPost()">Publish to Gallery and News</button>
 </div>
-
 <div id="cms-media" class="hidden">
-<h3 style="color:#fff;font-size:.9rem">Site Media Settings</h3>
-<input id="mediaLogo" placeholder="Logo URL - https://..."/>
-<input id="mediaBgVideo" placeholder="Background Video URL - mp4 link for 24/7 loop"/>
+<h3 style="color:#fff;font-size:.9rem">Site Media Settings - Logo and Background Video 24/7 Loop</h3>
+<input id="mediaLogo" placeholder="Logo URL https://..."/>
+<input id="mediaBgVideo" placeholder="Background Video URL mp4 for loop"/>
 <button onclick="saveMedia()">Save Logo and Background Video</button>
-<p style="font-size:.68rem;color:var(--muted);margin-top:6px">Background video will loop autoplay muted 24/7 on homepage. Use direct mp4 link or YouTube embed converted to mp4.</p>
-<div style="margin-top:12px"><h3 style="color:#fff;font-size:.85rem">Preview</h3><video id="previewVideo" controls style="width:100%;border-radius:10px;margin-top:6px;max-height:160px"><source src=""/></video></div>
+<video id="previewVideo" controls style="width:100%;border-radius:10px;margin-top:8px;max-height:160px"><source src=""/></video>
 </div>
-
 <div id="cms-ads" class="hidden">
-<h3 style="color:#fff;font-size:.9rem">Advertisement Management</h3>
-<textarea id="adMeta" placeholder="Meta Pixel Code - paste full script" rows="3"></textarea>
-<textarea id="adGoogle" placeholder="Google AdSense Code - paste full script" rows="3"></textarea>
-<input id="adTopInput" placeholder="Top Ad HTML - will appear on homepage top"/>
+<h3 style="color:#fff;font-size:.9rem">Advertisement Management - Meta and Google</h3>
+<textarea id="adMeta" placeholder="Meta Pixel Code paste full script" rows="3"></textarea>
+<textarea id="adGoogle" placeholder="Google AdSense Code paste full script" rows="3"></textarea>
+<input id="adTopInput" placeholder="Top Ad HTML"/>
 <input id="adMidInput" placeholder="Mid Ad HTML"/>
 <input id="adBottomInput" placeholder="Bottom Ad HTML"/>
-<button onclick="saveAds()">Save Ads - Will Appear Instantly</button>
-<p style="font-size:.68rem;color:var(--muted);margin-top:6px">Ads are injected into ad slots. Leave empty to hide slots.</p>
+<button onclick="saveAds()">Save Ads</button>
 </div>
-
 <div id="cms-leads" class="hidden">
 <h3 style="color:#fff;font-size:.9rem">Community Leads and Volunteers</h3>
 <button onclick="loadLeads()" style="background:rgba(22,56,44,.8);border:1px solid var(--border)">Load Sign-ups</button>
 <div id="leadsList" style="max-height:200px;overflow:auto;margin-top:8px;font-size:.75rem"></div>
 </div>
-
-<div style="margin-top:12px;background:rgba(9,23,18,.6);border:1px solid var(--border);border-radius:10px;padding:8px">
-<p style="font-size:.66rem;color:var(--muted);margin:0">System: Supabase Connected - gqzsthdhxlwzdnqmiqxi.supabase.co - Tables: blog_posts, campaigns, community_leads, gallery, site_settings</p>
 </div>
-</div>
-
-<button onclick="closeCMS()" style="background:rgba(22,56,44,.8);color:var(--muted);border:1px solid var(--border);margin-top:10px">Close Portal</button>
+<button onclick="document.getElementById('cmsModal').classList.add('hidden')" style="background:rgba(22,56,44,.8);color:var(--muted);border:1px solid var(--border);margin-top:10px">Close Portal</button>
 </div></div>
 
-<footer><p>2026 Babira Ndeda Foundation - Vihiga County, Kenya - Serving the Community with Pride</p><p style="font-size:.65rem;margin-top:4px;opacity:.7">Connected to Supabase Live - Secure CMS - No emojis - Foundation Green v5</p></footer>
+<footer><p>2026 Babira Ndeda Foundation - Vihiga County, Kenya - Empowering Youth Advancing Education Promoting Community Health</p><p style="font-size:.65rem;margin-top:4px;opacity:.7">Connected to Supabase Live - Organizational Profile Complete - Secure CMS</p></footer>
 
 <script>
-// TABS
-function switchTab(id){
- document.querySelectorAll('.tab').forEach(e=>e.classList.add('hidden'));
- document.getElementById('tab-'+id).classList.remove('hidden');
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
- const n=document.getElementById('nav-'+id); if(n) n.classList.add('active');
+// TANGLE ANIMATION ON SCROLL AND TAP
+function openPage(id, btn){
+ // tangle animation
+ if(btn){btn.classList.add('tangle'); setTimeout(()=>btn.classList.remove('tangle'),500);}
+ // hide all pages
+ document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active')});
+ const target=document.getElementById('page-'+id);
+ if(target){target.classList.add('active'); target.querySelector('.page-inner').style.animation='none'; target.offsetHeight; target.querySelector('.page-inner').style.animation='contentSlide.55s cubic-bezier(.16,1,.3,1) both';}
+ // update tabs active
+ document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+ const activeBtn = btn || document.querySelector(`[data-page="${id}"]`);
+ if(activeBtn) activeBtn.classList.add('active');
+ // scroll tabs into view
+ if(activeBtn) activeBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
  window.scrollTo({top:0,behavior:'smooth'});
 }
-function openCMS(){document.getElementById('modal').classList.remove('hidden')}
-function closeCMS(){document.getElementById('modal').classList.add('hidden')}
+// Scroll tangling - header shrink + tabs wrap effect
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+ const st=window.scrollY;
+ const header=document.getElementById('mainHeader');
+ const tabsWrap=document.getElementById('tabsWrap');
+ if(st>80){header.classList.add('shrink'); tabsWrap.classList.add('scrolled');}
+ else {header.classList.remove('shrink'); tabsWrap.classList.remove('scrolled');}
+ // tangle tabs slightly on scroll
+ if(Math.abs(st-lastScroll)>60){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+   b.style.transform=`translateY(${Math.sin(st/100 + i)*2}px)`;
+   setTimeout(()=>{b.style.transform='';},300);
+  });
+  lastScroll=st;
+ }
+},{passive:true});
+
 function cmsTab(t){
  document.getElementById('cms-content').classList.add('hidden');
  document.getElementById('cms-media').classList.add('hidden');
@@ -281,7 +592,6 @@ function cmsTab(t){
  document.querySelectorAll('[id^="cmsBtn-"]').forEach(b=>b.style.background='rgba(22,56,44,.8)');
  document.getElementById('cmsBtn-'+t).style.background='var(--green)';
 }
-// SECURE LOGIN - EMPTY FIELDS, MANUAL VERIFY
 function cmsLogin(){
  const e=document.getElementById('loginEmail').value.trim();
  const p=document.getElementById('loginPass').value.trim();
@@ -290,186 +600,88 @@ function cmsLogin(){
  if(validEmails.includes(e) && validPass.includes(p)){
   document.getElementById('loginBox').classList.add('hidden');
   document.getElementById('adminBox').classList.remove('hidden');
- } else {
-  alert('Invalid credentials. Use admin@babirandedafoundation.org and babira2026');
- }
+ } else {alert('Invalid credentials. Use admin@babirandedafoundation.org and babira2026');}
 }
 function filterGallery(type, btn){
  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
  if(btn) btn.classList.add('active');
- const items=document.querySelectorAll('.gallery-item');
- items.forEach(it=>{
-  if(type==='all' || it.dataset.type===type) it.style.display='block';
-  else it.style.display='none';
+ document.querySelectorAll('.gallery-item').forEach(it=>{
+  if(type==='all' || it.dataset.type===type) it.style.display='block'; else it.style.display='none';
  });
 }
-// Smart Tools
-function checkBursary(){
- const w=document.getElementById('wardSelect').value;
- const g=document.getElementById('gradeInput').value;
- document.getElementById('bursaryResult').innerText = g? `Eligible for ${w} bursary review. Our team will contact you within 5 days.` : 'Enter your class to check.';
-}
-function calcImpact(){
- const v=parseInt(document.getElementById('donateInput').value)||0;
- if(!v){document.getElementById('impactResult').innerText='Enter amount'; return;}
- const youth=Math.floor(v/500);
- const books=Math.floor(v/250);
- document.getElementById('impactResult').innerText = `KES ${v} = ${youth} youth training days + ${books} books or 1 health outreach kit.`;
-}
-function volunteer(){
- const n=document.getElementById('volName').value;
- const p=document.getElementById('volPhone').value;
- if(!n||!p){document.getElementById('volMsg').innerText='Fill name and phone'; return;}
- if(window.supa) supa.from('community_leads').insert([{email: n+' - '+p+' - VOLUNTEER'}]).then(()=>{});
- document.getElementById('volMsg').innerText='Registered as volunteer - we will WhatsApp you.';
-}
+function checkBursary(){const g=document.getElementById('gradeInput').value; document.getElementById('bursaryResult').innerText=g?`Eligible for ${document.getElementById('wardSelect').value} bursary review. Team will contact within 5 days.`:'Enter class to check.';}
+function calcImpact(){const v=parseInt(document.getElementById('donateInput').value)||0; if(!v){document.getElementById('impactResult').innerText='Enter amount'; return;} document.getElementById('impactResult').innerText=`KES ${v} = ${Math.floor(v/500)} youth training days + ${Math.floor(v/250)} books.`;}
+function volunteer(){const n=document.getElementById('volName').value; const p=document.getElementById('volPhone').value; if(!n||!p){document.getElementById('volMsg').innerText='Fill name and phone'; return;} if(window.supa) supa.from('community_leads').insert([{email:n+' - '+p+' - VOLUNTEER'}]).then(()=>{}); document.getElementById('volMsg').innerText='Registered as volunteer - we will WhatsApp you.';}
 
-// Supabase - Safe load, no white screen
 let supa=null;
 (function(){
- const s=document.createElement('script');
- s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
- s.onload=()=>{
-  try{
-   supa=window.supabase.createClient('https://gqzsthdhxlwzdnqmiqxi.supabase.co','sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK');
-   window.supa=supa;
-   document.getElementById('sys').innerText='Connected to Supabase Live and Growing';
-   loadContent();
-   loadMediaSettings();
-  }catch(e){console.log(e)}
- };
- s.onerror=()=>{document.getElementById('sys').innerText='Offline Cache - Site Live';};
+ const s=document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+ s.onload=()=>{try{supa=window.supabase.createClient('https://gqzsthdhxlwzdnqmiqxi.supabase.co','sb_publishable_1jzIBnVIrlf6bypJ5UK5tQ_R8MHLVsK'); window.supa=supa; document.getElementById('sys').innerText='Connected to Supabase Live'; loadContent(); loadMedia();}catch(e){}};
  document.head.appendChild(s);
 })();
-
 async function loadContent(){
  if(!supa) return;
  try{
-  const {data:posts} = await supa.from('blog_posts').select('*').order('created_at',{ascending:false}).limit(20);
-  // Gallery
+  const {data:posts}=await supa.from('blog_posts').select('*').order('created_at',{ascending:false}).limit(30);
   const grid=document.getElementById('galleryGrid');
   if(posts && posts.length){
-   grid.innerHTML = posts.map(p=>`
-    <div class="gallery-item" data-type="${p.category==='Video'?'video':p.image_url?'photo':'story'}">
-     ${p.video_url? `<video src="${p.video_url}" controls poster="${p.image_url||''}"></video>` : p.image_url? `<img src="${p.image_url}" alt="${p.title}" loading="lazy"/>` : `<div style="height:180px;background:linear-gradient(135deg,#16382c,#0f221a);display:flex;align-items:center;justify-content:center;color:var(--muted)">No Image</div>`}
-     <div class="gallery-info">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span class="badge">${p.category||'Story'}</span><span style="font-size:.65rem;color:var(--muted)">${new Date(p.created_at).toLocaleDateString()}</span></div>
-      <div style="font-weight:700;font-size:.92rem;margin-bottom:4px">${p.title}</div>
-      <div style="font-size:.82rem;color:var(--muted)">${(p.body||'').slice(0,120)}...</div>
-     </div>
-    </div>`).join('');
-   // News tab
-   document.getElementById('posts').innerHTML = posts.map(p=>`
-    <div style="background:rgba(9,23,18,.7);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;display:flex;gap:12px">
-     ${p.image_url? `<img src="${p.image_url}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;flex-shrink:0"/>` : ''}
-     <div><div style="font-size:.65rem;color:var(--mint);font-weight:700">${p.category||'News'}</div><div style="font-weight:700">${p.title}</div><div style="font-size:.82rem;color:var(--muted)">${(p.body||'').slice(0,150)}</div></div>
-    </div>`).join('');
-  } else {
-   grid.innerHTML='<p style="font-size:.85rem;color:var(--muted)">No gallery items yet. Publish from CMS Portal - Content tab. Add photo URL and story.</p>';
-   document.getElementById('posts').innerHTML='<p style="font-size:.85rem;color:var(--muted)">No news yet. Publish from CMS Portal.</p>';
-  }
-  const {data:camps} = await supa.from('campaigns').select('*').order('created_at',{ascending:false}).limit(10);
-  if(camps && camps.length){
-   document.getElementById('camps').innerHTML = camps.map(c=>`<div style="background:rgba(9,23,18,.7);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px"><b>${c.title}</b><p style="font-size:.82rem">${c.description||''}</p><p style="color:var(--mint);font-size:.8rem">Target: KES ${c.target_amount||0}</p></div>`).join('');
-  }
- } catch(e){
-  console.log('load error', e);
-  document.getElementById('galleryGrid').innerHTML='<p style="color:var(--gold);font-size:.85rem">Connected but tables not setup. Run SQL in Supabase SQL Editor.</p>';
- }
+   grid.innerHTML=posts.map(p=>`<div class="gallery-item" data-type="${p.category==='Video'?'video':p.image_url?'photo':'story'}">${p.video_url?`<video src="${p.video_url}" controls poster="${p.image_url||''}"></video>`:p.image_url?`<img src="${p.image_url}" alt="${p.title}" loading="lazy"/>`:`<div style="height:180px;background:linear-gradient(135deg,#16382c,#0f221a);display:flex;align-items:center;justify-content:center;color:var(--muted)">No Image</div>`}<div class="gallery-info"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span class="badge">${p.category||'Story'}</span><span style="font-size:.65rem;color:var(--muted)">${new Date(p.created_at).toLocaleDateString()}</span></div><div style="font-weight:700;font-size:.92rem;margin-bottom:4px">${p.title}</div><div style="font-size:.82rem;color:var(--muted)">${(p.body||'').slice(0,120)}...</div></div></div>`).join('');
+   const aboutFeed=document.getElementById('postsAbout');
+   if(aboutFeed) aboutFeed.innerHTML=posts.slice(0,4).map(p=>`<div style="background:rgba(9,23,18,.7);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;display:flex;gap:12px">${p.image_url?`<img src="${p.image_url}" style="width:70px;height:70px;object-fit:cover;border-radius:10px;flex-shrink:0"/>`:''}<div><div style="font-size:.65rem;color:var(--mint)">${p.category||'News'}</div><div style="font-weight:700;font-size:.9rem">${p.title}</div><div style="font-size:.8rem;color:var(--muted)">${(p.body||'').slice(0,110)}</div></div></div>`).join('');
+  } else {grid.innerHTML='<p style="font-size:.85rem;color:var(--muted)">No gallery items yet. Publish from CMS Portal - Content tab.</p>';}
+  const {data:camps}=await supa.from('campaigns').select('*').order('created_at',{ascending:false}).limit(10);
+  if(camps && camps.length){const el=document.getElementById('campsObj'); if(el) el.innerHTML='<h4>Active Campaigns</h4>'+camps.map(c=>`<div style="background:rgba(9,23,18,.7);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px"><b>${c.title}</b><p style="font-size:.82rem">${c.description||''}</p><p style="color:var(--mint);font-size:.8rem">Target: KES ${c.target_amount||0}</p></div>`).join('');}
+ }catch(e){console.log(e)}
 }
-
-async function loadMediaSettings(){
+async function loadMedia(){
  if(!supa) return;
  try{
-  const {data} = await supa.from('site_settings').select('*');
+  const {data}=await supa.from('site_settings').select('*');
   if(data){
-   const get = (k)=> (data.find(d=>d.key===k)?.value);
-   const logo=get('logo_url'); const bg=get('bg_video_url'); const adTop=get('ad_top'); const adMid=get('ad_mid'); const adBottom=get('ad_bottom'); const meta=get('meta_pixel'); const gAds=get('google_ads');
-   if(logo){document.getElementById('siteLogo').src=logo; document.getElementById('siteLogo').style.display='block'; document.getElementById('logoFallback').style.display='none';}
-   if(bg){document.getElementById('bgVideoSrc').src=bg; document.getElementById('bgVideo').load(); document.getElementById('previewVideo').src=bg;}
+   const get=k=>data.find(d=>d.key===k)?.value;
+   const logo=get('logo_url'); const bg=get('bg_video_url'); const adTop=get('ad_top'); const adBottom=get('ad_bottom'); const meta=get('meta_pixel'); const gAds=get('google_ads');
+   if(logo){document.getElementById('siteLogo').src=logo; document.getElementById('siteLogo').style.display='block'; const fb=document.getElementById('logoFallback'); if(fb) fb.style.display='none';}
+   if(bg){document.getElementById('bgVideoSrc').src=bg; document.getElementById('bgVideo').load(); const pv=document.getElementById('previewVideo'); if(pv) pv.src=bg;}
    if(adTop) document.getElementById('adTop').innerHTML=adTop;
-   if(adMid) document.getElementById('adMid').innerHTML=adMid;
    if(adBottom) document.getElementById('adBottom').innerHTML=adBottom;
-   if(meta){const s=document.createElement('div'); s.innerHTML=meta; document.body.appendChild(s);}
-   if(gAds){const s=document.createElement('div'); s.innerHTML=gAds; document.body.appendChild(s);}
+   if(meta){const d=document.createElement('div'); d.innerHTML=meta; document.body.appendChild(d);}
+   if(gAds){const d=document.createElement('div'); d.innerHTML=gAds; document.body.appendChild(d);}
   }
  }catch(e){}
 }
-
 async function createPost(){
  if(!supa) return alert('Supabase not ready');
- const title=document.getElementById('postTitle').value;
- const type=document.getElementById('postType').value;
- const img=document.getElementById('postImage').value;
- const vid=document.getElementById('postVideo').value;
- const body=document.getElementById('postBody').value;
- const cat=document.getElementById('postCategory').value || (type==='photo'?'Photo':type==='video'?'Video':type==='campaign'?'Campaign':'Story');
- if(!title ||!body) return alert('Title and story required');
- const table = type==='campaign'? 'campaigns' : 'blog_posts';
- const payload = type==='campaign'? {title,description:body,target_amount:'0'} : {title,body,category:cat,image_url:img,video_url:vid};
- const {error} = await supa.from(table).insert([payload]);
- if(error) alert('Error: '+error.message); else {alert('Published - appears in Gallery and News'); loadContent(); }
+ const title=document.getElementById('postTitle').value; const type=document.getElementById('postType').value; const img=document.getElementById('postImage').value; const vid=document.getElementById('postVideo').value; const body=document.getElementById('postBody').value; const cat=document.getElementById('postCategory').value || (type==='photo'?'Photo':type==='video'?'Video':type==='campaign'?'Campaign':'Story');
+ if(!title||!body) return alert('Title and story required');
+ const table=type==='campaign'?'campaigns':'blog_posts';
+ const payload=type==='campaign'?{title,description:body,target_amount:'0'}:{title,body,category:cat,image_url:img,video_url:vid};
+ const {error}=await supa.from(table).insert([payload]); if(error) alert('Error: '+error.message); else {alert('Published - appears in Gallery and News'); loadContent();}
 }
 async function saveMedia(){
- if(!supa) return;
- const logo=document.getElementById('mediaLogo').value;
- const bg=document.getElementById('mediaBgVideo').value;
+ if(!supa) return; const logo=document.getElementById('mediaLogo').value; const bg=document.getElementById('mediaBgVideo').value;
  if(logo) await supa.from('site_settings').upsert({key:'logo_url',value:logo});
  if(bg) await supa.from('site_settings').upsert({key:'bg_video_url',value:bg});
- alert('Media saved - logo and background video updated. Refresh to see loop video 24/7.');
- loadMediaSettings();
+ alert('Media saved - logo and background video updated 24/7 loop'); loadMedia();
 }
 async function saveAds(){
- if(!supa) return;
- const meta=document.getElementById('adMeta').value;
- const gads=document.getElementById('adGoogle').value;
- const top=document.getElementById('adTopInput').value;
- const mid=document.getElementById('adMidInput').value;
- const bottom=document.getElementById('adBottomInput').value;
+ if(!supa) return; const meta=document.getElementById('adMeta').value; const gads=document.getElementById('adGoogle').value; const top=document.getElementById('adTopInput').value; const bottom=document.getElementById('adBottomInput').value;
  if(meta) await supa.from('site_settings').upsert({key:'meta_pixel',value:meta});
  if(gads) await supa.from('site_settings').upsert({key:'google_ads',value:gads});
  if(top) await supa.from('site_settings').upsert({key:'ad_top',value:top});
- if(mid) await supa.from('site_settings').upsert({key:'ad_mid',value:mid});
  if(bottom) await supa.from('site_settings').upsert({key:'ad_bottom',value:bottom});
- alert('Ads saved - will appear on homepage instantly');
- loadMediaSettings();
+ alert('Ads saved'); loadMedia();
 }
 async function joinNetwork(){
- const email=document.getElementById('emailInput').value.trim();
- const region=document.getElementById('regionInput').value.trim();
- const agree=document.getElementById('agreeCheck').checked;
- const msgEl=document.getElementById('joinMsg');
+ const email=document.getElementById('emailInput').value.trim(); const region=document.getElementById('regionInput').value.trim(); const agree=document.getElementById('agreeCheck').checked; const msgEl=document.getElementById('joinMsg');
  if(!email){msgEl.innerText='Enter email or WhatsApp number'; msgEl.style.color='#fbbf24'; return;}
  if(!agree){msgEl.innerText='Please agree to be contacted'; msgEl.style.color='#fbbf24'; return;}
- if(!supa){msgEl.innerText='Connecting... try again in 2 seconds'; return;}
- try{
-  const {error} = await supa.from('community_leads').insert([{email: email+' | '+region, created_at: new Date().toISOString()}]);
-  if(error){
-   if(error.message.includes('community_leads')){msgEl.innerText='Table missing - admin run SQL setup in Supabase. Your email saved locally.'; msgEl.style.color='#fbbf24'; localStorage.setItem('lead_'+Date.now(), email); }
-   else msgEl.innerText='Error: '+error.message;
-  } else {msgEl.innerText='Thank you - You are now part of Babira Foundation network'; msgEl.style.color='#86efac'; document.getElementById('emailInput').value='';}
- } catch(e){msgEl.innerText='Network error - saved locally, admin will sync'; localStorage.setItem('lead_'+Date.now(), email);}
+ if(!supa){msgEl.innerText='Connecting... try again'; return;}
+ try{const {error}=await supa.from('community_leads').insert([{email:email+' | '+region}]); if(error){if(error.message.includes('community_leads')){msgEl.innerText='Table missing - admin run SQL. Saved locally.'; msgEl.style.color='#fbbf24'; localStorage.setItem('lead_'+Date.now(),email);} else msgEl.innerText='Error: '+error.message;} else {msgEl.innerText='Thank you - You are now part of Babira Foundation network'; msgEl.style.color='#86efac'; document.getElementById('emailInput').value='';}}catch(e){msgEl.innerText='Network error - saved locally';}
 }
 async function loadLeads(){
- if(!supa) return;
- const {data,error}=await supa.from('community_leads').select('*').order('created_at',{ascending:false}).limit(50);
- const el=document.getElementById('leadsList');
- if(error) el.innerHTML='Error: '+error.message + '<br/>Run SQL setup.';
- else el.innerHTML=(data||[]).map(l=>`<div style="padding:6px;background:#091712;border:1px solid var(--border);border-radius:8px;margin:4px 0">${l.email} - ${new Date(l.created_at).toLocaleDateString()}</div>`).join('')||'No sign-ups yet';
+ if(!supa) return; const {data,error}=await supa.from('community_leads').select('*').order('created_at',{ascending:false}).limit(50);
+ const el=document.getElementById('leadsList'); if(error) el.innerHTML='Error: '+error.message; else el.innerHTML=(data||[]).map(l=>`<div style="padding:6px;background:#091712;border:1px solid var(--border);border-radius:8px;margin:4px 0">${l.email} - ${new Date(l.created_at).toLocaleDateString()}</div>`).join('')||'No sign-ups yet';
 }
 </script>
-
-<!-- IMPORTANT SQL SETUP - RUN THIS ONCE IN SUPABASE -->
-<!--
-create table if not exists blog_posts (id uuid primary key default gen_random_uuid(), title text, body text, category text, image_url text, video_url text, created_at timestamptz default now());
-create table if not exists campaigns (id uuid primary key default gen_random_uuid(), title text, description text, target_amount text, created_at timestamptz default now());
-create table if not exists community_leads (id uuid primary key default gen_random_uuid(), email text, created_at timestamptz default now());
-create table if not exists site_settings (key text primary key, value text, created_at timestamptz default now());
-alter table blog_posts enable row level security; alter table campaigns enable row level security; alter table community_leads enable row level security; alter table site_settings enable row level security;
-drop policy if exists "allow all" on blog_posts; create policy "allow all" on blog_posts for all to anon, authenticated using (true) with check (true);
-drop policy if exists "allow all" on campaigns; create policy "allow all" on campaigns for all to anon, authenticated using (true) with check (true);
-drop policy if exists "allow all" on community_leads; create policy "allow all" on community_leads for all to anon, authenticated using (true) with check (true);
-drop policy if exists "allow all" on site_settings; create policy "allow all" on site_settings for all to anon, authenticated using (true) with check (true);
--->
 </body>
 </html>
