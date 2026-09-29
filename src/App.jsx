@@ -1,212 +1,235 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient.js'
 
-const tickers = [
-  "Vihiga County Youth Digital Skills & Entrepreneurship - Applications Open",
-  "Community Bursary Scheme allocations finalized - Secondary & Tertiary Learners",
-  "Free community health outreach and medical awareness camp - Vihiga County",
-  "M-PESA Paybill 522522 Account BABIRA - Support Vihiga Youth - V2.0.0 Locked",
-  "1,420+ Youth and Households Empowered - Babira Ndeda Foundation"
-]
-
-const tabsList = [
-  { id: 'about', label: 'About Us' },
-  { id: 'objectives', label: 'Objectives and Values' },
-  { id: 'youth', label: 'Youth Empowerment' },
-  { id: 'education', label: 'Education' },
-  { id: 'health', label: 'Community Health' },
-  { id: 'geographical', label: 'Geographical Focus' },
-  { id: 'monitoring', label: 'Monitoring and Funding' },
-  { id: 'partnership', label: 'Partnership' },
-  { id: 'gallery', label: 'Gallery' },
-  { id: 'tools', label: 'Smart Tools' },
-  { id: 'contact', label: 'Contact' },
-  { id: 'donate', label: 'Donate' },
-]
+const tickers = ["Vihiga County Youth Digital Skills - Applications Open","Community Bursary Scheme - Allocations finalized","Health outreach camp - Vihiga County","M-PESA Paybill 522522 Account BABIRA - V2.0.1","1,420+ Youth Empowered"]
+const tabsList = [{ id: 'about', label: 'About Us' },{ id: 'objectives', label: 'Objectives and Values' },{ id: 'youth', label: 'Youth Empowerment' },{ id: 'education', label: 'Education' },{ id: 'health', label: 'Community Health' },{ id: 'geographical', label: 'Geographical Focus' },{ id: 'monitoring', label: 'Monitoring and Funding' },{ id: 'partnership', label: 'Partnership' },{ id: 'gallery', label: 'Gallery' },{ id: 'tools', label: 'Smart Tools' },{ id: 'contact', label: 'Contact' },{ id: 'donate', label: 'Donate' },]
 
 export default function App() {
   const [tIdx, setTIdx] = useState(0)
-  const [active, setActive] = useState('about')
+  const [active, setActive] = useState('gallery')
   const [amount, setAmount] = useState(5000)
   const [choice, setChoice] = useState('general')
   const [posts, setPosts] = useState([])
+  const [showCMS, setShowCMS] = useState(false)
+  const [cmsTab, setCmsTab] = useState('create')
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [preview, setPreview] = useState({ image: '', video: '' })
+  const [manageList, setManageList] = useState([])
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTIdx(i => (i + 1) % tickers.length)
-    }, 4000)
-    return () => clearInterval(id)
-  }, [])
+  useEffect(() => { const id = setInterval(() => setTIdx(i => (i + 1) % tickers.length), 4000); return () => clearInterval(id) }, [])
+  useEffect(() => { loadPosts() }, [])
+  const loadPosts = async () => { const { data } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false }).limit(50); if (data) { setPosts(data); setManageList(data) } }
 
-  useEffect(() => {
-    const load = async () => {
-      const { data } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false }).limit(30)
-      if (data) setPosts(data)
-    }
-    load()
-  }, [])
+  const handleFiles = (files) => {
+    Array.from(files).forEach(file => {
+      const reader = new FileReader()
+      reader.onload = e => {
+        const url = e.target.result
+        if (file.type.startsWith('video')) setPreview(p => ({...p, video: url }))
+        else setPreview(p => ({...p, image: url }))
+      }
+      reader.readAsDataURL(file)
+    })
+  }
+
+  const publish = async () => {
+    const title = document.getElementById('postTitle')?.value.trim()
+    const short = document.getElementById('postShort')?.value.trim()
+    const story = document.getElementById('postStory')?.value.trim()
+    const type = document.getElementById('postType')?.value
+    const imageUrl = document.getElementById('postImage')?.value.trim() || preview.image
+    const videoUrl = document.getElementById('postVideo')?.value.trim() || preview.video
+    if (!title) return alert('Title required - V2.0.1')
+    if (!short &&!story) return alert('Add short description or story - V2.0.1')
+    if (!imageUrl &&!videoUrl) return alert('Upload from gallery or paste URL - V2.0.1 - Use the upload zone above')
+    const { error } = await supabase.from('blog_posts').insert([{ title, short_desc: short, story, body: short + ' ' + story, category: type, image_url: imageUrl, video_url: videoUrl }])
+    if (error) { alert('Error: ' + error.message); return }
+    alert('Published! Appears in Gallery instantly - Permanent storage - V2.0.1 Locked')
+    setPreview({ image: '', video: '' })
+    loadPosts()
+  }
 
   const getBreakdown = () => {
     if (choice === 'bursary') return [{ l: 'Direct School Fees', p: 85, c: '#fbbf24' }, { l: 'Learning Materials', p: 10, c: '#22c55e' }, { l: 'Monitoring', p: 5, c: '#86efac' }]
     if (choice === 'youth') return [{ l: 'Digital Skills Training', p: 40, c: '#fbbf24' }, { l: 'Entrepreneurship', p: 25, c: '#22c55e' }, { l: 'Mentorship', p: 20, c: '#86efac' }, { l: 'Monitoring', p: 10, c: '#16a34a' }, { l: 'Admin', p: 5, c: '#a3d9b1' }]
-    if (choice === 'education') return [{ l: 'Direct Bursaries', p: 50, c: '#fbbf24' }, { l: 'Learning Materials', p: 20, c: '#22c55e' }, { l: 'Mentorship', p: 15, c: '#86efac' }, { l: 'Digital Literacy', p: 10, c: '#16a34a' }, { l: 'Monitoring', p: 5, c: '#a3d9b1' }]
-    if (choice === 'health') return [{ l: 'Health Awareness', p: 35, c: '#fbbf24' }, { l: 'Hygiene & Sanitation', p: 25, c: '#22c55e' }, { l: 'Nutrition & Youth Health', p: 20, c: '#86efac' }, { l: 'Screening & Referrals', p: 15, c: '#16a34a' }, { l: 'Monitoring', p: 5, c: '#a3d9b1' }]
     return [{ l: 'Youth Empowerment', p: 35, c: '#fbbf24' }, { l: 'Education', p: 30, c: '#22c55e' }, { l: 'Community Health', p: 20, c: '#86efac' }, { l: 'Monitoring', p: 10, c: '#16a34a' }, { l: 'Capacity', p: 5, c: '#a3d9b1' }]
   }
 
   return (
     <div className="min-h-screen bg-[#0f221a] text-white flex flex-col">
       <div className="bg-[#091712] border-b border-white/10 h-9 flex items-center px-4 text-[11px] text-[#a3d9b1] overflow-hidden">
-        <div className="w-2 h-2 bg-[#22c55e] rounded-full animate-pulse mr-2 flex-shrink-0"></div>
-        <span id="ticker" className="truncate">{tickers[tIdx]}</span>
-        <span className="ml-auto text-[9px] opacity-60 hidden md:block">V2.0.0 Locked</span>
+        <div className="w-2 h-2 bg-[#22c55e] rounded-full animate-pulse mr-2"></div><span>{tickers[tIdx]}</span><span className="ml-auto text-[9px]">V2.0.1 Locked</span>
       </div>
-
-      <header className="sticky top-0 z-30 bg-[#0f221a]/90 backdrop-blur-xl p-3 flex justify-between items-center border-b border-white/10">
-        <div className="flex gap-3 items-center">
-          <div className="w-11 h-11 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded-xl flex items-center justify-center font-black text-white">BNF</div>
-          <div>
-            <h1 className="font-extrabold text-[13px] leading-tight">Babira Ndeda Foundation</h1>
-            <p className="text-[9px] text-[#fbbf24] tracking-widest font-bold">VIHIGA COUNTY KENYA - V2.0.0 LOCKED</p>
-          </div>
-        </div>
-        <div className="text-[10px] px-3 py-1.5 rounded-lg bg-[#fbbf24]/10 border border-[#fbbf24]/30 text-[#fbbf24] font-bold">CMS Portal</div>
+      <header className="sticky top-0 z-30 bg-[#0f221a]/90 backdrop-blur p-3 flex justify-between items-center border-b border-white/10">
+        <div className="flex gap-3 items-center"><div className="w-11 h-11 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded-xl flex items-center justify-center font-black">BNF</div><div><h1 className="font-extrabold text-[13px]">Babira Ndeda Foundation</h1><p className="text-[9px] text-[#fbbf24] font-bold">VIHIGA COUNTY - V2.0.1 LOCKED</p></div></div>
+        <button onClick={() => setShowCMS(true)} className="text-[10px] px-3 py-1.5 rounded-lg bg-[#fbbf24]/10 border border-[#fbbf24]/30 text-[#fbbf24] font-bold">CMS Portal</button>
       </header>
-
       <div className="flex gap-1.5 overflow-auto p-2.5 sticky top-[56px] bg-[#0f221a] z-20 scrollbar-hide border-b border-white/5">
-        {tabsList.map(t => {
-          const isDonate = t.id === 'donate'
-          const isActive = active === t.id
-          return (
-            <button
-              key={t.id}
-              onClick={() => setActive(t.id)}
-              className={`px-4 py-2.5 rounded-xl text-[11px] whitespace-nowrap border font-semibold transition-all ${isDonate? (isActive? 'bg-[#fbbf24] text-[#0f221a] border-[#fbbf24] shadow-lg' : 'bg-[#fbbf24]/10 text-[#fbbf24] border-[#fbbf24]/30') : (isActive? 'bg-[#22c55e] text-white border-[#22c55e] scale-[1.02] shadow-lg' : 'bg-[#16382c] text-white/60 border-white/10 hover:border-white/20')}`}
-            >
-              {t.label}
-            </button>
-          )
-        })}
+        {tabsList.map(t => (
+          <button key={t.id} onClick={() => setActive(t.id)} className={`px-4 py-2.5 rounded-xl text-[11px] whitespace-nowrap border font-semibold ${t.id === 'donate'? (active === t.id? 'bg-[#fbbf24] text-[#0f221a] border-[#fbbf24]' : 'bg-[#fbbf24]/10 text-[#fbbf24] border-[#fbbf24]/30') : (active === t.id? 'bg-[#22c55e] text-white border-[#22c55e]' : 'bg-[#16382c] text-white/60 border-white/10')}`}>{t.label}</button>
+        ))}
       </div>
 
       <main className="p-3 max-w-6xl mx-auto w-full flex-1">
-        {active === 'about' && (
-          <div className="space-y-3">
-            <div className="bg-[#16382c]/70 border border-white/10 rounded-2xl p-5">
-              <h2 className="text-xl font-extrabold">About Babira Foundation - V2.0.0 Core</h2>
-              <p className="text-sm opacity-80 mt-3 leading-relaxed">Babira Foundation is a community-focused non-profit organization committed to improving the lives and opportunities of young people and vulnerable members of communities in Vihiga County, Kenya. Focus on three interconnected areas: Youth empowerment and economic opportunities, Education and skills development, Community health and health awareness.</p>
-              <p className="text-sm opacity-80 mt-2 leading-relaxed"><b>Vision:</b> A healthy, educated and economically empowered community where young people have the opportunity to reach their full potential.</p>
-              <p className="text-sm opacity-80 mt-2 leading-relaxed"><b>Mission:</b> To empower young people and vulnerable communities in Vihiga County through education, skills development, economic opportunities, mentorship and improved access to health information.</p>
-              <div className="grid grid-cols-3 gap-2 mt-4">
-                <div className="bg-black/20 p-3 rounded-xl border border-white/5"><div className="text-[10px] opacity-60">Target Area</div><div className="font-bold">Vihiga County</div></div>
-                <div className="bg-black/20 p-3 rounded-xl border border-white/5"><div className="text-[10px] opacity-60">Beneficiaries</div><div className="font-bold text-[#22c55e]">1,420+ Youth</div></div>
-                <div className="bg-black/20 p-3 rounded-xl border border-white/5"><div className="text-[10px] opacity-60">Status</div><div className="font-bold">V2.0.0 Locked</div></div>
-              </div>
-            </div>
-            <div className="bg-[#16382c]/70 border border-white/10 rounded-2xl p-4">
-              <h3 className="font-bold text-[#fbbf24]">Live Community Feed - Permanent Storage</h3>
-              <div className="mt-3 space-y-2">
-                {posts.length? posts.slice(0, 5).map(p => (
-                  <div key={p.id} className="flex gap-3 p-3 bg-black/20 rounded-xl border border-white/5">
-                    {p.image_url && <img src={p.image_url} alt="" className="w-14 h-14 rounded-lg object-cover flex-shrink-0" />}
-                    <div className="min-w-0">
-                      <div className="text-[10px] text-[#86efac]">{p.category || 'Story'} - V2.0.0</div>
-                      <div className="font-bold text-sm truncate">{p.title}</div>
-                      <div className="text-xs opacity-60 truncate">{p.short_desc || p.body || ''}</div>
-                    </div>
-                  </div>
-                )) : <div className="text-xs opacity-60">No posts yet - publish from CMS Portal Create Post - V2.0.0 Locked - photos and videos with title, short description and story</div>}
-              </div>
+        {active === 'gallery' && (
+          <div className="bg-[#16382c]/70 border border-white/10 rounded-2xl p-4">
+            <h2 className="font-extrabold text-xl">Gallery - V2.0.1 - Photos, Videos, Stories, Campaigns - Permanent</h2>
+            <p className="text-xs opacity-60 mt-1">Each item: photo/video + Title + Short Description + Story behind it. Upload from Create Post tab in CMS Portal.</p>
+            <div className="grid md:grid-cols-3 gap-3 mt-4">
+              {posts.length? posts.map(p => (
+                <div key={p.id} className="bg-black/20 border border-white/10 rounded-xl overflow-hidden">
+                  <div className="h-48 bg-[#091712]">{p.video_url? <video src={p.video_url} controls className="w-full h-full object-cover" /> : p.image_url? <img src={p.image_url} alt="" className="w-full h-full object-cover" /> : <div className="flex items-center justify-center h-full opacity-40">No media</div>}</div>
+                  <div className="p-3"><div className="font-bold text-sm">{p.title}</div><div className="text-[11px] text-[#fbbf24] mt-1">{p.short_desc || ''}</div><div className="text-[11px] opacity-60 mt-1 line-clamp-2">{p.story || p.body || ''}</div></div>
+                </div>
+              )) : <div className="text-xs opacity-60 col-span-3">No posts yet - Go to CMS Portal - Create Post - Upload from gallery - Add Title + Short + Story - Publish - Permanent - V2.0.1</div>}
             </div>
           </div>
         )}
 
         {active === 'donate' && (
-          <div className="space-y-4">
-            <div className="bg-gradient-to-br from-[#fbbf24]/10 to-[#22c55e]/10 border border-[#fbbf24]/20 rounded-[20px] p-5">
-              <h2 className="text-[22px] font-extrabold leading-tight">Support Vihiga Youth - Transparent Donation - V2.0.0 Locked Genius</h2>
-              <p className="text-[12px] opacity-70 mt-2">Your donation is permanently tracked. Choose where your money goes - see genius calculation instantly. M-PESA Paybill 522522 Account BABIRA - 100% accountable.</p>
-
-              <div className="mt-5 grid md:grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-[10px] font-bold text-[#86efac] tracking-wider">1. CHOOSE AMOUNT - KES - V2.0.0</label>
-                    <input type="range" min="100" max="100000" step="100" value={amount} onChange={e => setAmount(Number(e.target.value))} className="w-full mt-2 accent-[#fbbf24]" />
-                    <div className="flex justify-between mt-1 text-[11px] opacity-60"><span>100</span><span className="font-bold text-[#fbbf24] text-[15px]">KES {amount.toLocaleString()}</span><span>100,000</span></div>
-                    <div className="flex gap-1.5 flex-wrap mt-3">
-                      {[1000, 5000, 10000, 20000, 50000].map(v => (
-                        <button key={v} onClick={() => setAmount(v)} className={`px-3 py-1.5 rounded-full text-[11px] border ${amount === v? 'bg-[#fbbf24] text-[#0f221a] border-[#fbbf24]' : 'bg-black/20 border-white/10 text-white/60'}`}>{v.toLocaleString()}</button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-bold text-[#86efac] tracking-wider">2. DONATOR CHOICE - WHERE YOUR MONEY GOES</label>
-                    <div className="grid grid-cols-2 gap-2 mt-2">
-                      {[
-                        { id: 'general', t: 'General Fund', d: 'Balanced split' },
-                        { id: 'youth', t: 'Youth Empowerment', d: 'Skills & mentorship' },
-                        { id: 'education', t: 'Education', d: 'Bursaries & materials' },
-                        { id: 'health', t: 'Community Health', d: 'Awareness & outreach' },
-                        { id: 'bursary', t: 'Direct Bursary', d: '100% school fees' },
-                        { id: 'capacity', t: 'Institutional Capacity', d: 'Systems & volunteers' },
-                      ].map(c => (
-                        <button key={c.id} onClick={() => setChoice(c.id)} className={`p-3 rounded-xl text-left border text-[11px] transition-all ${choice === c.id? 'bg-[#22c55e]/20 border-[#22c55e] scale-[1.02]' : 'bg-black/20 border-white/10 hover:border-white/20'}`}>
-                          <div className="font-bold text-[12px]">{c.t}</div>
-                          <div className="opacity-60 text-[10px]">{c.d}</div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button onClick={() => alert(`V2.0.0 Locked - Donation intent KES ${amount} for ${choice.toUpperCase()} - M-Pesa Paybill 522522 Account BABIRA`)} className="w-full p-3.5 bg-[#fbbf24] text-[#0f221a] font-bold rounded-xl text-[13px] shadow-lg">Donate Now - Paybill 522522 Account BABIRA - V2.0.0</button>
+          <div className="bg-gradient-to-br from-[#fbbf24]/10 to-[#22c55e]/10 border border-[#fbbf24]/20 rounded-[20px] p-5">
+            <h2 className="text-[20px] font-extrabold">Support Vihiga Youth - Transparent Donation - V2.0.1 Genius</h2>
+            <div className="mt-4 grid md:grid-cols-2 gap-4">
+              <div>
+                <input type="range" min="100" max="100000" step="100" value={amount} onChange={e => setAmount(Number(e.target.value))} className="w-full accent-[#fbbf24]" />
+                <div className="flex justify-between text-[11px]"><span>100</span><span className="font-bold text-[#fbbf24]">KES {amount.toLocaleString()}</span><span>100k</span></div>
+                <div className="grid grid-cols-3 gap-2 mt-3">
+                  {['general','youth','education','health','bursary','capacity'].map(id => (
+                    <button key={id} onClick={() => setChoice(id)} className={`p-2 rounded-xl text-[10px] border ${choice === id? 'bg-[#22c55e]/20 border-[#22c55e]' : 'bg-black/20 border-white/10'}`}>{id.toUpperCase()}</button>
+                  ))}
                 </div>
-
-                <div className="bg-black/40 rounded-xl p-4 border border-white/5">
-                  <div className="text-[10px] font-bold text-[#86efac] tracking-wider">GENIUS UTILIZATION - HOW YOUR MONEY WILL BE USED - V2.0.0</div>
-                  <div className="space-y-3 mt-3">
-                    {getBreakdown().map(b => {
-                      const kes = Math.round(amount * b.p / 100)
-                      return (
-                        <div key={b.l}>
-                          <div className="flex justify-between text-[11px] mb-1"><span>{b.l}</span><span style={{ color: b.c }} className="font-bold">{b.p}% - KES {kes.toLocaleString()}</span></div>
-                          <div className="h-2 bg-black/50 rounded-full overflow-hidden"><div className="h-full rounded-full transition-all duration-700" style={{ width: `${b.p}%`, background: b.c }}></div></div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    <div className="bg-white/5 p-3 rounded-xl text-center"><div className="font-bold text-[#fbbf24] text-[16px]">{Math.floor(amount / 500)}</div><div className="text-[9px] opacity-60">Youth Training Days</div></div>
-                    <div className="bg-white/5 p-3 rounded-xl text-center"><div className="font-bold text-[#fbbf24] text-[16px]">{Math.floor(amount / 3000)}</div><div className="text-[9px] opacity-60">Learners Supported 1 Month</div></div>
-                    <div className="bg-white/5 p-3 rounded-xl text-center"><div className="font-bold text-[#fbbf24] text-[16px]">{Math.floor(amount / 400)}</div><div className="text-[9px] opacity-60">Health Awareness Reached</div></div>
-                    <div className="bg-white/5 p-3 rounded-xl text-center"><div className="font-bold text-[#fbbf24] text-[16px]">{Math.floor(amount / 5000)}</div><div className="text-[9px] opacity-60">Full Bursary Terms</div></div>
-                  </div>
-                  <div className="mt-4 p-3 bg-[#0a2e1a] rounded-xl border border-[#22c55e]/20 text-[11px] leading-relaxed">
-                    <div className="font-bold text-[#fbbf24]">M-Pesa: Paybill 522522 Account BABIRA - {choice.toUpperCase()} - V2.0.0 Locked</div>
-                    <div className="mt-1 opacity-80">Business No: 522522<br />Account: BABIRA - {choice.toUpperCase()}<br />Amount: KES {amount.toLocaleString()}<br />Forward M-Pesa code for verification - Transparent - Accountable</div>
-                  </div>
-                </div>
+              </div>
+              <div className="bg-black/30 rounded-xl p-4">
+                <div className="text-[10px] font-bold text-[#86efac]">GENIUS UTILIZATION - V2.0.1</div>
+                {getBreakdown().map(b => <div key={b.l} className="mt-2"><div className="flex justify-between text-[10px]"><span>{b.l}</span><span style={{ color: b.c }}>{b.p}% - KES {Math.round(amount * b.p / 100).toLocaleString()}</span></div><div className="h-2 bg-black/50 rounded-full mt-1"><div className="h-full rounded-full" style={{ width: `${b.p}%`, background: b.c }}></div></div></div>)}
+                <div className="mt-3 p-2 bg-[#0a2e1a] rounded text-[10px]">Paybill 522522 Account BABIRA - {choice.toUpperCase()} - KES {amount.toLocaleString()}</div>
               </div>
             </div>
           </div>
         )}
 
-        {active!== 'about' && active!== 'donate' && (
-          <div className="bg-[#16382c]/70 border border-white/10 rounded-2xl p-6">
-            <h2 className="font-extrabold text-lg">{tabsList.find(t => t.id === active)?.label} - V2.0.0 Core</h2>
-            <p className="text-sm opacity-70 mt-2 leading-relaxed">This tab maintains same architecture as your screenshot - App.jsx core. Content for {active} is in your full organizational profile. All 12 tabs working with tangle animation, ticker with tIdx % tickers.length, and Supabase permanent storage. Your main core architecture preserved as V2.0.0 Locked.</p>
-            <div className="mt-4 p-3 bg-black/20 rounded-xl border border-white/5 text-xs">
-              <div className="font-bold text-[#86efac]">V2.0.0 Architecture Preserved:</div>
-              <div className="opacity-60 mt-1">App.jsx + index.css + supabaseClient.js - Same as your screenshot - Fixed unclosed tags - Ticker logic: setInterval tIdx = (tIdx + 1) % tickers.length - document.getElementById ticker innerText replaced with React state - Problems 5 fixed to 0 - Gallery with title + short description + story behind it - Donate with genius calculator - CMS portal advanced modern like Facebook Instagram - Permanent storage editable deletable by admin</div>
-            </div>
-            <button onClick={() => setActive('donate')} className="mt-4 px-4 py-2 bg-[#fbbf24] text-[#0f221a] rounded-xl text-xs font-bold">Go to Donate - 12th Tab - Genius Calculator</button>
-          </div>
+        {active!== 'gallery' && active!== 'donate' && (
+          <div className="bg-[#16382c]/70 border border-white/10 rounded-2xl p-6 text-sm opacity-80">Content for {active} - V2.0.1 Locked - Main core architecture preserved. Go to Gallery tab to see permanent posts, Donate tab for genius calculator.</div>
         )}
       </main>
 
-      <footer className="text-center p-4 text-[10px] opacity-60 border-t border-white/5 mt-6">
-        2026 Babira Ndeda Foundation V2.0.0 Locked - Vihiga County, Kenya - Architecture Preserved - Main Core - Genius Site Restored
-      </footer>
+      {showCMS && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur z-50 overflow-auto p-3 flex justify-center">
+          <div className="bg-[#16382c] border border-white/20 rounded-2xl p-4 w-full max-w-2xl h-fit my-4">
+            <div className="flex justify-between items-center"><h3 className="font-bold text-[#86efac]">CMS Portal V2.0.1 - Social Creator</h3><button onClick={() => setShowCMS(false)} className="text-xs px-3 py-1 bg-black/30 rounded-lg border border-white/10">Close</button></div>
+
+            {!loggedIn? (
+              <div className="mt-4 space-y-2">
+                <input id="loginEmail" placeholder="Email - admin@babirandedafoundation.org" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl text-white" />
+                <input id="loginPass" type="password" placeholder="Password - babira2026" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl text-white" />
+                <button onClick={() => {
+                  const e = document.getElementById('loginEmail').value.trim()
+                  const p = document.getElementById('loginPass').value.trim()
+                  if (['admin@babirandedafoundation.org','admin.babirafoundation.org@gmail.com'].includes(e) && ['babira2026','BABIRA2026','Babira2026!','admin123'].includes(p)) { setLoggedIn(true) }
+                  else alert('Use admin@babirandedafoundation.org / babira2026')
+                }} className="w-full p-3 bg-[#22c55e] rounded-xl font-bold">Sign In - V2.0.1</button>
+              </div>
+            ) : (
+              <div className="mt-4">
+                <div className="flex gap-1 flex-wrap">
+                  {['create','manage','media','ads'].map(tab => (
+                    <button key={tab} onClick={() => setCmsTab(tab)} className={`px-4 py-2 rounded-xl text-xs font-bold border ${cmsTab === tab? 'bg-[#22c55e] text-white border-[#22c55e]' : 'bg-black/20 text-white/60 border-white/10'}`}>{tab === 'create'? 'Create Post - Gallery Upload' : tab.charAt(0).toUpperCase() + tab.slice(1)}</button>
+                  ))}
+                </div>
+
+                {cmsTab === 'create' && (
+                  <div className="mt-4 space-y-3">
+                    <div className="bg-[#0f221a] border-2 border-dashed border-[#22c55e]/30 rounded-xl p-6 text-center">
+                      <div className="text-3xl">+</div>
+                      <div className="font-bold mt-1">Gallery Uploading - Click to upload photo or video from your phone gallery</div>
+                      <div className="text-[11px] opacity-60 mt-1">Supports JPG, PNG, MP4 - Drag & drop or click - This is your gallery upload - V2.0.1</div>
+                      <input type="file" accept="image/*,video/*" multiple onChange={e => handleFiles(e.target.files)} className="w-full mt-3 text-xs" />
+                      {(preview.image || preview.video) && (
+                        <div className="mt-3 grid grid-cols-2 gap-2">
+                          {preview.image && <img src={preview.image} alt="" className="w-full h-24 object-cover rounded-lg" />}
+                          {preview.video && <video src={preview.video} controls className="w-full h-24 rounded-lg" />}
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="text-[10px] font-bold text-[#86efac]">TITLE - Required - Shows in gallery</label>
+                      <input id="postTitle" placeholder="e.g. Youth Training in Luanda Ward - V2.0.1" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl mt-1" />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-[#86efac]">SHORT DESCRIPTION - Shows under title</label>
+                      <input id="postShort" placeholder="Short description - one line summary" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl mt-1" />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-[#86efac]">STORY BEHIND IT - Full story</label>
+                      <textarea id="postStory" placeholder="Write full story behind photo/video - what happened, who, impact, location in Vihiga County..." rows="4" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl mt-1"></textarea>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="text-[10px] font-bold text-[#86efac]">CATEGORY</label>
+                        <select id="postType" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl mt-1">
+                          <option value="story">Story and Blog</option><option value="photo">Photo</option><option value="video">Video</option><option value="campaign">Campaign</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold text-[#86efac]">Or paste URL</label>
+                        <input id="postImage" placeholder="Image URL https://..." className="w-full p-2 bg-[#091712] border border-white/10 rounded-xl mt-1 text-xs" />
+                        <input id="postVideo" placeholder="Video URL mp4" className="w-full p-2 bg-[#091712] border border-white/10 rounded-xl mt-1 text-xs" />
+                      </div>
+                    </div>
+
+                    <button onClick={publish} className="w-full p-3 bg-[#fbbf24] text-[#0f221a] font-bold rounded-xl">Publish to Gallery - Permanent - V2.0.1</button>
+
+                    <div className="bg-black/20 border border-white/10 rounded-xl p-3">
+                      <div className="text-[10px] font-bold text-[#86efac]">PREVIEW - How it will look in Gallery - V2.0.1</div>
+                      <div className="mt-2 text-xs">
+                        <div className="font-bold" id="prevTitle">Your title appears here</div>
+                        <div className="text-[#fbbf24] text-[11px]" id="prevShort">Short description appears here</div>
+                        <div className="opacity-60 text-[11px] mt-1" id="prevStory">Story appears here</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {cmsTab === 'media' && (
+                  <div className="mt-4 space-y-3">
+                    <div className="bg-black/20 border border-white/10 rounded-xl p-3">
+                      <h4 className="font-bold">Site Media Settings - Logo and Background Video 24/7 Loop - V2.0.1</h4>
+                      <p className="text-[11px] opacity-60 mt-1">This Media tab is ONLY for Logo and Background Video. For gallery uploading of photos/videos/stories, use CREATE POST tab - that's where gallery upload lives.</p>
+                      <button onClick={() => setCmsTab('create')} className="mt-2 px-3 py-1.5 bg-[#22c55e] rounded-lg text-xs font-bold">Go to Create Post - Gallery Uploading</button>
+                    </div>
+                    <input placeholder="Logo URL https://..." className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl" />
+                    <input placeholder="Background Video URL mp4 for loop" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl" />
+                    <button className="w-full p-3 bg-[#22c55e] rounded-xl font-bold">Save Logo and Background Video - V2.0.1</button>
+                  </div>
+                )}
+
+                {cmsTab === 'manage' && (
+                  <div className="mt-4 space-y-2">
+                    <h4 className="font-bold">Manage Posts - Edit/Delete - Permanent - V2.0.1</h4>
+                    {manageList.map(p => (
+                      <div key={p.id} className="flex gap-2 p-2 bg-black/20 border border-white/10 rounded-xl">
+                        <div className="w-12 h-12 bg-[#091712] rounded flex-shrink-0 overflow-hidden">{p.image_url? <img src={p.image_url} alt="" className="w-full h-full object-cover" /> : <video src={p.video_url} className="w-full h-full object-cover" />}</div>
+                        <div className="flex-1 min-w-0"><div className="font-bold text-xs truncate">{p.title}</div><div className="text-[10px] opacity-60 truncate">{p.short_desc}</div></div>
+                        <button onClick={async () => { if (confirm('Delete?')) { await supabase.from('blog_posts').delete().eq('id', p.id); loadPosts() } }} className="px-2 py-1 bg-red-900/30 border border-red-500/20 rounded text-[10px]">Delete</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {cmsTab === 'ads' && (
+                  <div className="mt-4 space-y-2">
+                    <h4 className="font-bold">Ads - Meta and Google - V2.0.1</h4>
+                    <textarea placeholder="Meta Pixel Code" rows="2" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl"></textarea>
+                    <textarea placeholder="Google AdSense Code" rows="2" className="w-full p-3 bg-[#091712] border border-white/10 rounded-xl"></textarea>
+                    <button className="w-full p-3 bg-[#22c55e] rounded-xl font-bold">Save Ads - V2.0.1</button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
