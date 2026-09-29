@@ -11,8 +11,6 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <!-- Babel for JSX compilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Supabase JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -90,7 +88,7 @@
                 </div>
               </div>
 
-              {/* Desktop Nav */}
+              {/* Navigation */}
               <nav className="hidden md:flex items-center space-x-1 bg-emerald-900/40 p-1.5 rounded-2xl border border-emerald-800/50">
                 {[
                   { id: 'about', label: 'About Us' },
@@ -122,7 +120,7 @@
               </button>
             </header>
 
-            {/* Mobile Nav */}
+            {/* Mobile Navigation */}
             <div className="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-900/50 border-b border-emerald-800/40">
               {['about', 'programmes', 'campaigns', 'gallery', 'stories'].map((tab) => (
                 <button
@@ -137,7 +135,7 @@
               ))}
             </div>
 
-            {/* Hero Header */}
+            {/* Hero Section */}
             <section className="relative px-4 lg:px-12 py-12 text-center space-y-4">
               <div className="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-emerald-900/60 border border-emerald-700/50 text-emerald-300 text-xs font-bold uppercase tracking-wider">
                 Community Empowerment
@@ -150,7 +148,7 @@
               </p>
             </section>
 
-            {/* Dynamic Content */}
+            {/* Dynamic Content Area */}
             <main className="max-w-6xl mx-auto px-4 lg:px-8 pb-16 w-full flex-grow">
               {activeTab === 'about' && (
                 <div className="grid md:grid-cols-3 gap-6 animate-float">
@@ -259,7 +257,7 @@
                 </div>
               )}
 
-              {/* Status Bar */}
+              {/* Status Indicator */}
               <div className="mt-12 glass-card p-5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-emerald-300">
                 <div className="flex items-center space-x-3">
                   <span className="relative flex h-3 w-3">
@@ -280,7 +278,7 @@
               <p className="mt-1 text-emerald-500">Empowering youth. Advancing education. Promoting community health.</p>
             </footer>
 
-            {/* CMS Modal */}
+            {/* CMS Portal Modal */}
             {isCmsOpen && (
               <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
                 <div className="bg-emerald-950 border border-emerald-700/60 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-6">
