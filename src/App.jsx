@@ -24,11 +24,11 @@ export default function App() {
       alert('Please select a document first.');
       return;
     }
-    setUploadStatus('Uploading registration document...');
+    setUploadStatus('Processing document...');
     setTimeout(() => {
-      setUploadStatus(`Successfully uploaded: ${selectedFile.name}`);
+      setUploadStatus(`Document "${selectedFile.name}" submitted successfully.`);
       setSelectedFile(null);
-    }, 1200);
+    }, 1000);
   };
 
   const handleLogin = (e) => {
@@ -40,25 +40,27 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-slate-950 to-emerald-950 text-emerald-50 flex flex-col justify-between">
+      {/* Header Bar */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-emerald-950/80 border-b border-emerald-800/40 px-4 lg:px-8 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-emerald-900/50">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-emerald-900/50">
             BN
           </div>
           <div>
             <h1 className="font-extrabold text-lg text-white tracking-wide">Babira Ndeda Foundation</h1>
-            <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
+            <p className="text-xs text-emerald-400 font-medium flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
               Vihiga County, Kenya
             </p>
           </div>
         </div>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1 bg-emerald-900/40 p-1.5 rounded-2xl border border-emerald-800/50">
           {[
             { id: 'about', label: 'About Us' },
             { id: 'programmes', label: 'Programmes' },
-            { id: 'campaigns', label: 'Campaigns & Registration' },
+            { id: 'campaigns', label: 'Campaigns & Sign-ups' },
             { id: 'gallery', label: 'Gallery' },
             { id: 'stories', label: 'Stories' },
           ].map((tab) => (
@@ -85,6 +87,7 @@ export default function App() {
         </button>
       </header>
 
+      {/* Mobile Navigation */}
       <div className="md:hidden flex overflow-x-auto space-x-2 p-3 bg-emerald-900/50 border-b border-emerald-800/40">
         {['about', 'programmes', 'campaigns', 'gallery', 'stories'].map((tab) => (
           <button
@@ -99,25 +102,27 @@ export default function App() {
         ))}
       </div>
 
-      <section className="relative px-4 lg:px-12 py-16 text-center space-y-6">
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-900/60 border border-emerald-700/50 text-emerald-300 text-xs font-bold uppercase tracking-wider">
-          <span>Google Quantum UI</span> • <span>Community Impact</span>
+      {/* Hero Header */}
+      <section className="relative px-4 lg:px-12 py-12 text-center space-y-4">
+        <div className="inline-flex items-center space-x-2 px-4 py-1 rounded-full bg-emerald-900/60 border border-emerald-700/50 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+          Community Empowerment
         </div>
-        <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
+        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
           Empowering Youth. Advancing Education. Promoting Health.
         </h2>
-        <p className="text-emerald-200 text-base md:text-lg max-w-2xl mx-auto font-normal">
-          Building community resilience across Vihiga County through education bursaries, skills training, and accessible healthcare initiatives.
+        <p className="text-emerald-200 text-sm md:text-base max-w-2xl mx-auto font-normal">
+          Building community resilience across Vihiga County through education bursaries, skills training, and health initiatives.
         </p>
       </section>
 
+      {/* Dynamic Tab Views */}
       <main className="max-w-6xl mx-auto px-4 lg:px-8 pb-16 w-full flex-grow">
         {activeTab === 'about' && (
           <div className="grid md:grid-cols-3 gap-6 animate-float">
             {[
               { title: 'Youth Empowerment', desc: 'Providing youth leadership training, vocational support, and entrepreneurship opportunities across Kenya.' },
-              { title: 'Quality Education', desc: 'Supporting underprivileged students with bursaries, mentorship, and high-quality learning resources.' },
-              { title: 'Community Health', desc: 'Promoting healthcare access, health education, and wellness campaigns in local communities.' },
+              { title: 'Quality Education', desc: 'Supporting underprivileged students with bursaries, mentorship, and learning resources.' },
+              { title: 'Community Health', desc: 'Promoting healthcare access, health education, and outreach programs.' },
             ].map((card, idx) => (
               <div key={idx} className="glass-card p-6 rounded-3xl hover:border-emerald-400/60 transition-all duration-300">
                 <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold mb-4">
@@ -132,17 +137,17 @@ export default function App() {
 
         {activeTab === 'programmes' && (
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white">Our Strategic Initiatives</h3>
+            <h3 className="text-2xl font-bold text-white">Strategic Programmes</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="glass-card p-6 rounded-3xl">
                 <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-semibold">Active</span>
                 <h4 className="text-xl font-bold text-white mt-3">Vihiga Youth Digital Skills</h4>
-                <p className="text-sm text-emerald-200 mt-2">Equipping young minds with technical skills, software knowledge, and agricultural innovation.</p>
+                <p className="text-sm text-emerald-200 mt-2">Equipping young innovators with practical digital, software, and agricultural skills.</p>
               </div>
               <div className="glass-card p-6 rounded-3xl">
                 <span className="text-xs bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full font-semibold">Active</span>
                 <h4 className="text-xl font-bold text-white mt-3">Community Bursary Scheme</h4>
-                <p className="text-sm text-emerald-200 mt-2">Assisting bright and needy students across secondary and tertiary education levels.</p>
+                <p className="text-sm text-emerald-200 mt-2">Supporting bright students with secondary and tertiary academic sponsorships.</p>
               </div>
             </div>
           </div>
@@ -167,12 +172,12 @@ export default function App() {
                   />
                   <label htmlFor="doc-upload" className="cursor-pointer space-y-2 block">
                     <div className="w-12 h-12 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center mx-auto text-xl">
-                      📁
+                      📄
                     </div>
                     <p className="text-sm font-semibold text-emerald-200">
-                      {selectedFile ? selectedFile.name : 'Click to select PDF or image'}
+                      {selectedFile ? selectedFile.name : 'Choose File or Drag & Drop'}
                     </p>
-                    <p className="text-xs text-emerald-400">Maximum file size: 25 MB</p>
+                    <p className="text-xs text-emerald-400">PDF, PNG, JPG, or WEBP up to 25MB</p>
                   </label>
                 </div>
 
@@ -195,11 +200,11 @@ export default function App() {
 
         {activeTab === 'gallery' && (
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white">Foundation Media & Gallery</h3>
+            <h3 className="text-2xl font-bold text-white">Media Gallery</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="glass-card aspect-video rounded-2xl flex items-center justify-center text-emerald-300 font-medium text-sm">
-                  Media Content #{i}
+                  Community Media #{i}
                 </div>
               ))}
             </div>
@@ -208,18 +213,19 @@ export default function App() {
 
         {activeTab === 'stories' && (
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-white">Community Stories</h3>
+            <h3 className="text-2xl font-bold text-white">Community Impact Stories</h3>
             <div className="glass-card p-6 rounded-3xl">
-              <span className="text-xs text-emerald-400 font-bold uppercase tracking-wider">Featured Story</span>
+              <span className="text-xs text-emerald-400 font-bold uppercase tracking-wider">Featured Impact</span>
               <h4 className="text-2xl font-bold text-white mt-1">Transforming Livelihoods in Vihiga County</h4>
               <p className="text-emerald-200 text-sm mt-3 leading-relaxed">
-                Discover how community-driven education, youth skills acquisition, and accessible health support are creating lasting opportunities across the region.
+                How education bursaries and vocational skills development are enabling long-term self-reliance.
               </p>
             </div>
           </div>
         )}
 
-        <div className="mt-12 glass-card p-5 rounded-2xl flex items-center justify-between text-xs text-emerald-300">
+        {/* Database Connection Status Widget */}
+        <div className="mt-12 glass-card p-5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-xs text-emerald-300">
           <div className="flex items-center space-x-3">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -233,18 +239,20 @@ export default function App() {
         </div>
       </main>
 
+      {/* Footer */}
       <footer className="border-t border-emerald-800/40 bg-emerald-950/90 py-6 px-4 text-center text-xs text-emerald-400">
         <p className="font-semibold text-emerald-200">Babira Ndeda Foundation • Vihiga County, Kenya</p>
         <p className="mt-1 text-emerald-500">Empowering youth. Advancing education. Promoting community health.</p>
       </footer>
 
+      {/* Admin CMS Modal */}
       {isCmsOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-emerald-950 border border-emerald-700/60 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-6">
             <div className="flex justify-between items-center border-b border-emerald-800/60 pb-4">
               <div>
                 <h3 className="text-lg font-bold text-white">CMS Admin Portal</h3>
-                <p className="text-xs text-emerald-300">Manage foundation content and media</p>
+                <p className="text-xs text-emerald-300">Manage portal content and database</p>
               </div>
               <button onClick={() => setIsCmsOpen(false)} className="text-emerald-400 hover:text-white text-xl">✕</button>
             </div>
@@ -285,7 +293,7 @@ export default function App() {
             ) : (
               <div className="space-y-4">
                 <div className="p-3 bg-emerald-900/40 rounded-xl text-xs text-emerald-300 border border-emerald-700/50">
-                  Signed in as: <strong>{adminEmail}</strong>
+                  Logged in as: <strong>{adminEmail}</strong>
                 </div>
                 <button
                   onClick={() => setIsLoggedIn(false)}
