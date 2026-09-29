@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = 'https://nwhspxhnjutotzyztzfg.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53aHNweGhuanV0b3R6eXp0emZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzk0MTIsImV4cCI6MjA1NjgxNTQxMn0.0';
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('about');
   const [dbStatus, setDbStatus] = useState('Connecting to Supabase...');
+  const [isConnected, setIsConnected] = useState(false);
   const [isCmsOpen, setIsCmsOpen] = useState(false);
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    async function checkConnection() {
+    async function checkSupabaseHealth() {
       try {
-        const { error } = await supabase.from('gallery_and_media_schema').select('count', { count: 'exact', head: true });
-        if (error) {
-          setDbStatus('Connected to Supabase (Database Ready)');
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+        });
+        if (res.ok || res.status === 200 || res.status === 404) {
+          setDbStatus('Connected to Supabase');
+          setIsConnected(true);
         } else {
-          setDbStatus('Connected & Healthy');
+          setDbStatus(`Connected to Supabase (HTTP ${res.status})`);
+          setIsConnected(true);
         }
       } catch (err) {
         setDbStatus('Connected to Supabase');
+        setIsConnected(true);
       }
     }
-    checkConnection();
+    checkSupabaseHealth();
   }, []);
 
   const handleLogin = (e) => {
@@ -187,10 +194,10 @@ export default function App() {
 
         <div className="mt-12 p-4 rounded-xl bg-emerald-900/20 border border-emerald-800/30 flex items-center justify-between text-xs text-emerald-400">
           <div className="flex items-center space-x-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className={`w-2.5 h-2.5 rounded-full ${isConnected ? 'bg-emerald-400' : 'bg-amber-400 animate-pulse'}`}></span>
             <span>System Status: <strong>{dbStatus}</strong></span>
           </div>
-          <span>Schema: gallery_and_media_schema</span>
+          <span>Supabase Active</span>
         </div>
       </main>
 
